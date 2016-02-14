@@ -28,9 +28,9 @@ class LongURLs(models.Model):
     originally_encoded = models.CharField(verbose_name='Y=the long URL was encoded when submitted; N=otherwise',
                                          max_length=1, null=False, choices=ORIGINALLY_ENCODED)
 
-    # @classmethod
-    # def get(cls, id):
-    #     return cls.get(cls, id__exact=id)
+    @classmethod
+    def get(cls, id):
+        return cls.get(id)
 
     class Meta:
         unique_together = ('longurl', 'id')
@@ -56,13 +56,13 @@ class ShortURLs(models.Model):
     compression_ratio = models.DecimalField(verbose_name='ratio of compression achived long vs short', max_digits=10,
                                            decimal_places=2, null=False)
 
-    # @classmethod
-    # def get(cls, id):
-    #     return models.get(id__exact=id)
-    #
-    # @classmethod
-    # def get_by_longurl_id(cls, longurl_id):
-    #     return models.get(longurl_id__exact=longurl_id)
+    @classmethod
+    def get(cls, id):
+        return cls.get(id)
+
+    @classmethod
+    def get_by_longurl_id(cls, longurl_id):
+        return cls.get(longurl_id)
 
     class Meta:
         unique_together = (('longurl_id', 'id',), ('shorturl', 'id'), ('longurl_id', 'shorturl'))
@@ -91,66 +91,63 @@ class SnakrLog(models.Model):
     long = models.DecimalField(verbose_name='longitude location of the origin of the request', max_digits=11,
                               decimal_places=8, null=False)
 
-#     @classmethod
-#     def get_by_shorturl_id(cls, shorturl_id, **kwargs):
-# #   def get_by_shorturl_id(cls, shorturl_id, is_active='Y', entry_type='', order_by=''):
-#         is_active = kwargs.get(cls,'is_active','Y')
-#         entry_type = kwargs.get(cls,'entry_type','')
-#         order_by = kwargs.get(cls,'order_by','')
-#         if order_by is not None:
-#             if is_active in ['Y', 'N']:
-#                 if entry_type in ['NL', 'NS', 'RS', 'RL']:
-#                     return models.query(cls, shorturl_id).filter(is_active__exact=is_active).filter(
-#                             entry_type__exact=entry_type).order(order_by)
-#                 else:
-#                     return models.query(cls, shorturl_id).filter(is_active__exact=is_active).order(order_by)
-#             else:
-#                 if entry_type in ['NL', 'NS', 'RS', 'RL']:
-#                     return models.query(cls, shorturl_id).filter(entry_type__exact=entry_type).order(order_by)
-#                 else:
-#                     return models.query(cls, shorturl_id).order(order_by)
-#         else:
-#             if is_active in ['Y', 'N']:
-#                 if entry_type in ['NL', 'NS', 'RS', 'RL']:
-#                     return models.query(cls, shorturl_id).filter(is_active__exact=is_active).filter(
-#                             entry_type__exact=entry_type)
-#                 else:
-#                     return models.query(cls, shorturl_id).filter(is_active__exact=is_active)
-#             else:
-#                 if entry_type in ['NL', 'NS', 'RS', 'RL']:
-#                     return models.query(cls, shorturl_id).filter(entry_type__exact=entry_type)
-#                 else:
-#                     return models.query(cls, shorturl_id)
-#
-#     @classmethod
-#     def get_by_longurl_id(cls, longurl_id, is_active='Y', entry_type='', order_by=''):
-#         if order_by is not None:
-#             if is_active in ['Y', 'N']:
-#                 if entry_type in ['NL', 'NS', 'RS', 'RL']:
-#                     return models.query(cls, longurl_id).filter(is_active__exact=is_active).filter(
-#                             entry_type__exact=entry_type).order(order_by)
-#                 else:
-#                     return models.query(cls, longurl_id).filter(is_active__exact=is_active).order(order_by)
-#             else:
-#                 if entry_type in ['NL', 'NS', 'RS', 'RL']:
-#                     return models.query(cls, longurl_id).filter(entry_type__exact=entry_type).order(order_by)
-#                 else:
-#                     return models.query(cls, longurl_id).order(order_by)
-#         else:
-#             if is_active in ['Y', 'N']:
-#                 if entry_type in ['NL', 'NS', 'RS', 'RL']:
-#                     return models.query(cls, longurl_id).filter(is_active__exact=is_active).filter(
-#                             entry_type__exact=entry_type)
-#                 else:
-#                     return models.query(cls, longurl_id).filter(is_active__exact=is_active)
-#             else:
-#                 if entry_type in ['NL', 'NS', 'RS', 'RL']:
-#                     return models.query(cls, longurl_id).filter(entry_type__exact=entry_type)
-#                 else:
-#                     return models.query(cls, longurl_id)
+    @classmethod
+    def get_by_shorturl_id(cls, shorturl_id, **kwargs):
+        is_active = kwargs.get('is_active','Y')
+        entry_type = kwargs.get('entry_type','')
+        order_by = kwargs.get('order_by','')
+        if order_by is not None:
+            if is_active in ['Y', 'N']:
+                if entry_type in ['NL', 'NS', 'RS', 'RL']:
+                    return cls.query(shorturl_id).filter(is_active__exact=is_active).filter(
+                            entry_type__exact=entry_type).order(order_by)
+                else:
+                    return cls.query(shorturl_id).filter(is_active__exact=is_active).order(order_by)
+            else:
+                if entry_type in ['NL', 'NS', 'RS', 'RL']:
+                    return cls.query(shorturl_id).filter(entry_type__exact=entry_type).order(order_by)
+                else:
+                    return cls.query(shorturl_id).order(order_by)
+        else:
+            if is_active in ['Y', 'N']:
+                if entry_type in ['NL', 'NS', 'RS', 'RL']:
+                    return cls.query(shorturl_id).filter(is_active__exact=is_active).filter(
+                            entry_type__exact=entry_type)
+                else:
+                    return cls.query(shorturl_id).filter(is_active__exact=is_active)
+            else:
+                if entry_type in ['NL', 'NS', 'RS', 'RL']:
+                    return cls.query(shorturl_id).filter(entry_type__exact=entry_type)
+                else:
+                    return cls.query(shorturl_id)
 
-    class Meta:
-        unique_together = ('entry_type', 'logged_on', 'longurl_id', 'shorturl_id',)
+    @classmethod
+    def get_by_longurl_id(cls, longurl_id, is_active='Y', entry_type='', order_by=''):
+        if order_by is not None:
+            if is_active in ['Y', 'N']:
+                if entry_type in ['NL', 'NS', 'RS', 'RL']:
+                    return cls.query(longurl_id).filter(is_active__exact=is_active).filter(
+                            entry_type__exact=entry_type).order(order_by)
+                else:
+                    return cls.query(longurl_id).filter(is_active__exact=is_active).order(order_by)
+            else:
+                if entry_type in ['NL', 'NS', 'RS', 'RL']:
+                    return cls.query(longurl_id).filter(entry_type__exact=entry_type).order(order_by)
+                else:
+                    return cls.query(longurl_id).order(order_by)
+        else:
+            if is_active in ['Y', 'N']:
+                if entry_type in ['NL', 'NS', 'RS', 'RL']:
+                    return cls.query(longurl_id).filter(is_active__exact=is_active).filter(
+                            entry_type__exact=entry_type)
+                else:
+                    return cls.query(longurl_id).filter(is_active__exact=is_active)
+            else:
+                if entry_type in ['NL', 'NS', 'RS', 'RL']:
+                    return cls.query(longurl_id).filter(entry_type__exact=entry_type)
+                else:
+                    return cls.query(longurl_id)
+
 
 
 def __str__(self):

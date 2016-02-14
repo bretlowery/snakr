@@ -16,16 +16,17 @@
 # See https://cloud.google.com/appengine/docs/managed-vms/config for details.
 
 # [START django_app]
+application: snakrv2
+version: 1
 runtime: python27
 api_version: 1
 threadsafe: yes
-version: 1
 
 handlers:
 - url: /static
   static_dir: static/
 - url: .*
-  script: mysite.wsgi.application
+  script: snakr.wsgi.application
 
 # Only pure Python libraries can be vendored
 # Python libraries that use C extensions can
