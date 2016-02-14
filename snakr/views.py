@@ -11,9 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import textwrap
 
 from django.http import HttpResponse
+from django.views.generic.base import View
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the snakr index.")
+class handler(View):
+
+    def dispatch(request, *args, **kwargs):
+        response_text = textwrap.dedent('''\
+            <html>
+            <head>
+                <title>Greetings to the world</title>
+            </head>
+            <body>
+                <h1>Greetings to the world</h1>
+                <p>Hello, world!</p>
+            </body>
+            </html>
+        ''')
+        return HttpResponse(response_text)

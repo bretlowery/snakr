@@ -1,6 +1,5 @@
 import warnings
 
-from django.template.context_processors import *  # NOQA
 from django.utils.deprecation import RemovedInDjango110Warning
 
 warnings.warn(

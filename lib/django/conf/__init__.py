@@ -8,13 +8,14 @@ a list of all possible variables.
 
 import importlib
 import os
-import time
 import warnings
 
+import time
 from django.conf import global_settings
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.deprecation import RemovedInDjango110Warning
 from django.utils.functional import LazyObject, empty
+
+from django.utils.deprecation import RemovedInDjango110Warning
 
 ENVIRONMENT_VARIABLE = "DJANGO_SETTINGS_MODULE"
 

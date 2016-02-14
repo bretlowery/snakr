@@ -2,10 +2,9 @@ from __future__ import unicode_literals
 
 import copy
 import re
-import sys
 from io import BytesIO
-from itertools import chain
 
+import sys
 from django.conf import settings
 from django.core import signing
 from django.core.exceptions import DisallowedHost, ImproperlyConfigured
@@ -20,6 +19,7 @@ from django.utils.http import is_same_domain
 from django.utils.six.moves.urllib.parse import (
     parse_qsl, quote, urlencode, urljoin, urlsplit,
 )
+from itertools import chain
 
 RAISE_ERROR = object()
 host_validation_re = re.compile(r"^([a-z0-9.-]+|\[[a-f0-9]*:[a-f0-9:]+\])(:\d+)?$")

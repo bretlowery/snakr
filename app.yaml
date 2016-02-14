@@ -26,7 +26,7 @@ handlers:
 - url: /static
   static_dir: static/
 - url: .*
-  script: snakr.wsgi.application
+  script: web.wsgi.application
 
 # Only pure Python libraries can be vendored
 # Python libraries that use C extensions can

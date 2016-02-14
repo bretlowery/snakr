@@ -11,13 +11,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# from django.conf.urls import include, url
+# from django.contrib import admin
+#
+# from snakr.views import index
+#
+# urlpatterns = [
+#     url(r'^$', index),
+#     url(r'^admin/', include(admin.site.urls)),
+# ]
 
-from django.conf.urls import include, url
-from django.contrib import admin
+from django.conf.urls import patterns, url
 
-from snakr.views import index
+from snakr.views import handler
 
-urlpatterns = [
-    url(r'^$', index),
-    url(r'^admin/', include(admin.site.urls)),
-]
+urlpatterns = patterns(
+    '',
+    url(r'^$', handler.as_view(), name='home'),
+)

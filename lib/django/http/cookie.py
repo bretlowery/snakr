@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 import sys
-
 from django.utils import six
 from django.utils.encoding import force_str
 from django.utils.six.moves import http_cookies

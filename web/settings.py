@@ -41,10 +41,9 @@ except ImportError:
     from djangoappengine.boot import setup_env
     setup_env(DEV_APPSERVER_VERSION)
 
-from djangoappengine.utils import on_production_server, have_appserver
+from djangoappengine.utils import on_production_server
 
-
-DEBUG = not on_production_server
+DEBUG = True #not on_production_server
 TEMPLATE_DEBUG = DEBUG
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -83,10 +82,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+#    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+#    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'web.urls'
@@ -109,6 +108,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'web.wsgi.application'
 
+# PREPARE_UPLOAD_BACKEND = 'djangoappengine.storage.prepare_upload'
+# SERVE_FILE_BACKEND = 'djangoappengine.storage.serve_file'
+# DEFAULT_FILE_STORAGE = 'djangoappengine.storage.BlobstoreStorage'
+# FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024
+# FILE_UPLOAD_HANDLERS = (
+#     'djangoappengine.storage.BlobstoreFileUploadHandler',
+#     'django.core.files.uploadhandler.MemoryFileUploadHandler',
+# )
+#
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'TIMEOUT': 0,
+#     }
+# }
+#
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases

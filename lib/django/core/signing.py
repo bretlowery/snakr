@@ -36,19 +36,20 @@ These functions make use of all of them.
 from __future__ import unicode_literals
 
 import base64
-import datetime
 import json
 import re
-import time
 import warnings
-import zlib
 
+import datetime
+import time
+import zlib
 from django.conf import settings
 from django.utils import baseconv
 from django.utils.crypto import constant_time_compare, salted_hmac
-from django.utils.deprecation import RemovedInDjango110Warning
 from django.utils.encoding import force_bytes, force_str, force_text
 from django.utils.module_loading import import_string
+
+from django.utils.deprecation import RemovedInDjango110Warning
 
 _SEP_UNSAFE = re.compile(r'^[A-z0-9-_=]*$')
 

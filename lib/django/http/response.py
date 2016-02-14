@@ -1,12 +1,12 @@
 from __future__ import unicode_literals
 
-import datetime
 import json
 import re
-import sys
-import time
 from email.header import Header
 
+import datetime
+import sys
+import time
 from django.conf import settings
 from django.core import signals, signing
 from django.core.exceptions import DisallowedRedirect

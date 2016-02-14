@@ -1,9 +1,9 @@
-import sys
 import threading
 import warnings
 from collections import Counter, OrderedDict, defaultdict
 from functools import partial
 
+import sys
 from django.core.exceptions import AppRegistryNotReady, ImproperlyConfigured
 from django.utils import lru_cache
 

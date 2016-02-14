@@ -1,7 +1,7 @@
 import collections
-from math import ceil
 
 from django.utils import six
+from math import ceil
 
 
 class InvalidPage(Exception):

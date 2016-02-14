@@ -17,7 +17,6 @@ from django.core.exceptions import ImproperlyConfigured, ViewDoesNotExist
 from django.http import Http404
 from django.utils import lru_cache, six
 from django.utils.datastructures import MultiValueDict
-from django.utils.deprecation import RemovedInDjango110Warning
 from django.utils.encoding import force_str, force_text, iri_to_uri
 from django.utils.functional import cached_property, lazy
 from django.utils.http import RFC3986_SUBDELIMS, urlquote
@@ -25,6 +24,8 @@ from django.utils.module_loading import module_has_submodule
 from django.utils.regex_helper import normalize
 from django.utils.six.moves.urllib.parse import urlsplit, urlunsplit
 from django.utils.translation import get_language, override
+
+from django.utils.deprecation import RemovedInDjango110Warning
 
 # SCRIPT_NAME prefixes for each thread are stored here. If there's no entry for
 # the current thread (which is the only one we ever access), it is assumed to

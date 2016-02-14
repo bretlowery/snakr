@@ -15,13 +15,14 @@ from django.http import (
 )
 from django.template import RequestContext, loader
 from django.template.context import _current_app_undefined
+from django.utils import six
+from django.utils.encoding import force_text
+from django.utils.functional import Promise
+
 from django.template.engine import (
     _context_instance_undefined, _dictionary_undefined, _dirs_undefined,
 )
-from django.utils import six
 from django.utils.deprecation import RemovedInDjango110Warning
-from django.utils.encoding import force_text
-from django.utils.functional import Promise
 
 
 def render_to_response(template_name, context=None,
