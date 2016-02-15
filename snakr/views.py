@@ -14,32 +14,40 @@
 
 import textwrap
 import datetime
-from django.views.generic.base import View
+#from django.views.generic.base import View
 from django.http import HttpResponse, HttpResponseNotAllowed
 
+from get_shorturl import GetShortURL
+
+
 def dispatcher(**table):
+
     def invalid_method(request, *args, **kwargs):
         r = request.method
         return HttpResponseNotAllowed(r)
+
     def d(request, *args, **kwargs):
         h = table.get(request.method, invalid_method)
         return h(request, *args, **kwargs)
+
     return d
 
-#class handlers(View):
 
-def get_handler(self, *args, **kwargs):
+def get_handler(request, *args, **kwargs):
+    g = GetShortURL(request)
     return hello()
 
-def post_handler(*args, **kwargs):
+
+def post_handler(self, *args, **kwargs):
     return None
+
 
 def hello(*args, **kwargs):
     now = datetime.datetime.now().strftime('%A, %B %d, %Y %H:%M:%S')
     response_text = textwrap.dedent('''\
             <html>
             <head>
-                <title>snakrv2</title>
+                <title>snakrv2.001</title>
             </head>
             <body>
                 <h1>The Current Time Here Is:</h1>
