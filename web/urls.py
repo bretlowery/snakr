@@ -23,10 +23,11 @@
 # ]
 
 from django.conf.urls import patterns, url
-
-from snakr.views import handler
+from snakr.views import dispatcher, get_handler, post_handler
 
 urlpatterns = patterns(
-    '',
-    url(r'^$', handler.as_view(), name='home'),
-)
+        '',
+        (r'^$', dispatcher(
+                GET=get_handler,
+                POST=post_handler,
+                )))

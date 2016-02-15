@@ -11,24 +11,41 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 import textwrap
-
-from django.http import HttpResponse
+import datetime
 from django.views.generic.base import View
+from django.http import HttpResponse, HttpResponseNotAllowed
 
+def dispatcher(**table):
+    def invalid_method(request, *args, **kwargs):
+        r = request.method
+        return HttpResponseNotAllowed(r)
+    def d(request, *args, **kwargs):
+        h = table.get(request.method, invalid_method)
+        return h(request, *args, **kwargs)
+    return d
 
-class handler(View):
+#class handlers(View):
 
-    def dispatch(request, *args, **kwargs):
-        response_text = textwrap.dedent('''\
+def get_handler(self, *args, **kwargs):
+    return hello()
+
+def post_handler(*args, **kwargs):
+    return None
+
+def hello(*args, **kwargs):
+    now = datetime.datetime.now().strftime('%A, %B %d, %Y %H:%M:%S')
+    response_text = textwrap.dedent('''\
             <html>
             <head>
-                <title>Greetings to the world</title>
+                <title>snakrv2</title>
             </head>
             <body>
-                <h1>Greetings to the world</h1>
-                <p>Hello, world!</p>
+                <h1>The Current Time Here Is:</h1>
+                <p>%s</p>
             </body>
             </html>
-        ''')
-        return HttpResponse(response_text)
+        ''' % now)
+    return HttpResponse(response_text)
+
