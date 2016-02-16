@@ -21,5 +21,11 @@ class utils:
 
     @staticmethod
     def is_url_valid(myurl):
+        rtn = True
         validator = URLValidator()
-        return validator(myurl)
+        try:
+            dummy = validator(myurl)
+        except:
+            rtn = False
+            pass
+        return rtn

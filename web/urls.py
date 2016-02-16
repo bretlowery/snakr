@@ -24,10 +24,11 @@
 
 from django.conf.urls import patterns, url
 from snakr.views import dispatcher, get_handler, post_handler
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = patterns(
         '',
-        (r'^$', dispatcher(
+        (r'^$', csrf_exempt(dispatcher(
                 GET=get_handler,
                 POST=post_handler,
-                )))
+                ))))

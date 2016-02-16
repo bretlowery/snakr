@@ -14,11 +14,12 @@
 
 import textwrap
 import datetime
-#from django.views.generic.base import View
-from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed
+from django.template import RequestContext
+from django.shortcuts import render_to_response, redirect
 
 from get_shorturl import GetShortURL
-
+from post_longurl import PostLongURL
 
 def dispatcher(**table):
 
@@ -35,25 +36,15 @@ def dispatcher(**table):
 
 def get_handler(request, *args, **kwargs):
     g = GetShortURL(request)
-    return hello()
+    return gello(request, 'GET', g.normalized_shorturl)
 
 
-def post_handler(self, *args, **kwargs):
-    return None
+def post_handler(request, *args, **kwargs):
+    p = PostLongURL(request)
+    return redirect("http://www.bretlowery.com", permanent=False)
 
 
-def hello(*args, **kwargs):
+def gello(request, *args, **kwargs):
     now = datetime.datetime.now().strftime('%A, %B %d, %Y %H:%M:%S')
-    response_text = textwrap.dedent('''\
-            <html>
-            <head>
-                <title>snakrv2.001</title>
-            </head>
-            <body>
-                <h1>The Current Time Here Is:</h1>
-                <p>%s</p>
-            </body>
-            </html>
-        ''' % now)
-    return HttpResponse(response_text)
+    return render_to_response("response.html",{"pn":"snakrv2.01" , "dt":now, "rm":args[0], "url":args[1]}, context_instance=RequestContext(request))
 

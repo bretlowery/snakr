@@ -106,7 +106,14 @@ TEMPLATES = [
     },
 ]
 
+import os.path
+temp_path = os.path.realpath('.')
+TEMPLATE_DIRS = (
+    temp_path +"/templates"
+)
+
 WSGI_APPLICATION = 'web.wsgi.application'
+# CSRF_COOKIE_SECURE = False
 
 # PREPARE_UPLOAD_BACKEND = 'djangoappengine.storage.prepare_upload'
 # SERVE_FILE_BACKEND = 'djangoappengine.storage.serve_file'
