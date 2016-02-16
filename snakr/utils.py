@@ -1,6 +1,9 @@
 import urllib
 import hashlib
+import re
 from django.core.validators import URLValidator
+
+_URL_VALIDATOR = URLValidator()
 
 class utils:
 
@@ -22,9 +25,9 @@ class utils:
     @staticmethod
     def is_url_valid(myurl):
         rtn = True
-        validator = URLValidator()
         try:
-            dummy = validator(myurl)
+
+            dummy = _URL_VALIDATOR(myurl)
         except:
             rtn = False
             pass

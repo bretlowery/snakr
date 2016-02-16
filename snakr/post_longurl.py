@@ -25,7 +25,7 @@ class PostLongURL:
         if not lurl:
             raise SuspiciousOperation('Required JSON "u" keyvalue pair not found in the POST request.')
         dlurl = utils.get_decodedurl(lurl)
-        if utils.is_url_valid(dlurl):
+        if not utils.is_url_valid(dlurl):
             raise SuspiciousOperation('The URL found in the JSON "u" data value ("%s") in the POST request is not a valid URL.' % dlurl)
         lparts = urlparse(dlurl)
         if lurl == dlurl:
