@@ -12,14 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import textwrap
 import datetime
-from django.http import HttpResponseNotAllowed
-from django.template import RequestContext
-from django.shortcuts import render_to_response, redirect
+from django.http import HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse
 
-from get_shorturl import GetShortURL
-from post_longurl import PostLongURL
+from shorturls import ShortURL
+from longurls import LongURL
 
 def dispatcher(**table):
 
@@ -35,16 +32,17 @@ def dispatcher(**table):
 
 
 def get_handler(request, *args, **kwargs):
-    g = GetShortURL(request)
-    return gello(request, 'GET', g.normalized_shorturl)
+    s = ShortURL()
+    return gello(request, 'GET', s.normalized_shorturl)
 
 
 def post_handler(request, *args, **kwargs):
-    p = PostLongURL(request)
-    return redirect("http://www.bretlowery.com", permanent=False)
+    l = LongURL(request)
+    shorturl = l.persist(request)
+    return HttpResponse(shorturl)
 
 
 def gello(request, *args, **kwargs):
     now = datetime.datetime.now().strftime('%A, %B %d, %Y %H:%M:%S')
-    return render_to_response("response.html",{"pn":"snakrv2.01" , "dt":now, "rm":args[0], "url":args[1]}, context_instance=RequestContext(request))
+    return HttpResponse("response.html",{"pn":"snakrv2.01" , "dt":now, "rm":args[0], "url":args[1]})
 

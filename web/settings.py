@@ -26,6 +26,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import string
 
 from djangoappengine.settings_base import *
 
@@ -109,7 +110,7 @@ TEMPLATES = [
 import os.path
 temp_path = os.path.realpath('.')
 TEMPLATE_DIRS = (
-    temp_path +"/templates"
+    temp_path +"/templates",
 )
 
 WSGI_APPLICATION = 'web.wsgi.application'
@@ -141,15 +142,15 @@ import os
 if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
     # Running on production App Engine, so use a Google Cloud SQL database.
     DATABASES = {
-        # 'default': {
-        #     'ENGINE': 'django.db.backends.mysql',
-        #     'HOST': '/cloudsql/<your-cloud-sql-instance>',
-        #     'NAME': '<your-database-name>',
-        #     'USER': 'root',
-        # }
         'default': {
-             'ENGINE': 'djangoappengine.db',
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/snakrdb.appspot.com',
+            'NAME': 'snakrv2',
+            'USER': 'root',    # sounds crazy, but "root" is required by GAE (hmmmmmmmmmm)
         }
+        # 'default': {
+        #     'ENGINE': 'djangoappengine.db',
+        # }
     }
 else:
     DATABASES = {
@@ -186,3 +187,13 @@ STATIC_URL = '/static/'
 
 # Max retries on hash collision detection
 MAX_RETRIES = 3
+
+# host (netloc) of the short URL to use
+SHORTURL_HOST = "snakrv2.appspot.com"
+
+# Number of alphabetic characters in the short URL path (min 6, max 12)
+SHORTURL_PATH_SIZE = 6
+
+# Character set to use for the short URL path. Remove easily-confused characters "0", "O", "o", "1", and "l". Keep "L".
+SHORTURL_PATH_ALPHABET = string.digits + string.letters
+SHORTURL_PATH_ALPHABET = SHORTURL_PATH_ALPHABET.replace("0","").replace("O","").replace("o","").replace("1","").replace("l","")
