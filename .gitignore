@@ -47,3 +47,6 @@ coverage.xml
 *,cover
 .hypothesis/
 
+#settings.py
+settings*.py
+web/settings.py
