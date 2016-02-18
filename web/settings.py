@@ -114,7 +114,26 @@ TEMPLATE_DIRS = (
 )
 
 WSGI_APPLICATION = 'web.wsgi.application'
-# CSRF_COOKIE_SECURE = False
+
+# Internationalization
+# https://docs.djangoproject.com/en/1.8/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+STATIC_ROOT='static'
+STATIC_URL = '/static/'
 
 # PREPARE_UPLOAD_BACKEND = 'djangoappengine.storage.prepare_upload'
 # SERVE_FILE_BACKEND = 'djangoappengine.storage.serve_file'
@@ -139,12 +158,13 @@ WSGI_APPLICATION = 'web.wsgi.application'
 
 # [START db_setup]
 import os
+SNAKRDB_MODE = "REMOTE"
 if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
     # Running on production App Engine, so use a Google Cloud SQL database.
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/snakrdb.appspot.com',
+            'HOST': '/cloudsql/snakrv2:snakrdb',
             'NAME': 'snakrv2',
             'USER': 'root',    # sounds crazy, but "root" is required by GAE (hmmmmmmmmmm)
         }
@@ -152,7 +172,20 @@ if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
         #     'ENGINE': 'djangoappengine.db',
         # }
     }
-else:
+elif SNAKRDB_MODE == "REMOTE":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '2001:4860:4864:1:dd71:885e:4c83:41f2',
+            'NAME': 'snakrv2',
+            'USER': 'snakrdbo',    # sounds crazy, but "root" is required by GAE (hmmmmmmmmmm)
+            'PASSWORD': 'snakrdbo7939163'
+        }
+        # 'default': {
+        #     'ENGINE': 'djangoappengine.db',
+        # }
+    }
+elif SNAKRDB_MODE == "LOCAL":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -164,26 +197,6 @@ else:
         }
     }
 # [END db_setup]
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-
-STATIC_ROOT='static'
-STATIC_URL = '/static/'
 
 # Max retries on hash collision detection
 MAX_RETRIES = 3
