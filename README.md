@@ -61,10 +61,10 @@ from your local MySQL Workbench client until you grant your new IP acesss on the
 
 Setting                | Value
 ---------------------- | ------------------------------
-SHORTURL_HOST          | The root host (netloc) to append to the front of the short urls generated.
-SHORTURL_PATH_SIZE     | How many characters in the 'shorten_using' alphabet to use in building short URLs.
-SHORTURL_PATH_ALPHABET | The alphabet containing the characters from which to build the short URL.
-MAX_RETRIES            | The maximum number of retries to attempt before returning an error should a hashing collision occur (odds are appx 1 in 1.86 billion).
+SHORTURL_HOST          | The root host (netloc) to append to the front of the short urls generated. Use your own small domain name for this and forward its traffic to your GAE public URL. The [GAE site](http://cloud.google.com) has instructions.
+SHORTURL_PATH_SIZE     | How many characters in the 'shorten_using' alphabet to use in building short URLs, from 6 to 10. Note that this can be changed at will to a larger or smaller value between 6 and 10, and all historical short URLs will still work.
+SHORTURL_PATH_ALPHABET | The alphabet containing the characters from which to build the short URL. This CANNOT be changed at will without possible breaking previously generated short URLs. This can occur if a character or digit is removed form the alphabet but which still appears in a previously-generated short URL. Those short URLs will break the next time they are used.
+MAX_RETRIES            | The maximum number of retries to attempt before returning an error should a hashing collision occur (odds are appx 1 in 1.86 billion). Defaults to 3. No real need to change this.
 
 ### Installing Libraries
 See the [Third party libraries](https://developers.google.com/appengine/docs/python/tools/libraries27)
