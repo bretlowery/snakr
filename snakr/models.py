@@ -81,7 +81,7 @@ class Log(mydb.Model):
         ('R', 'Short URL Requested'),
         ('X', 'Existing Long URL Resubmitted'),
     )
-    log_order = mydb.AutoField(verbose_name='autoincrementing order of log events', primary_key=True, max_length=19,
+    log_order = mydb.AutoField(verbose_name='autoincrementing order of log events', primary_key=True, max_length=20,
                                 null=False)
     logged_on = mydb.DateTimeField(verbose_name='datetime that the event was logged', auto_now=True, null=False)
     entry_type = mydb.CharField(

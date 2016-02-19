@@ -19,7 +19,7 @@ class LongURL:
         self.normalized_longurl_scheme = ""
         self.id = 0
         json_data = json.loads(request.body)
-        lurl=""
+        lurl = ""
         if json_data:
             lurl = json_data["u"]
         if not lurl:
@@ -31,12 +31,15 @@ class LongURL:
             preencoded = True
             self.normalized_longurl = lurl
         if not utils.is_url_valid(self.normalized_longurl):
-            raise SuspiciousOperation('The URL found in the JSON "u" data value in the POST request (<%s>) is not a valid URL.' % self.normalized_longurl)
+            raise SuspiciousOperation(
+                'The URL found in the JSON "u" data value in the POST request (<%s>) is not a valid URL.' %
+                self.normalized_longurl)
         self.normalized_longurl_scheme = urlparse(lurl).scheme.lower()
         self.longurl_is_preencoded = preencoded
         self.longurl = lurl
         self.id = utils.get_longurlhash(self.normalized_longurl)
-        # raise SuspiciousOperation('<%s> <%s> <%s> <%s> <%s>' % (self.id,self.longurl,self.normalized_longurl,self.normalized_longurl_scheme,self.longurl_is_preencoded ))
+        # raise SuspiciousOperation('<%s> <%s> <%s> <%s> <%s>' % (self.id,self.longurl,self.normalized_longurl,
+        # self.normalized_longurl_scheme,self.longurl_is_preencoded ))
         return
 
     @transaction.commit_on_success
@@ -88,11 +91,12 @@ class LongURL:
             # 1. Check for potential collision
             #
             if l.longurl != self.normalized_longurl:
-                raise SuspiciousOperation('HASH COLLISION DETECTED on lookup of long URL <%s>' % self.normalized_longurl)
+                raise SuspiciousOperation(
+                    'HASH COLLISION DETECTED on lookup of long URL <%s>' % self.normalized_longurl)
             #
             # 2. Lookup the short url
             #
-            s = ShortURLs.objects.get(longurl_id = self.id, is_active='Y')
+            s = ShortURLs.objects.get(longurl_id=self.id, is_active='Y')
             if not s:
                 raise Http404
             #
@@ -103,4 +107,3 @@ class LongURL:
             # 4. Return the short url
             #
         return s.shorturl
-

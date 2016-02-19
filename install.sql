@@ -19,7 +19,7 @@ CREATE TABLE `snakr_shorturls` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `snakr_log` (
-  `log_order` int(11) NOT NULL AUTO_INCREMENT,
+  `log_order` bigint(20) NOT NULL AUTO_INCREMENT,
   `logged_on` datetime NOT NULL,
   `entry_type` char(1) NOT NULL,
   `longurl_id` bigint(20) NOT NULL,

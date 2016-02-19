@@ -2,102 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e97d469-436f-4ac1-9d9d-fb46df745c6f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/rename_this_to_settings.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoload/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoload/middleware.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoload/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dbindexer/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dbindexer/api.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dbindexer/backends.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dbindexer/base.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dbindexer/compiler.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dbindexer/lookups.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dbindexer/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dbindexer/resolver.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dbindexer/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/appstats/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/appstats/ui.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/boot.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/conf/project_template/app.yaml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/conf/project_template/cron.yaml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/conf/project_template/index.yaml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/conf/project_template/indexes.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/conf/project_template/manage.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/conf/project_template/project_name/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/conf/project_template/project_name/settings.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/conf/project_template/project_name/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/conf/project_template/settings.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/db/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/db/base.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/db/compiler.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/db/creation.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/db/db_settings.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/db/expressions.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/db/stubs.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/db/utils.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/dbindexes.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/deferred/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/deferred/handler.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/lib/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/lib/memcache.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/mail.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/main/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/main/main.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/management/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/management/commands/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/management/commands/deploy.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/management/commands/remote.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/management/commands/runserver.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/management/commands/testserver.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/mapreduce/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/mapreduce/handler.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/mapreduce/input_readers.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/mapreduce/pipeline.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/settings_base.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/storage.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/test_backend.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/test_field_db_conversion.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/test_field_options.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/test_filter.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/test_keys.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/test_mapreduce.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/test_not_return_sets.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/test_order.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/test_storage.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/tests/test_transactions.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/utils.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangoappengine/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/db/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/db/base.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/db/basecompiler.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/db/creation.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/db/utils.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/errorviews.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/fields.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/http.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/middleware.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/sites/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/sites/dynamicsite.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/test.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/utils.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/djangotoolbox/widgets.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Google_App_Engine_SDK.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Google_App_Engine_SDK.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/django/contrib/auth/middleware.py" afterPath="$PROJECT_DIR$/django/contrib/auth/middleware.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/django/contrib/messages/tests/base.py" afterPath="$PROJECT_DIR$/django/contrib/messages/tests/base.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/django/contrib/admin/static/admin/js/vendor/jquery/jquery.js" afterPath="$PROJECT_DIR$/lib/django/contrib/admin/static/admin/js/vendor/jquery/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/django/contrib/auth/middleware.py" afterPath="$PROJECT_DIR$/lib/django/contrib/auth/middleware.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/settings.py" afterPath="$PROJECT_DIR$/web/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/urls.py" afterPath="$PROJECT_DIR$/web/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/wsgi.py" afterPath="$PROJECT_DIR$/web/wsgi.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/install.sql" afterPath="$PROJECT_DIR$/install.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/longurls.py" afterPath="$PROJECT_DIR$/snakr/longurls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/models.py" afterPath="$PROJECT_DIR$/snakr/models.py" />
     </list>
     <ignored path="Snakr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -129,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -147,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/snakr/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.4087137">
+              <caret line="83" column="115" selection-start-line="83" selection-start-column="115" selection-end-line="83" selection-end-column="115" />
               <folding />
             </state>
           </provider>
@@ -179,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.813278">
-              <caret line="209" column="40" selection-start-line="209" selection-start-column="40" selection-end-line="209" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -239,15 +147,15 @@
         <option value="$PROJECT_DIR$/app.yaml" />
         <option value="$PROJECT_DIR$/snakr/settings.py" />
         <option value="$PROJECT_DIR$/snakr/customfields.py" />
-        <option value="$PROJECT_DIR$/snakr/models.py" />
         <option value="$PROJECT_DIR$/web/wsgi.py" />
         <option value="$PROJECT_DIR$/web/urls.py" />
         <option value="$PROJECT_DIR$/snakr/shorturls.py" />
         <option value="$PROJECT_DIR$/snakr/views.py" />
         <option value="$PROJECT_DIR$/snakr/utils.py" />
-        <option value="$PROJECT_DIR$/snakr/longurls.py" />
         <option value="$PROJECT_DIR$/web/public_settings_rename_this_to_settings.py" />
         <option value="$PROJECT_DIR$/web/settings.py" />
+        <option value="$PROJECT_DIR$/snakr/longurls.py" />
+        <option value="$PROJECT_DIR$/snakr/models.py" />
       </list>
     </option>
   </component>
@@ -698,7 +606,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="30" y="23" width="1336" height="745" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="App Config Tool" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22137405" sideWeight="0.4969088" order="7" side_tool="false" content_ui="tabs" />
@@ -707,7 +615,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22642967" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22642967" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1074,18 +982,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1110,20 +1018,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/shorturls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="9" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -1138,10 +1036,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/settings.py">
+    <entry file="file://$PROJECT_DIR$/snakr/shorturls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.813278">
-          <caret line="209" column="40" selection-start-line="209" selection-start-column="40" selection-end-line="209" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="108" column="9" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4087137">
+          <caret line="83" column="115" selection-start-line="83" selection-start-column="115" selection-end-line="83" selection-end-column="115" />
           <folding />
         </state>
       </provider>
