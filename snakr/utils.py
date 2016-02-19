@@ -2,8 +2,6 @@ import hashlib
 import random
 import urllib
 from urlparse import urlparse
-
-#from django.contrib.gis.utils import GeoIP
 from django.core.validators import URLValidator
 
 import web.settings as settings
@@ -45,7 +43,7 @@ class utils:
     def is_url_valid(myurl):
         rtn = True
         try:
-            dummy = _URL_VALIDATOR(myurl)
+            dummy = _URL_VALIDATOR(utils.get_decodedurl(myurl))
         except:
             rtn = False
             pass
@@ -56,18 +54,41 @@ class utils:
         return urlparse('http://www.dummyurl.com')  # this is a django 1.5.11 bug workaround
 
     @staticmethod
-    def get_client_ip(request):
+    def get_demographics(request):
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        return ip
-
-    @staticmethod
-    def get_client_geolocation(client_ip):
-        #g = GeoIP()
-        #lat,lng = g.lat_lon(client_ip)
+        # if request.method == 'GET':
+        #     slatlong = request.GET.get('X-AppEngine-CityLatLong')
+        #     lat = slatlong.split(',')[0]
+        #     lng = slatlong.split(',')[1]
+        #     city = request.GET.get('X-AppEngine-City')
+        #     country = request.GET.get('X-AppEngine-Country')
+        # elif request.method == 'POST':
+        #     slatlong = request.META.get('X-AppEngine-CityLatLong')
+        #     lat = slatlong.split(',')[0]
+        #     lng = slatlong.split(',')[1]
+        #     city = request.META.get('X-AppEngine-City')
+        #     country = request.META.get('X-AppEngine-Country')
+        # else:
         lat = 0
         lng = 0
-        return lat, lng
+        city = 'unknown'
+        country = 'unknown'
+        return ip, lat, lng, city, country
+
+    @staticmethod
+    def is_validnsp(normalized_shorturl_path):
+        rtn = False
+        if normalized_shorturl_path.startswith("/"):
+            if normalized_shorturl_path.endswith("/"):
+                rtn = True
+                for c in normalized_shorturl_path[1:-1]:
+                    if settings.SHORTURL_PATH_ALPHABET.find(c) == -1:
+                        rtn = False
+                        break
+        return rtn
+
+

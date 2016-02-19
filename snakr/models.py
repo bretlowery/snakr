@@ -44,8 +44,8 @@ class LongURLs(mydb.Model):
         ('N', 'No'),
     )
     id = mydb.BigIntegerField(verbose_name='unique SHA1 binary hash value of the long URL', primary_key=True, null=False)
-    longurl = mydb.TextField(verbose_name='encoded, quoted version of the submitted long URL',
-                              validators=[URLValidator()], null=False, blank=False)
+    longurl = mydb.CharField(verbose_name='encoded, quoted version of the submitted long URL',
+                              max_length=4096, validators=[URLValidator()], null=False, blank=False)
     created_on = mydb.DateTimeField(verbose_name='datetime that the long URL was first submitted for shortening',
                                      auto_now=True)
     originally_encoded = mydb.CharField(verbose_name='Y=the long URL was encoded when submitted; N=otherwise',
@@ -76,10 +76,10 @@ class ShortURLs(mydb.Model):
 
 class Log(mydb.Model):
     ENTRY_TYPE = (
-        ('NL', 'New Long URL Submitted'),
-        ('NS', 'New Short URL Created'),
-        ('RS', 'Short URL Requested'),
-        ('RL', 'Existing Long URL Resubmitted'),
+        ('L', 'New Long URL Submitted'),
+        ('S', 'New Short URL Created'),
+        ('R', 'Short URL Requested'),
+        ('X', 'Existing Long URL Resubmitted'),
     )
     log_order = mydb.AutoField(verbose_name='autoincrementing order of log events', primary_key=True, max_length=19,
                                 null=False)
@@ -87,7 +87,7 @@ class Log(mydb.Model):
     entry_type = mydb.CharField(
             verbose_name='NL=a new long URL was submitted, NS=a new short URL was created, RS=a short URL request was '
                          'made, RL=an existing long URL was resubmitted',
-            max_length=2, null=False, choices=ENTRY_TYPE)
+            max_length=1, null=False, choices=ENTRY_TYPE)
     longurl_id = mydb.BigIntegerField(verbose_name='unique SHA1 binary hash value of the long URL', null=False)
     shorturl_id = mydb.BigIntegerField(verbose_name='unique SHA1 binary hash value of the corresponding short URL', null=False)
     ip_address = mydb.CharField(verbose_name='IPv4 or IPv6 address of the origin of the request', max_length=45,
@@ -96,12 +96,14 @@ class Log(mydb.Model):
                              decimal_places=8, null=False)
     long = mydb.DecimalField(verbose_name='longitude location of the origin of the request', max_digits=11,
                               decimal_places=8, null=False)
+    city_of_origin = mydb.CharField(verbose_name='city of the origin of the request', max_length=100, null=False, blank=False)
+    country_of_origin = mydb.CharField(verbose_name='country of the origin of the request', max_length=100, null=False, blank=False)
 
 
 def savelog(request, entry_type, longurl_id, shorturl_id):
-    ip_address = utils.get_client_ip(request)
-    lat, lng = utils.get_client_geolocation(ip_address)
-    l = Log(entry_type=entry_type, longurl_id=longurl_id, shorturl_id=shorturl_id, ip_address=ip_address, lat=lat, long=lng)
+    ip_address, lat, lng, city, country = utils.get_demographics(request)
+    l = Log(entry_type=entry_type, longurl_id=longurl_id, shorturl_id=shorturl_id,
+            ip_address=ip_address, lat=lat, long=lng, city_of_origin=city, country_of_origin=country)
     l.save()
     return
 

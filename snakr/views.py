@@ -14,9 +14,10 @@
 
 import datetime
 from django.http import HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse
-
+import json
 from shorturls import ShortURL
 from longurls import LongURL
+from django.http import Http404
 
 def dispatcher(**table):
 
@@ -32,17 +33,30 @@ def dispatcher(**table):
 
 
 def get_handler(request, *args, **kwargs):
+    # create an instance of the ShortURL object, validate the short URL, and if successful load the ShortURL instance with it
     s = ShortURL()
-    return gello(request, 'GET', s.normalized_shorturl)
+    # lookup the long url previously used to generate the short url
+    longurl = s.getlongurl(request)
+    # if found, 302 to it; otherwise, 404
+    if longurl:
+        return HttpResponseRedirect(longurl)
+    else:
+        return Http404
 
 
 def post_handler(request, *args, **kwargs):
+    # create an instance of the LongURL object, validate the long URL, and if successful load the LongURL instance with it
     l = LongURL(request)
-    shorturl = l.persist(request)
-    return HttpResponse(shorturl)
+    # generate the shorturl and either persist both the long and short urls if new,
+    # or lookup the matching short url if it already exists (i.e. the long url was submitted a 2nd or subsequent time)
+    shorturl = l.get_or_make_shorturl(request)
+    # return the shorturl as JSON
+    response_data = {}
+    response_data['shorturl'] = shorturl
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
-def gello(request, *args, **kwargs):
-    now = datetime.datetime.now().strftime('%A, %B %d, %Y %H:%M:%S')
-    return HttpResponse("response.html",{"pn":"snakrv2.01" , "dt":now, "rm":args[0], "url":args[1]})
+# def hello(request, *args, **kwargs):
+#     now = datetime.datetime.now().strftime('%A, %B %d, %Y %H:%M:%S')
+#     return HttpResponse("response.html",{"pn":"snakrv2.01" , "dt":now, "rm":args[0], "url":args[1]})
 
