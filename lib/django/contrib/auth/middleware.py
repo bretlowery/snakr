@@ -42,7 +42,7 @@ class RemoteUserMiddleware(object):
     If request.user is not authenticated, then this middleware attempts to
     authenticate the username passed in the ``REMOTE_USER`` request header.
     If authentication is successful, the user is automatically logged in to
-    persist the user in the session.
+    process the user in the session.
 
     The header used is configurable and defaults to ``REMOTE_USER``.  Subclass
     this class and change the ``header`` attribute if you need to use a
@@ -88,7 +88,7 @@ class RemoteUserMiddleware(object):
         # to authenticate the user.
         user = auth.authenticate(remote_user=username)
         if user:
-            # User is valid.  Set request.user and persist user in the session
+            # User is valid.  Set request.user and process user in the session
             # by logging the user in.
             request.user = user
             auth.login(request, user)

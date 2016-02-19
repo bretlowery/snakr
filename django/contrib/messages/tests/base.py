@@ -191,7 +191,7 @@ class BaseTest(TestCase):
     @override_settings(MESSAGE_LEVEL=constants.DEBUG)
     def test_multiple_posts(self):
         """
-        Tests that messages persist properly when multiple POSTs are made
+        Tests that messages process properly when multiple POSTs are made
         before a GET.
         """
         data = {
