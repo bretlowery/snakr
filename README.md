@@ -1,14 +1,14 @@
 ## Snakr
 
-A URL shortener service demo using Python and [Flask micro framework](http://flask.pocoo.org)
-on GAE with a Google Cloud SQL backend.
+A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.5.11](https://www.djangoproject.com/)
+on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) backend.
 
 ## Test It Online
 1. Install curl or another REST client testing tool like [Advanced Rest Client Application for Chrome](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo/reviews?hl=en-US&utm_source=ARC)
 
 2. Using your REST testing tool, test the POST action:
     ```
-    URL: http://premium-fuze-120323.appspot.com
+    URL: http://snakrv2.appspot.com
     POST:
         Content-Type: application/json
         Payload:      {"u":"<the url you want to shorten goes here without the angle brackets>"}
@@ -37,7 +37,7 @@ See the README file for directions. You'll need python 2.7 and [pip 1.4 or later
    ```
 4. Create your GAE and Cloud SQL instances.
 
-5. Upload from your Python IDE to GAE.
+5. Upload from your Python IDE to GAE. I like [Pycharm](https://www.jetbrains.com/pycharm/).
 
 6. Create an instance in Cloud SQL to hold the database.
 
@@ -55,23 +55,16 @@ from your local MySQL Workbench client until you grant your new IP acesss on the
 *Password = the password you entered
 *Database/Scheme = the db/scheme name you entered
 
-10. In MySQL Workbench, run Install.sql to create the db objects.
+10. In MySQL Workbench, run install.sql to create the db objects.
 
-11. In Globals.py, adjust these parameters accordingly:
+11. In Settings.py, add your personal GAE config info, db connection info for your GAE Cloud SQL instance, then adjust these parameters accordingly:
 
-Setting               | Value
---------------------- | ------------------------------
-detailed_errors       | True of False. If True, returns detailed error messages if any occur to the caller.
-user_error            | If detailed_errors = False, this string is returned on any error. HTTP 1xx/3xx/4xx/5xx errors are handled normally.
-server                | Your Google App Engine id. snakr test is 'premium-fuze-120323'.
-webroot               | The HTTP schema and netloc/host/domain to append to the short URLs generated; i.e., your web server.
-schema                | Name of your Cloud SQL schema (database).
-instance              | DO NOT ALTER THIS ENTRY WHEN HOSTING ON GAE.
-unix_socket           | DO NOT ALTER THIS ENTRY WHEN HOSTING ON GAE.
-charset               | Your mySQL character set, defaults to 'utf8'
-short_urlsize         | How many characters in the 'shorten_using' alphabet to use in building short URLs.
-shorten_using         | The alphabet containing the characters from which to build the short URL.
-max_collision_retries | The maximum number of retries to attempt before returning an error should a hashing collision occur.
+Setting                | Value
+---------------------- | ------------------------------
+SHORTURL_HOST          | The root host (netloc) to append to the front of the short urls generated.
+SHORTURL_PATH_SIZE     | How many characters in the 'shorten_using' alphabet to use in building short URLs.
+SHORTURL_PATH_ALPHABET | The alphabet containing the characters from which to build the short URL.
+MAX_RETRIES            | The maximum number of retries to attempt before returning an error should a hashing collision occur (odds are appx 1 in 1.86 billion).
 
 ### Installing Libraries
 See the [Third party libraries](https://developers.google.com/appengine/docs/python/tools/libraries27)
