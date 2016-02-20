@@ -83,12 +83,11 @@ class utils:
     def is_validnsp(normalized_shorturl_path):
         rtn = False
         if normalized_shorturl_path.startswith("/"):
-            if normalized_shorturl_path.endswith("/"):
-                rtn = True
-                for c in normalized_shorturl_path[1:-1]:
-                    if settings.SHORTURL_PATH_ALPHABET.find(c) == -1:
-                        rtn = False
-                        break
+            rtn = True
+            for c in normalized_shorturl_path[1:]:
+                if settings.SHORTURL_PATH_ALPHABET.find(c) == -1:
+                    rtn = False
+                    break
         return rtn
 
 

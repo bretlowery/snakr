@@ -26,20 +26,15 @@ from django.conf.urls import patterns
 from snakr.views import dispatcher, get_handler, post_handler
 from django.views.decorators.csrf import csrf_exempt
 
-# urlpatterns = patterns(
-#         '',
-#         (r'^$', csrf_exempt(dispatcher(
-#                 GET=get_handler,
-#                 POST=post_handler,
-#                 ))))
 
 urlpatterns = patterns(
         '',
-        (r'^.*/', csrf_exempt(dispatcher(
+        (r'^.*', csrf_exempt(dispatcher(
                 GET=get_handler,
                 POST=post_handler,
                 ))),
-        (r'^$', csrf_exempt(dispatcher(
-                GET=get_handler,
-                POST=post_handler,
-                ))))
+        # (r'^$', csrf_exempt(dispatcher(
+        #         GET=get_handler,
+        #         POST=post_handler,
+        #         ))),
+)

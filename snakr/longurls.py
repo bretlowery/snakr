@@ -77,10 +77,10 @@ class LongURL:
             #
             # 4. Persist everything
             #
-            with transaction.commit_on_success:
-                ldata.save()
-                sdata.save()
-                savelog(request, entry_type='N', longurl_id=ldata.id, shorturl_id=s.id)
+            #with transaction.commit_on_success:
+            ldata.save()
+            sdata.save()
+            savelog(request, entry_type='N', longurl_id=ldata.id, shorturl_id=s.id)
             #
             # 5. Return the short url
             #

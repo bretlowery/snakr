@@ -110,15 +110,12 @@ class ShortURL:
         #
         # Lookup the matching long url by the short url's id.
         # If it doesn't exist, 404.
-        # If it does, and if the longurl was not originally encoded, decode it.
+        # If it does, decode it.
         #
         l = LongURLs.objects.get(id = s.longurl_id)
         if not l:
             raise Http404
-        if l.originally_encoded == 'N':
-            longurl = utils.get_decodedurl(l.longurl)
-        else:
-            longurl = l.longurl
+        longurl = utils.get_decodedurl(l.longurl)
         #
         # Log that a 302 request to the matching long url is about to occur
         #
