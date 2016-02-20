@@ -1,14 +1,12 @@
 import json
 from urlparse import urlparse
-
 import secure.settings as settings
 from django.core.exceptions import SuspiciousOperation
-#from django.db import transaction
 from django.http import Http404
 from models import LongURLs, ShortURLs, savelog
 from shorturls import ShortURL
 from utils import utils
-
+from django.db import transaction
 
 class LongURL:
     """Validates and processes the long URL in the POST request."""
@@ -33,13 +31,13 @@ class LongURL:
             self.normalized_longurl = lurl
         if not utils.is_url_valid(self.normalized_longurl):
             raise SuspiciousOperation(
-                'The URL found in the JSON "u" data value in the POST request (<%s>) is not a valid URL.' %
+                'The URL found in the JSON "u" data value in the POST request ({%s}) is not a valid URL.' %
                 self.normalized_longurl)
         self.normalized_longurl_scheme = urlparse(lurl).scheme.lower()
         self.longurl_is_preencoded = preencoded
         self.longurl = lurl
         self.id = utils.get_longurlhash(self.normalized_longurl)
-        # raise SuspiciousOperation('<%s> <%s> <%s> <%s> <%s>' % (self.id,self.longurl,self.normalized_longurl,
+        # raise SuspiciousOperation('{%s} {%s} {%s} {%s} {%s}' % (self.id,self.longurl,self.normalized_longurl,
         # self.normalized_longurl_scheme,self.longurl_is_preencoded ))
         return
 
@@ -77,7 +75,6 @@ class LongURL:
             #
             # 4. Persist everything
             #
-            #with transaction.commit_on_success:
             ldata.save()
             sdata.save()
             savelog(request, entry_type='N', longurl_id=ldata.id, shorturl_id=s.id)
@@ -93,7 +90,7 @@ class LongURL:
             #
             if l.longurl != self.normalized_longurl:
                 raise SuspiciousOperation(
-                    'HASH COLLISION DETECTED on lookup of long URL <%s>' % self.normalized_longurl)
+                    'HASH COLLISION DETECTED on lookup of long URL {%s}' % self.normalized_longurl)
             #
             # 2. Lookup the short url
             #
@@ -103,7 +100,6 @@ class LongURL:
             #
             # 3. Log the lookup
             #
-            #with transaction.commit_on_success:
             savelog(request, entry_type='X', longurl_id=self.id, shorturl_id=s.id)
             #
             # 4. Return the short url

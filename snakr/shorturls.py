@@ -1,12 +1,10 @@
-from urlparse import urlparse, urlunparse
-
 import secure.settings as settings
+from urlparse import urlparse, urlunparse
 from django.core.exceptions import SuspiciousOperation
-#from django.db import transaction
 from django.http import Http404
 from models import ShortURLs, LongURLs, savelog
 from utils import utils
-
+from django.db import transaction
 
 class ShortURL:
     """Validates and processes the short URL in the GET request."""
@@ -98,13 +96,13 @@ class ShortURL:
         #
         # Lookup the short url
         #
-        # raise SuspiciousOperation('<%s> <%s> <%s>' % (self.id, self.shorturl,self.normalized_shorturl))
+        # raise SuspiciousOperation('{%s} {%s} {%s}' % (self.id, self.shorturl,self.normalized_shorturl))
         try:
             s = ShortURLs.objects.get(id = self.id, is_active='Y')
             if not s:
-                raise SuspiciousOperation('ERROR: URL <%s> is not recognized by this service.' % self.shorturl)
+                raise SuspiciousOperation('ERROR: URL {%s} is not recognized by this service.' % self.shorturl)
         except:
-            raise SuspiciousOperation('ERROR: URL <%s> is not recognized by this service.' % self.shorturl)
+            raise SuspiciousOperation('ERROR: URL {%s} is not recognized by this service.' % self.shorturl)
         if s.shorturl != self.shorturl:
             raise SuspiciousOperation('ERROR: the short URL sent to this service is different from the original short URL provided and may pose a security risk. DO NOT USE the altered version.')
         #
@@ -119,7 +117,6 @@ class ShortURL:
         #
         # Log that a 302 request to the matching long url is about to occur
         #
-        #with transaction.commit_on_success:
         savelog(request, entry_type='R', longurl_id=s.longurl_id, shorturl_id=self.id)
         #
         # Return the longurl

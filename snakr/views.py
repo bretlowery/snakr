@@ -12,12 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import datetime
-from django.http import HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse
 import json
+from django.http import HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse
+from django.http import Http404
 from shorturls import ShortURL
 from longurls import LongURL
-from django.http import Http404
 
 def dispatcher(**table):
 

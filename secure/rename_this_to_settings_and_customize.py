@@ -121,6 +121,12 @@ USE_TZ = True
 STATIC_ROOT='static'
 STATIC_URL = '/static/'
 
+
+ADMINS = ()
+MANAGERS = ADMINS
+
+
+
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 

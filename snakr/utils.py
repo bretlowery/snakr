@@ -2,7 +2,6 @@ import hashlib
 import random
 import urllib
 from urlparse import urlparse
-
 import secure.settings as settings
 from django.core.validators import URLValidator
 

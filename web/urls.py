@@ -12,19 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# from django.conf.urls import include, url
-# from django.contrib import admin
-#
-# from main.views import index
-#
-# urlpatterns = [
-#     url(r'^$', index),
-#     url(r'^admin/', include(admin.site.urls)),
-# ]
-
 from django.conf.urls import patterns
-from snakr.views import dispatcher, get_handler, post_handler
 from django.views.decorators.csrf import csrf_exempt
+from snakr.views import dispatcher, get_handler, post_handler
 
 
 urlpatterns = patterns(
@@ -33,8 +23,4 @@ urlpatterns = patterns(
                 GET=get_handler,
                 POST=post_handler,
                 ))),
-        # (r'^$', csrf_exempt(dispatcher(
-        #         GET=get_handler,
-        #         POST=post_handler,
-        #         ))),
 )

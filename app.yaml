@@ -33,4 +33,5 @@ handlers:
 libraries:
 - name: MySQLdb
   version: "latest"
-# [END django_app]
+- name: ssl
+  version: latest
