@@ -49,4 +49,3 @@ coverage.xml
 
 #settings.py
 settings*.py
-secure/*
