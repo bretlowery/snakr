@@ -140,7 +140,7 @@ MAX_RETRIES            | The maximum number of retries to attempt before returni
 
 Snakr persists its data in Google Cloud SQL in this version; later versions will use other storage options on Google Cloud such as Datastore or Memcached. This initial design uses three Cloud SQL tables.
 
-The original design had both long and short url tables in a single table. I split it in two thinking about future features such as multiple short URLs for a single long URL (useful in certain business-oriented use cases).
+The original design had both long and short urls in a single table. I split it in two thinking about future features such as multiple short URLs for a single long URL (useful in certain business-oriented use cases).
 
 ####Table snakr_longurl
 One row per long URL successfully submitted for shortening to Snakr.
