@@ -41,7 +41,7 @@ if lib_names:
 
 if lib_path is None:
     raise GDALException('Could not find the GDAL library (tried "%s"). '
-                       'Try setting GDAL_LIBRARY_PATH in your settings.' %
+                       'Try setting GDAL_LIBRARY_PATH in your secure.' %
                        '", "'.join(lib_names))
 
 # This loads the GDAL/OGR C library

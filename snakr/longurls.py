@@ -1,12 +1,13 @@
 import json
-from urlparse import urlparse, urlunparse
+from urlparse import urlparse
+
+import secure.settings as settings
 from django.core.exceptions import SuspiciousOperation
-from utils import utils
+#from django.db import transaction
+from django.http import Http404
 from models import LongURLs, ShortURLs, savelog
 from shorturls import ShortURL
-import web.settings as settings
-from django.db import transaction
-from django.http import Http404
+from utils import utils
 
 
 class LongURL:
@@ -42,7 +43,6 @@ class LongURL:
         # self.normalized_longurl_scheme,self.longurl_is_preencoded ))
         return
 
-    @transaction.commit_on_success
     def get_or_make_shorturl(self, request):
         #
         # Does the long URL already exist?
@@ -77,9 +77,10 @@ class LongURL:
             #
             # 4. Persist everything
             #
-            ldata.save()
-            sdata.save()
-            savelog(request, entry_type='N', longurl_id=ldata.id, shorturl_id=s.id)
+            with transaction.commit_on_success:
+                ldata.save()
+                sdata.save()
+                savelog(request, entry_type='N', longurl_id=ldata.id, shorturl_id=s.id)
             #
             # 5. Return the short url
             #
@@ -102,6 +103,7 @@ class LongURL:
             #
             # 3. Log the lookup
             #
+            #with transaction.commit_on_success:
             savelog(request, entry_type='X', longurl_id=self.id, shorturl_id=s.id)
             #
             # 4. Return the short url

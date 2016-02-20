@@ -28,9 +28,9 @@ from django.utils.version import get_docs_version
 
 class SettingsReference(str):
     """
-    Special subclass of string which actually references a current settings
+    Special subclass of string which actually references a current secure
     value. It's treated as the value in memory, but serializes out to a
-    settings.NAME attribute reference.
+    secure.NAME attribute reference.
     """
 
     def __new__(self, value, setting_name):
@@ -173,8 +173,8 @@ class MigrationWriter(object):
         dependencies = []
         for dependency in self.migration.dependencies:
             if dependency[0] == "__setting__":
-                dependencies.append("        migrations.swappable_dependency(settings.%s)," % dependency[1])
-                imports.add("from django.conf import settings")
+                dependencies.append("        migrations.swappable_dependency(secure.%s)," % dependency[1])
+                imports.add("from django.conf import secure")
             else:
                 # No need to output bytestrings for dependencies
                 dependency = tuple(force_text(s) for s in dependency)
@@ -404,7 +404,7 @@ class MigrationWriter(object):
             return repr(value), {"import datetime"}
         # Settings references
         elif isinstance(value, SettingsReference):
-            return "settings.%s" % value.setting_name, {"from django.conf import settings"}
+            return "secure.%s" % value.setting_name, {"from django.conf import secure"}
         # Simple types
         elif isinstance(value, float):
             if math.isnan(value) or math.isinf(value):

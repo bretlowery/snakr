@@ -32,12 +32,12 @@ class TranslatorCommentWarning(SyntaxWarning):
 
 
 # Here be dragons, so a short explanation of the logic won't hurt:
-# We are trying to solve two problems: (1) access settings, in particular
-# settings.USE_I18N, as late as possible, so that modules can be imported
+# We are trying to solve two problems: (1) access secure, in particular
+# secure.USE_I18N, as late as possible, so that modules can be imported
 # without having to first configure Django, and (2) if some other code creates
 # a reference to one of these functions, don't break that reference when we
 # replace the functions with their real counterparts (once we do access the
-# settings).
+# secure).
 
 class Trans(object):
     """

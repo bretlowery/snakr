@@ -205,7 +205,7 @@ def do_get_available_languages(parser, token):
         {% endfor %}
 
     This will just pull the LANGUAGES setting from
-    your setting file (or the default settings) and
+    your setting file (or the default secure) and
     put it into the named variable.
     """
     # token.split_contents() isn't useful here because this tag doesn't accept variable as arguments
@@ -241,7 +241,7 @@ def do_get_language_info_list(parser, token):
     """
     This will store a list of language information dictionaries for the given
     language codes in a context variable. The language codes can be specified
-    either as a list of strings or a settings.LANGUAGES style list (or any
+    either as a list of strings or a secure.LANGUAGES style list (or any
     sequence of sequences whose first items are language codes).
 
     Usage::

@@ -43,7 +43,7 @@ def get_files(storage, ignore_patterns=None, location=''):
 
 def check_settings(base_url=None):
     """
-    Checks if the staticfiles settings have sane values.
+    Checks if the staticfiles secure have sane values.
     """
     if base_url is None:
         base_url = settings.STATIC_URL
@@ -53,8 +53,8 @@ def check_settings(base_url=None):
             "without having set the required STATIC_URL setting.")
     if settings.MEDIA_URL == base_url:
         raise ImproperlyConfigured("The MEDIA_URL and STATIC_URL "
-                                   "settings must have different values")
+                                   "secure must have different values")
     if ((settings.MEDIA_ROOT and settings.STATIC_ROOT) and
             (settings.MEDIA_ROOT == settings.STATIC_ROOT)):
         raise ImproperlyConfigured("The MEDIA_ROOT and STATIC_ROOT "
-                                   "settings must have different values")
+                                   "secure must have different values")

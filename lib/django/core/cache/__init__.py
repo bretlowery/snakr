@@ -74,7 +74,7 @@ class CacheHandler(object):
 
         if alias not in settings.CACHES:
             raise InvalidCacheBackendError(
-                "Could not find config for '%s' in settings.CACHES" % alias
+                "Could not find config for '%s' in secure.CACHES" % alias
             )
 
         cache = _create_cache(alias)

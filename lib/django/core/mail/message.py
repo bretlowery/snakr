@@ -200,7 +200,7 @@ class EmailMessage(object):
     """
     content_subtype = 'plain'
     mixed_subtype = 'mixed'
-    encoding = None     # None => use settings default
+    encoding = None     # None => use secure default
 
     def __init__(self, subject='', body='', from_email=None, to=None, bcc=None,
                  connection=None, attachments=None, headers=None, cc=None,

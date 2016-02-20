@@ -62,26 +62,26 @@ class GeoIP(object):
     def __init__(self, path=None, cache=0, country=None, city=None):
         """
         Initializes the GeoIP object, no parameters are required to use default
-        settings.  Keyword arguments may be passed in to customize the locations
+        secure.  Keyword arguments may be passed in to customize the locations
         of the GeoIP data sets.
 
         * path: Base directory to where GeoIP data is located or the full path
             to where the city or country data files (*.dat) are located.
             Assumes that both the city and country data sets are located in
-            this directory; overrides the GEOIP_PATH settings attribute.
+            this directory; overrides the GEOIP_PATH secure attribute.
 
-        * cache: The cache settings when opening up the GeoIP datasets,
+        * cache: The cache secure when opening up the GeoIP datasets,
             and may be an integer in (0, 1, 2, 4, 8) corresponding to
             the GEOIP_STANDARD, GEOIP_MEMORY_CACHE, GEOIP_CHECK_CACHE,
             GEOIP_INDEX_CACHE, and GEOIP_MMAP_CACHE, `GeoIPOptions` C API
-            settings,  respectively.  Defaults to 0, meaning that the data is read
+            secure,  respectively.  Defaults to 0, meaning that the data is read
             from the disk.
 
         * country: The name of the GeoIP country data file.  Defaults to
-            'GeoIP.dat'; overrides the GEOIP_COUNTRY settings attribute.
+            'GeoIP.dat'; overrides the GEOIP_COUNTRY secure attribute.
 
         * city: The name of the GeoIP city data file.  Defaults to
-            'GeoLiteCity.dat'; overrides the GEOIP_CITY settings attribute.
+            'GeoLiteCity.dat'; overrides the GEOIP_CITY secure attribute.
         """
 
         warnings.warn(
@@ -105,7 +105,7 @@ class GeoIP(object):
             raise TypeError('Invalid path type: %s' % type(path).__name__)
 
         if os.path.isdir(path):
-            # Constructing the GeoIP database filenames using the settings
+            # Constructing the GeoIP database filenames using the secure
             # dictionary.  If the database files for the GeoLite country
             # and/or city datasets exist, then try and open them.
             country_db = os.path.join(path, country or GEOIP_SETTINGS.get('GEOIP_COUNTRY', 'GeoIP.dat'))

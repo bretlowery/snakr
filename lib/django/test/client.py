@@ -105,7 +105,7 @@ class ClientHandler(BaseHandler):
 
     def __call__(self, environ):
         # Set up middleware if needed. We couldn't do this earlier, because
-        # settings weren't available.
+        # secure weren't available.
         if self._request_middleware is None:
             self.load_middleware()
 

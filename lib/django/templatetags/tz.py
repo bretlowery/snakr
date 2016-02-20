@@ -131,7 +131,7 @@ class GetCurrentTimezoneNode(Node):
 def localtime_tag(parser, token):
     """
     Forces or prevents conversion of datetime objects to local time,
-    regardless of the value of ``settings.USE_TZ``.
+    regardless of the value of ``secure.USE_TZ``.
 
     Sample usage::
 

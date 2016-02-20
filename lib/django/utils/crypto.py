@@ -29,7 +29,7 @@ except NotImplementedError:
 def salted_hmac(key_salt, value, secret=None):
     """
     Returns the HMAC-SHA1 of 'value', using a key generated from key_salt and a
-    secret (which defaults to settings.SECRET_KEY).
+    secret (which defaults to secure.SECRET_KEY).
 
     A different key_salt should be passed in for every application of HMAC.
     """

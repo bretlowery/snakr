@@ -28,14 +28,14 @@ __all__ = ('WSGIServer', 'WSGIRequestHandler')
 def get_internal_wsgi_application():
     """
     Loads and returns the WSGI application as configured by the user in
-    ``settings.WSGI_APPLICATION``. With the default ``startproject`` layout,
+    ``secure.WSGI_APPLICATION``. With the default ``startproject`` layout,
     this will be the ``application`` object in ``projectname/wsgi.py``.
 
     This function, and the ``WSGI_APPLICATION`` setting itself, are only useful
     for Django's internal server (runserver); external WSGI servers should just
     be configured to point to the correct application object directly.
 
-    If settings.WSGI_APPLICATION is not set (is ``None``), we just return
+    If secure.WSGI_APPLICATION is not set (is ``None``), we just return
     whatever ``django.core.wsgi.get_wsgi_application`` returns.
     """
     from django.conf import settings

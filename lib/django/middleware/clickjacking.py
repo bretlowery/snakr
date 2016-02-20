@@ -18,7 +18,7 @@ class XFrameOptionsMiddleware(object):
     By default, sets the X-Frame-Options header to 'SAMEORIGIN', meaning the
     response can only be loaded on a frame within the same site. To prevent the
     response from being loaded in a frame in any site, set X_FRAME_OPTIONS in
-    your project's Django settings to 'DENY'.
+    your project's Django secure to 'DENY'.
 
     Note: older browsers will quietly ignore this header, thus other
     clickjacking protection techniques should be used if protection in those
@@ -44,7 +44,7 @@ class XFrameOptionsMiddleware(object):
         Gets the value to set for the X_FRAME_OPTIONS header.
 
         By default this uses the value from the X_FRAME_OPTIONS Django
-        settings. If not found in settings, defaults to 'SAMEORIGIN'.
+        secure. If not found in secure, defaults to 'SAMEORIGIN'.
 
         This method can be overridden if needed, allowing it to vary based on
         the request or response.

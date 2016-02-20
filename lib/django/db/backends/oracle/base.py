@@ -235,7 +235,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
             # work for this connection or we need to fall back on LIKEC.
             # This check is performed only once per DatabaseWrapper
             # instance per thread, since subsequent connections will use
-            # the same settings.
+            # the same secure.
             cursor = self.create_cursor()
             try:
                 cursor.execute("SELECT 1 FROM DUAL WHERE DUMMY %s"

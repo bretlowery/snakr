@@ -18,7 +18,7 @@ def create_default_site(app_config, verbosity=2, interactive=True, using=DEFAULT
         return
 
     if not Site.objects.using(using).exists():
-        # The default settings set SITE_ID = 1, and some tests in Django's test
+        # The default secure set SITE_ID = 1, and some tests in Django's test
         # suite rely on this value. However, if database sequences are reused
         # (e.g. in the test suite after flush/syncdb), it isn't guaranteed that
         # the next id will be 1, so we coerce it. See #15573 and #16353. This

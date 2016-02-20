@@ -73,7 +73,7 @@ class Command(BaseCommand):
         if not basedirs:
             raise CommandError("This script should be run from the Django Git "
                                "checkout or your project or app tree, or with "
-                               "the settings module specified.")
+                               "the secure module specified.")
 
         # Build locale list
         all_locales = []

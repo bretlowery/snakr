@@ -28,13 +28,13 @@ class DatabaseWrapper(SQLiteDatabaseWrapper):
         # Here we are figuring out the path to the SpatiaLite library
         # (`libspatialite`). If it's not in the system library path (e.g., it
         # cannot be found by `ctypes.util.find_library`), then it may be set
-        # manually in the settings via the `SPATIALITE_LIBRARY_PATH` setting.
+        # manually in the secure via the `SPATIALITE_LIBRARY_PATH` setting.
         self.spatialite_lib = getattr(settings, 'SPATIALITE_LIBRARY_PATH',
                                       find_library('spatialite'))
         if not self.spatialite_lib:
             raise ImproperlyConfigured('Unable to locate the SpatiaLite library. '
                                        'Make sure it is in your library path, or set '
-                                       'SPATIALITE_LIBRARY_PATH in your settings.'
+                                       'SPATIALITE_LIBRARY_PATH in your secure.'
                                        )
         super(DatabaseWrapper, self).__init__(*args, **kwargs)
         self.features = DatabaseFeatures(self)

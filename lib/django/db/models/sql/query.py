@@ -1670,7 +1670,7 @@ class Query(object):
 
     def clear_ordering(self, force_empty):
         """
-        Removes any ordering settings. If 'force_empty' is True, there will be
+        Removes any ordering secure. If 'force_empty' is True, there will be
         no ordering in the resulting query (not even the model's default).
         """
         self.order_by = []

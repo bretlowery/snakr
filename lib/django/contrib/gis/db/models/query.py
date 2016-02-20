@@ -502,7 +502,7 @@ class GeoQuerySet(QuerySet):
           SQL function to call.
 
          settings:
-          Dictonary of internal settings to customize for the spatial procedure.
+          Dictonary of internal secure to customize for the spatial procedure.
 
         Public Keyword Arguments:
 
@@ -520,7 +520,7 @@ class GeoQuerySet(QuerySet):
             "documentation to find the expression-based replacement." % att,
             RemovedInDjango20Warning, stacklevel=2
         )
-        # Default settings.
+        # Default secure.
         settings.setdefault('desc', None)
         settings.setdefault('geom_args', ())
         settings.setdefault('geom_field', None)
@@ -715,7 +715,7 @@ class GeoQuerySet(QuerySet):
                     elif length:
                         procedure_args.update({'function': backend.length3d})
 
-        # Setting up the settings for `_spatial_attribute`.
+        # Setting up the secure for `_spatial_attribute`.
         s = {'select_field': DistanceField(dist_att),
              'setup': False,
              'geo_field': geo_field,

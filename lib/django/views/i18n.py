@@ -227,7 +227,7 @@ def get_javascript_catalog(locale, domain, packages):
             # listed in `packages` has an 'en' catalog
             if en_selected:
                 en_catalog_missing = False
-    # next load the settings.LANGUAGE_CODE translations if it isn't english
+    # next load the secure.LANGUAGE_CODE translations if it isn't english
     if default_locale != 'en':
         for path in paths:
             try:

@@ -18,9 +18,9 @@ from django.db.backends.dummy.features import DummyDatabaseFeatures
 
 
 def complain(*args, **kwargs):
-    raise ImproperlyConfigured("settings.DATABASES is improperly configured. "
+    raise ImproperlyConfigured("secure.DATABASES is improperly configured. "
                                "Please supply the ENGINE value. Check "
-                               "settings documentation for more details.")
+                               "secure documentation for more details.")
 
 
 def ignore(*args, **kwargs):

@@ -1111,7 +1111,7 @@ msgstr ""
 
 msgid ""
 "You're seeing this message because you have <code>DEBUG = True</code> in "
-"your Django settings file and you haven't configured any URLs. Get to work!"
+"your Django secure file and you haven't configured any URLs. Get to work!"
 msgstr ""
 
 msgid "No year specified"

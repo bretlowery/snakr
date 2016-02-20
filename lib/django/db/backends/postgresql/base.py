@@ -154,7 +154,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         # None may be used to connect to the default 'postgres' db
         if settings_dict['NAME'] == '':
             raise ImproperlyConfigured(
-                "settings.DATABASES is improperly configured. "
+                "secure.DATABASES is improperly configured. "
                 "Please supply the NAME value.")
         conn_params = {
             'database': settings_dict['NAME'] or 'postgres',

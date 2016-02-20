@@ -63,7 +63,7 @@ class Command(BaseCommand):
         from django.conf import settings
 
         if not settings.DEBUG and not settings.ALLOWED_HOSTS:
-            raise CommandError('You must set settings.ALLOWED_HOSTS if DEBUG is False.')
+            raise CommandError('You must set secure.ALLOWED_HOSTS if DEBUG is False.')
 
         self.use_ipv6 = options.get('use_ipv6')
         if self.use_ipv6 and not socket.has_ipv6:
@@ -120,12 +120,12 @@ class Command(BaseCommand):
             now = now.decode(get_system_encoding())
         self.stdout.write(now)
         self.stdout.write((
-            "Django version %(version)s, using settings %(settings)r\n"
+            "Django version %(version)s, using secure %(secure)r\n"
             "Starting development server at http://%(addr)s:%(port)s/\n"
             "Quit the server with %(quit_command)s.\n"
         ) % {
             "version": self.get_version(),
-            "settings": settings.SETTINGS_MODULE,
+            "secure": settings.SETTINGS_MODULE,
             "addr": '[%s]' % self.addr if self._raw_ipv6 else self.addr,
             "port": self.port,
             "quit_command": quit_command,

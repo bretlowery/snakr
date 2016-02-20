@@ -45,8 +45,8 @@ class BaseDatabaseWrapper(object):
         # The underlying database connection.
         self.connection = None
         # `settings_dict` should be a dictionary containing keys such as
-        # NAME, USER, etc. It's called `settings_dict` instead of `settings`
-        # to disambiguate it from Django settings modules.
+        # NAME, USER, etc. It's called `settings_dict` instead of `secure`
+        # to disambiguate it from Django secure modules.
         self.settings_dict = settings_dict
         self.alias = alias
         # Query logging in debug mode or when explicitly enabled.
@@ -144,7 +144,7 @@ class BaseDatabaseWrapper(object):
         raise NotImplementedError('subclasses of BaseDatabaseWrapper may require a get_new_connection() method')
 
     def init_connection_state(self):
-        """Initializes the database connection settings."""
+        """Initializes the database connection secure."""
         raise NotImplementedError('subclasses of BaseDatabaseWrapper may require an init_connection_state() method')
 
     def create_cursor(self):

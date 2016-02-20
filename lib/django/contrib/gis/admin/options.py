@@ -9,10 +9,10 @@ spherical_mercator_srid = 3857
 
 class GeoModelAdmin(ModelAdmin):
     """
-    The administration options class for Geographic models. Map settings
+    The administration options class for Geographic models. Map secure
     may be overloaded from their defaults to create custom maps.
     """
-    # The default map settings that may be overloaded -- still subject
+    # The default map secure that may be overloaded -- still subject
     # to API changes.
     default_lon = 0
     default_lat = 0
@@ -69,7 +69,7 @@ class GeoModelAdmin(ModelAdmin):
     def get_map_widget(self, db_field):
         """
         Returns a subclass of the OpenLayersWidget (or whatever was specified
-        in the `widget` attribute) using the settings from the attributes set
+        in the `widget` attribute) using the secure from the attributes set
         in this class.
         """
         is_collection = db_field.geom_type in ('MULTIPOINT', 'MULTILINESTRING', 'MULTIPOLYGON', 'GEOMETRYCOLLECTION')

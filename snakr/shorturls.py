@@ -1,10 +1,12 @@
 from urlparse import urlparse, urlunparse
+
+import secure.settings as settings
 from django.core.exceptions import SuspiciousOperation
-import web.settings as settings
+#from django.db import transaction
+from django.http import Http404
 from models import ShortURLs, LongURLs, savelog
 from utils import utils
-from django.http import Http404
-from django.db import transaction
+
 
 class ShortURL:
     """Validates and processes the short URL in the GET request."""
@@ -55,7 +57,6 @@ class ShortURL:
         self.id = shash
         return self.normalized_shorturl
 
-    @transaction.commit_on_success
     def getlongurl(self, request):
         self.shorturl = ''
         self.shorturl_is_preencoded = False
@@ -121,6 +122,7 @@ class ShortURL:
         #
         # Log that a 302 request to the matching long url is about to occur
         #
+        #with transaction.commit_on_success:
         savelog(request, entry_type='R', longurl_id=s.longurl_id, shorturl_id=self.id)
         #
         # Return the longurl

@@ -15,7 +15,7 @@ from django.utils.six.moves import input
 class Command(BaseCommand):
     """
     Command that allows to copy or symlink static files from different
-    locations to the settings.STATIC_ROOT.
+    locations to the secure.STATIC_ROOT.
     """
     help = "Collect static files in a single location."
     requires_system_checks = False
@@ -150,7 +150,7 @@ class Command(BaseCommand):
 
         message.append(
             'You have requested to collect static files at the destination\n'
-            'location as specified in your settings'
+            'location as specified in your secure'
         )
 
         if self.is_local_storage() and self.storage.location:

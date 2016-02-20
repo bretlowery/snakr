@@ -1139,7 +1139,7 @@ msgstr ""
 
 msgid ""
 "You're seeing this message because you have <code>DEBUG = True</code> in "
-"your Django settings file and you haven't configured any URLs. Get to work!"
+"your Django secure file and you haven't configured any URLs. Get to work!"
 msgstr ""
 "Bu iletiyi görüyorsunuz çünkü Django ayarları dosyanızda <code>DEBUG = True</"
 "code> ifadesi var ve herhangi bir URL'yi yapılandırmadınız. Işe koyulun!"

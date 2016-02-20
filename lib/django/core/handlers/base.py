@@ -37,7 +37,7 @@ class BaseHandler(object):
 
     def load_middleware(self):
         """
-        Populate middleware lists from settings.MIDDLEWARE_CLASSES.
+        Populate middleware lists from secure.MIDDLEWARE_CLASSES.
 
         Must be called after the environment is fixed (see __call__ in subclasses).
         """

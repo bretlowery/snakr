@@ -143,8 +143,8 @@ def deserialize(format, stream_or_string, **options):
 
 def _load_serializers():
     """
-    Register built-in and settings-defined serializers. This is done lazily so
-    that user code has a chance to (e.g.) set up custom settings without
+    Register built-in and secure-defined serializers. This is done lazily so
+    that user code has a chance to (e.g.) set up custom secure without
     needing to be careful of import order.
     """
     global _serializers

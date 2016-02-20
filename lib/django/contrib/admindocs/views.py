@@ -63,7 +63,7 @@ class TemplateTagIndexView(BaseAdminDocsView):
         try:
             engine = Engine.get_default()
         except ImproperlyConfigured:
-            # Non-trivial TEMPLATES settings aren't supported (#24125).
+            # Non-trivial TEMPLATES secure aren't supported (#24125).
             pass
         else:
             app_libs = sorted(engine.template_libraries.items())
@@ -97,7 +97,7 @@ class TemplateFilterIndexView(BaseAdminDocsView):
         try:
             engine = Engine.get_default()
         except ImproperlyConfigured:
-            # Non-trivial TEMPLATES settings aren't supported (#24125).
+            # Non-trivial TEMPLATES secure aren't supported (#24125).
             pass
         else:
             app_libs = sorted(engine.template_libraries.items())
@@ -318,7 +318,7 @@ class TemplateDetailView(BaseAdminDocsView):
         try:
             default_engine = Engine.get_default()
         except ImproperlyConfigured:
-            # Non-trivial TEMPLATES settings aren't supported (#24125).
+            # Non-trivial TEMPLATES secure aren't supported (#24125).
             pass
         else:
             # This doesn't account for template loaders (#24128).

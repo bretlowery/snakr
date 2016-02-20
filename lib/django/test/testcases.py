@@ -1145,7 +1145,7 @@ class QuietWSGIRequestHandler(WSGIRequestHandler):
 class FSFilesHandler(WSGIHandler):
     """
     WSGI middleware that intercepts calls to a directory, as defined by one of
-    the *_ROOT settings, and serves those files, publishing them under *_URL.
+    the *_ROOT secure, and serves those files, publishing them under *_URL.
     """
     def __init__(self, application):
         self.application = application

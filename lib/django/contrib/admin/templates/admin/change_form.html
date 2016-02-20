@@ -107,7 +107,7 @@
                 $('.related-widget-wrapper select').trigger('change');
 
             {% if adminform and add %}
-                $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus()
+                $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus();
             {% endif %}
             });
         })(django.jQuery);

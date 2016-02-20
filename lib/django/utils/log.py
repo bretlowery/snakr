@@ -66,7 +66,7 @@ def configure_logging(logging_config, logging_settings):
 
         logging.config.dictConfig(DEFAULT_LOGGING)
 
-        # ... then invoke it with the logging settings
+        # ... then invoke it with the logging secure
         if logging_settings:
             logging_config_func(logging_settings)
 

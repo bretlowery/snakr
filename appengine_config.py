@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START vendor]
+## [START vendor]
 from google.appengine.ext import vendor
 vendor.add('lib')
-# [END vendor]
+## [END vendor]

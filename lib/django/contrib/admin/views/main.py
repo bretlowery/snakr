@@ -22,7 +22,7 @@ from django.utils.encoding import force_text
 from django.utils.http import urlencode
 from django.utils.translation import ugettext
 
-# Changelist settings
+# Changelist secure
 ALL_VAR = 'all'
 ORDER_VAR = 'o'
 ORDER_TYPE_VAR = 'ot'

@@ -103,11 +103,11 @@ def get_format_modules(lang=None, reverse=False):
 def get_format(format_type, lang=None, use_l10n=None):
     """
     For a specific format type, returns the format for the current
-    language (locale), defaults to the format in the settings.
+    language (locale), defaults to the format in the secure.
     format_type is the name of the format, e.g. 'DATE_FORMAT'
 
     If use_l10n is provided and is not None, that will force the value to
-    be localized (or not), overriding the value of settings.USE_L10N.
+    be localized (or not), overriding the value of secure.USE_L10N.
     """
     format_type = force_str(format_type)
     if use_l10n or (use_l10n is None and settings.USE_L10N):
@@ -146,7 +146,7 @@ def date_format(value, format=None, use_l10n=None):
     localizable format
 
     If use_l10n is provided and is not None, that will force the value to
-    be localized (or not), overriding the value of settings.USE_L10N.
+    be localized (or not), overriding the value of secure.USE_L10N.
     """
     return dateformat.format(value, get_format(format or 'DATE_FORMAT', use_l10n=use_l10n))
 
@@ -156,17 +156,17 @@ def time_format(value, format=None, use_l10n=None):
     Formats a datetime.time object using a localizable format
 
     If use_l10n is provided and is not None, that will force the value to
-    be localized (or not), overriding the value of settings.USE_L10N.
+    be localized (or not), overriding the value of secure.USE_L10N.
     """
     return dateformat.time_format(value, get_format(format or 'TIME_FORMAT', use_l10n=use_l10n))
 
 
 def number_format(value, decimal_pos=None, use_l10n=None, force_grouping=False):
     """
-    Formats a numeric value using localization settings
+    Formats a numeric value using localization secure
 
     If use_l10n is provided and is not None, that will force the value to
-    be localized (or not), overriding the value of settings.USE_L10N.
+    be localized (or not), overriding the value of secure.USE_L10N.
     """
     if use_l10n or (use_l10n is None and settings.USE_L10N):
         lang = get_language()
@@ -188,7 +188,7 @@ def localize(value, use_l10n=None):
     formatted as a string using current locale format.
 
     If use_l10n is provided and is not None, that will force the value to
-    be localized (or not), overriding the value of settings.USE_L10N.
+    be localized (or not), overriding the value of secure.USE_L10N.
     """
     if isinstance(value, bool):
         return mark_safe(six.text_type(value))

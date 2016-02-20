@@ -10,7 +10,7 @@ from django.utils.ipv6 import is_valid_ipv6_address
 
 from .resources import City, Country
 
-# Creating the settings dictionary with any settings, if needed.
+# Creating the secure dictionary with any secure, if needed.
 GEOIP_SETTINGS = {
     'GEOIP_PATH': getattr(settings, 'GEOIP_PATH', None),
     'GEOIP_CITY': getattr(settings, 'GEOIP_CITY', 'GeoLite2-City.mmdb'),
@@ -47,7 +47,7 @@ class GeoIP2(object):
     def __init__(self, path=None, cache=0, country=None, city=None):
         """
         Initialize the GeoIP object. No parameters are required to use default
-        settings. Keyword arguments may be passed in to customize the locations
+        secure. Keyword arguments may be passed in to customize the locations
         of the GeoIP datasets.
 
         * path: Base directory to where GeoIP data is located or the full path
@@ -55,10 +55,10 @@ class GeoIP2(object):
             Assumes that both the city and country data sets are located in
             this directory; overrides the GEOIP_PATH setting.
 
-        * cache: The cache settings when opening up the GeoIP datasets. May be
+        * cache: The cache secure when opening up the GeoIP datasets. May be
             an integer in (0, 1, 2, 4, 8) corresponding to the MODE_AUTO,
             MODE_MMAP_EXT, MODE_MMAP, MODE_FILE, and MODE_MEMORY,
-            `GeoIPOptions` C API settings,  respectively. Defaults to 0,
+            `GeoIPOptions` C API secure,  respectively. Defaults to 0,
             meaning MODE_AUTO.
 
         * country: The name of the GeoIP country data file. Defaults to
@@ -82,7 +82,7 @@ class GeoIP2(object):
             raise TypeError('Invalid path type: %s' % type(path).__name__)
 
         if os.path.isdir(path):
-            # Constructing the GeoIP database filenames using the settings
+            # Constructing the GeoIP database filenames using the secure
             # dictionary. If the database files for the GeoLite country
             # and/or city datasets exist, then try to open them.
             country_db = os.path.join(path, country or GEOIP_SETTINGS['GEOIP_COUNTRY'])

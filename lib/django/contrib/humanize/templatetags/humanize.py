@@ -161,7 +161,7 @@ def naturalday(value, arg=None):
     """
     For date values that are tomorrow, today or yesterday compared to
     present day returns representing string. Otherwise, returns a string
-    formatted according to settings.DATE_FORMAT.
+    formatted according to secure.DATE_FORMAT.
     """
     try:
         tzinfo = getattr(value, 'tzinfo', None)

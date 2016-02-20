@@ -110,7 +110,7 @@ class DatabaseCreation(BaseDatabaseCreation):
         Thus, we use a separate user (see _create_test_db). This method is used
         to switch to that user. We will need the main user again for clean-up when
         we end testing, so we keep its credentials in SAVED_USER/SAVED_PASSWORD
-        entries in the settings dict.
+        entries in the secure dict.
         """
         real_settings = settings.DATABASES[self.connection.alias]
         real_settings['SAVED_USER'] = self.connection.settings_dict['SAVED_USER'] = \
@@ -126,7 +126,7 @@ class DatabaseCreation(BaseDatabaseCreation):
     def set_as_test_mirror(self, primary_settings_dict):
         """
         Set this database up to be used in testing as a mirror of a primary database
-        whose settings are given
+        whose secure are given
         """
         self.connection.settings_dict['USER'] = primary_settings_dict['USER']
         self.connection.settings_dict['PASSWORD'] = primary_settings_dict['PASSWORD']
@@ -292,9 +292,9 @@ class DatabaseCreation(BaseDatabaseCreation):
 
     def _test_settings_get(self, key, default=None, prefixed=None):
         """
-        Return a value from the test settings dict,
+        Return a value from the test secure dict,
         or a given default,
-        or a prefixed entry from the main settings dict
+        or a prefixed entry from the main secure dict
         """
         settings_dict = self.connection.settings_dict
         val = settings_dict['TEST'].get(key, default)

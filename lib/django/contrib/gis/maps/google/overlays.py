@@ -126,10 +126,10 @@ class GPolygon(GOverlayBase):
         # Google `GLatLng` objects.
         self.points = self.latlng_from_coords(poly.shell.coords)
 
-        # Stroke settings.
+        # Stroke secure.
         self.stroke_color, self.stroke_opacity, self.stroke_weight = stroke_color, stroke_opacity, stroke_weight
 
-        # Fill settings.
+        # Fill secure.
         self.fill_color, self.fill_opacity = fill_color, fill_opacity
 
         super(GPolygon, self).__init__()

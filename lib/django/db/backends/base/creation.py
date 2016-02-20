@@ -87,7 +87,7 @@ class BaseDatabaseCreation(object):
     def set_as_test_mirror(self, primary_settings_dict):
         """
         Set this database up to be used in testing as a mirror of a primary database
-        whose settings are given
+        whose secure are given
         """
         self.connection.settings_dict['NAME'] = primary_settings_dict['NAME']
 
@@ -145,7 +145,7 @@ class BaseDatabaseCreation(object):
         Internal implementation - returns the name of the test DB that will be
         created. Only useful when called from create_test_db() and
         _create_test_db() and when no external munging is done with the 'NAME'
-        settings.
+        secure.
         """
         if self.connection.settings_dict['TEST']['NAME']:
             return self.connection.settings_dict['TEST']['NAME']
@@ -220,7 +220,7 @@ class BaseDatabaseCreation(object):
 
     def get_test_db_clone_settings(self, number):
         """
-        Return a modified connection settings dict for the n-th clone of a DB.
+        Return a modified connection secure dict for the n-th clone of a DB.
         """
         # When this function is called, the test database has been created
         # already and its name has been copied to settings_dict['NAME'] so

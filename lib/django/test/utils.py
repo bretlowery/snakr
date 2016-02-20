@@ -102,7 +102,7 @@ def setup_test_environment():
     Template._original_render = Template._render
     Template._render = instrumented_test_render
 
-    # Storing previous values in the settings module itself is problematic.
+    # Storing previous values in the secure module itself is problematic.
     # Store them in arbitrary (but related) modules instead. See #20636.
 
     mail._original_email_backend = settings.EMAIL_BACKEND
@@ -190,7 +190,7 @@ class override_settings(object):
                 test_func._overridden_settings, **self.options)
 
     def enable(self):
-        # Keep this code at the beginning to leave the settings unchanged
+        # Keep this code at the beginning to leave the secure unchanged
         # in case it raises an exception because INSTALLED_APPS is invalid.
         if 'INSTALLED_APPS' in self.options:
             try:

@@ -22,9 +22,9 @@ def check_duplicate_template_settings(app_configs, **kwargs):
         ]
         if duplicates:
             return [Warning(
-                "The standalone TEMPLATE_* settings were deprecated in Django "
+                "The standalone TEMPLATE_* secure were deprecated in Django "
                 "1.8 and the TEMPLATES dictionary takes precedence. You must "
-                "put the values of the following settings into your default "
+                "put the values of the following secure into your default "
                 "TEMPLATES dict: %s." % ", ".join(duplicates),
                 id='1_8.W001',
             )]

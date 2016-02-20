@@ -49,7 +49,7 @@ def get_commands():
     in each installed application -- if a commands package exists, all commands
     in that package are registered.
 
-    Core commands are always included. If a settings module has been
+    Core commands are always included. If a secure module has been
     specified, user-defined commands will also be included.
 
     The dictionary is in the format {command_name: app_name}. Key-value
@@ -157,11 +157,11 @@ class ManagementUtility(object):
                 usage.append(style.NOTICE("[%s]" % app))
                 for name in sorted(commands_dict[app]):
                     usage.append("    %s" % name)
-            # Output an extra note if settings are not properly configured
+            # Output an extra note if secure are not properly configured
             if self.settings_exception is not None:
                 usage.append(style.NOTICE(
                     "Note that only Django core commands are listed "
-                    "as settings are not properly configured (error: %s)."
+                    "as secure are not properly configured (error: %s)."
                     % self.settings_exception))
 
         return '\n'.join(usage)
@@ -178,13 +178,13 @@ class ManagementUtility(object):
             app_name = commands[subcommand]
         except KeyError:
             if os.environ.get('DJANGO_SETTINGS_MODULE'):
-                # If `subcommand` is missing due to misconfigured settings, the
+                # If `subcommand` is missing due to misconfigured secure, the
                 # following line will retrigger an ImproperlyConfigured exception
                 # (get_commands() swallows the original one) so the user is
                 # informed about it.
                 settings.INSTALLED_APPS
             else:
-                sys.stderr.write("No Django settings specified.\n")
+                sys.stderr.write("No Django secure specified.\n")
             sys.stderr.write("Unknown command: %r\nType '%s help' for usage.\n" %
                 (subcommand, self.prog_name))
             sys.exit(1)
@@ -279,11 +279,11 @@ class ManagementUtility(object):
         except IndexError:
             subcommand = 'help'  # Display help if no arguments were given.
 
-        # Preprocess options to extract --settings and --pythonpath.
+        # Preprocess options to extract --secure and --pythonpath.
         # These options could affect the commands that are available, so they
         # must be processed early.
         parser = CommandParser(None, usage="%(prog)s subcommand [options] [args]", add_help=False)
-        parser.add_argument('--settings')
+        parser.add_argument('--secure')
         parser.add_argument('--pythonpath')
         parser.add_argument('args', nargs='*')  # catch-all
         try:
@@ -302,8 +302,8 @@ class ManagementUtility(object):
             settings.INSTALLED_APPS
         except ImproperlyConfigured as exc:
             self.settings_exception = exc
-            # A handful of built-in management commands work without settings.
-            # Load the default settings -- where INSTALLED_APPS is empty.
+            # A handful of built-in management commands work without secure.
+            # Load the default secure -- where INSTALLED_APPS is empty.
             if subcommand in no_settings_commands:
                 settings.configure()
 

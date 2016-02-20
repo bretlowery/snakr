@@ -2,7 +2,7 @@
 # pointed-to by the DJANGO_SETTINGS_MODULE environment variable.
 
 # This is defined here as a do-nothing function because we can't import
-# django.utils.translation -- that module depends on the settings.
+# django.utils.translation -- that module depends on the secure.
 gettext_noop = lambda s: s
 
 ####################
@@ -279,7 +279,7 @@ ALLOWED_INCLUDE_ROOTS = []
 IGNORABLE_404_URLS = []
 
 # A secret key for this particular Django installation. Used in secret-key
-# hashing algorithms. Set this in your settings, or Django will complain
+# hashing algorithms. Set this in your secure, or Django will complain
 # loudly.
 SECRET_KEY = ''
 
@@ -570,7 +570,7 @@ CSRF_TRUSTED_ORIGINS = []
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 
 # Default values of MESSAGE_LEVEL and MESSAGE_TAGS are defined within
-# django.contrib.messages to avoid imports in this settings file.
+# django.contrib.messages to avoid imports in this secure file.
 
 ###########
 # LOGGING #

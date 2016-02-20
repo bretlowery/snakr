@@ -17,9 +17,9 @@ class CommonMiddleware(object):
     """
     "Common" middleware for taking care of some basic operations:
 
-        - Forbids access to User-Agents in settings.DISALLOWED_USER_AGENTS
+        - Forbids access to User-Agents in secure.DISALLOWED_USER_AGENTS
 
-        - URL rewriting: Based on the APPEND_SLASH and PREPEND_WWW settings,
+        - URL rewriting: Based on the APPEND_SLASH and PREPEND_WWW secure,
           this middleware appends missing slashes and/or prepends missing
           "www."s.
 
@@ -42,7 +42,7 @@ class CommonMiddleware(object):
     def process_request(self, request):
         """
         Check for denied User-Agents and rewrite the URL based on
-        settings.APPEND_SLASH and settings.PREPEND_WWW
+        secure.APPEND_SLASH and secure.PREPEND_WWW
         """
 
         # Check for denied User-Agents
@@ -51,7 +51,7 @@ class CommonMiddleware(object):
                 if user_agent_regex.search(request.META['HTTP_USER_AGENT']):
                     raise PermissionDenied('Forbidden user agent')
 
-        # Check for a redirect based on settings.PREPEND_WWW
+        # Check for a redirect based on secure.PREPEND_WWW
         host = request.get_host()
 
         if settings.PREPEND_WWW and host and not host.startswith('www.'):
@@ -68,7 +68,7 @@ class CommonMiddleware(object):
 
     def should_redirect_with_slash(self, request):
         """
-        Return True if settings.APPEND_SLASH is True and appending a slash to
+        Return True if secure.APPEND_SLASH is True and appending a slash to
         the request path turns an invalid path into a valid one.
         """
         if settings.APPEND_SLASH and not request.get_full_path().endswith('/'):
@@ -83,7 +83,7 @@ class CommonMiddleware(object):
         """
         Return the full path of the request with a trailing slash appended.
 
-        Raise a RuntimeError if settings.DEBUG is True and request.method is
+        Raise a RuntimeError if secure.DEBUG is True and request.method is
         GET, PUT, or PATCH.
         """
         new_path = request.get_full_path(force_append_slash=True)
@@ -93,7 +93,7 @@ class CommonMiddleware(object):
                 "in a slash and you have APPEND_SLASH set. Django can't "
                 "redirect to the slash URL while maintaining %(method)s data. "
                 "Change your form to point to %(url)s (note the trailing "
-                "slash), or set APPEND_SLASH=False in your Django settings." % {
+                "slash), or set APPEND_SLASH=False in your Django secure." % {
                     'method': request.method,
                     'url': request.get_host() + new_path,
                 }
@@ -161,7 +161,7 @@ class BrokenLinkEmailsMiddleware(object):
     def is_ignorable_request(self, request, uri, domain, referer):
         """
         Return True if the given request *shouldn't* notify the site managers
-        according to project settings or in three specific situations:
+        according to project secure or in three specific situations:
          - If the referer is empty.
          - If a '?' in referer is identified as a search engine source.
          - If the referer is equal to the current URL, ignoring the scheme

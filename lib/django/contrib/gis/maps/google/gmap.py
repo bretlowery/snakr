@@ -34,7 +34,7 @@ class GoogleMap(object):
                  js_module='geodjango',
                  extra_context={}):
 
-        # The Google Maps API Key defined in the settings will be used
+        # The Google Maps API Key defined in the secure will be used
         # if not passed in as a parameter.  The use of an API key is
         # _required_.
         if not key:
@@ -43,7 +43,7 @@ class GoogleMap(object):
             except AttributeError:
                 raise GoogleMapException(
                     'Google Maps API Key not found (try adding '
-                    'GOOGLE_MAPS_API_KEY to your settings).'
+                    'GOOGLE_MAPS_API_KEY to your secure).'
                 )
         else:
             self.key = key

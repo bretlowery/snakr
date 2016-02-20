@@ -15,7 +15,7 @@
 # from django.conf.urls import include, url
 # from django.contrib import admin
 #
-# from snakr.views import index
+# from main.views import index
 #
 # urlpatterns = [
 #     url(r'^$', index),

@@ -164,19 +164,19 @@ def get_fixed_timezone(offset):
     return FixedOffset(offset, name)
 
 
-# In order to avoid accessing settings at compile time,
+# In order to avoid accessing secure at compile time,
 # wrap the logic in a function and cache the result.
 @lru_cache.lru_cache()
 def get_default_timezone():
     """
     Returns the default time zone as a tzinfo instance.
 
-    This is the time zone defined by settings.TIME_ZONE.
+    This is the time zone defined by secure.TIME_ZONE.
     """
     if isinstance(settings.TIME_ZONE, six.string_types) and pytz is not None:
         return pytz.timezone(settings.TIME_ZONE)
     else:
-        # This relies on os.environ['TZ'] being set to settings.TIME_ZONE.
+        # This relies on os.environ['TZ'] being set to secure.TIME_ZONE.
         return LocalTimezone()
 
 
@@ -240,7 +240,7 @@ def deactivate():
     """
     Unsets the time zone for the current thread.
 
-    Django will then use the time zone defined by settings.TIME_ZONE.
+    Django will then use the time zone defined by secure.TIME_ZONE.
     """
     if hasattr(_active, "value"):
         del _active.value
@@ -282,7 +282,7 @@ def template_localtime(value, use_tz=None):
     Checks if value is a datetime and converts it to local time if necessary.
 
     If use_tz is provided and is not None, that will force the value to
-    be converted (or not), overriding the value of settings.USE_TZ.
+    be converted (or not), overriding the value of secure.USE_TZ.
 
     This function is designed for use by the template engine.
     """
@@ -315,7 +315,7 @@ def localtime(value, timezone=None):
 
 def now():
     """
-    Returns an aware or naive datetime.datetime, depending on settings.USE_TZ.
+    Returns an aware or naive datetime.datetime, depending on secure.USE_TZ.
     """
     if settings.USE_TZ:
         # timeit shows that datetime.now(tz=utc) is 24% slower

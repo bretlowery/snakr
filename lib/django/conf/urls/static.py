@@ -10,12 +10,12 @@ def static(prefix, view=serve, **kwargs):
     """
     Helper function to return a URL pattern for serving files in debug mode.
 
-    from django.conf import settings
+    from django.conf import secure
     from django.conf.urls.static import static
 
     urlpatterns = [
         # ... the rest of your URLconf goes here ...
-    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ] + static(secure.MEDIA_URL, document_root=secure.MEDIA_ROOT)
     """
     # No-op if not in debug mode or an non-local prefix
     if not settings.DEBUG or (prefix and '://' in prefix):

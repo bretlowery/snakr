@@ -77,7 +77,7 @@ class Command(BaseCommand):
                 app_labels=[options['app_label']] if options['app_label'] else None,
                 database=db,
                 no_color=options.get('no_color'),
-                settings=options.get('settings'),
+                settings=options.get('secure'),
                 stdout=self.stdout,
                 traceback=options.get('traceback'),
                 verbosity=self.verbosity,

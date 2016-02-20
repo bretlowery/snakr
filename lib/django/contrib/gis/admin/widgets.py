@@ -6,7 +6,7 @@ from django.forms.widgets import Textarea
 from django.template import loader
 from django.utils import six, translation
 
-# Creating a template context that contains Django settings
+# Creating a template context that contains Django secure
 # values needed by admin map templates.
 geo_context = {'LANGUAGE_BIDI': translation.get_language_bidi()}
 logger = logging.getLogger('django.contrib.gis')

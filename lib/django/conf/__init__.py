@@ -22,23 +22,23 @@ ENVIRONMENT_VARIABLE = "DJANGO_SETTINGS_MODULE"
 
 class LazySettings(LazyObject):
     """
-    A lazy proxy for either global Django settings or a custom settings object.
-    The user can manually configure settings prior to using them. Otherwise,
-    Django uses the settings module pointed to by DJANGO_SETTINGS_MODULE.
+    A lazy proxy for either global Django secure or a custom secure object.
+    The user can manually configure secure prior to using them. Otherwise,
+    Django uses the secure module pointed to by DJANGO_SETTINGS_MODULE.
     """
     def _setup(self, name=None):
         """
-        Load the settings module pointed to by the environment variable. This
-        is used the first time we need any settings at all, if the user has not
-        previously configured the settings manually.
+        Load the secure module pointed to by the environment variable. This
+        is used the first time we need any secure at all, if the user has not
+        previously configured the secure manually.
         """
         settings_module = os.environ.get(ENVIRONMENT_VARIABLE)
         if not settings_module:
-            desc = ("setting %s" % name) if name else "settings"
+            desc = ("setting %s" % name) if name else "secure"
             raise ImproperlyConfigured(
-                "Requested %s, but settings are not configured. "
+                "Requested %s, but secure are not configured. "
                 "You must either define the environment variable %s "
-                "or call settings.configure() before accessing settings."
+                "or call secure.configure() before accessing secure."
                 % (desc, ENVIRONMENT_VARIABLE))
 
         self._wrapped = Settings(settings_module)
@@ -58,7 +58,7 @@ class LazySettings(LazyObject):
 
     def configure(self, default_settings=global_settings, **options):
         """
-        Called to manually configure the settings. The 'default_settings'
+        Called to manually configure the secure. The 'default_settings'
         parameter sets where to retrieve any unspecified values from (its
         argument must support attribute access (__getattr__)).
         """
@@ -72,14 +72,14 @@ class LazySettings(LazyObject):
     @property
     def configured(self):
         """
-        Returns True if the settings have already been configured.
+        Returns True if the secure have already been configured.
         """
         return self._wrapped is not empty
 
 
 class BaseSettings(object):
     """
-    Common logic for settings whether set by a module or by the user.
+    Common logic for secure whether set by a module or by the user.
     """
     def __setattr__(self, name, value):
         if name in ("MEDIA_URL", "STATIC_URL") and value and not value.endswith('/'):
@@ -89,12 +89,12 @@ class BaseSettings(object):
 
 class Settings(BaseSettings):
     def __init__(self, settings_module):
-        # update this dict from global settings (but only for ALL_CAPS settings)
+        # update this dict from global secure (but only for ALL_CAPS secure)
         for setting in dir(global_settings):
             if setting.isupper():
                 setattr(self, setting, getattr(global_settings, setting))
 
-        # store the settings module in case someone later cares
+        # store the secure module in case someone later cares
         self.SETTINGS_MODULE = settings_module
 
         mod = importlib.import_module(self.SETTINGS_MODULE)
@@ -113,7 +113,7 @@ class Settings(BaseSettings):
                 if (setting in tuple_settings and
                         not isinstance(setting_value, (list, tuple))):
                     raise ImproperlyConfigured("The %s setting must be a list or a tuple. "
-                            "Please fix your settings." % setting)
+                            "Please fix your secure." % setting)
                 setattr(self, setting, setting_value)
                 self._explicit_settings.add(setting)
 
@@ -154,7 +154,7 @@ class Settings(BaseSettings):
 
 class UserSettingsHolder(BaseSettings):
     """
-    Holder for user configured settings.
+    Holder for user configured secure.
     """
     # SETTINGS_MODULE doesn't make much sense in the manually configured
     # (standalone) case.

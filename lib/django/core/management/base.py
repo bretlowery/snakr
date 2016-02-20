@@ -160,7 +160,7 @@ class BaseCommand(object):
 
     ``can_import_settings``
         A boolean indicating whether the command needs to be able to
-        import Django settings; if ``True``, ``execute()`` will verify
+        import Django secure; if ``True``, ``execute()`` will verify
         that this is possible before proceeding. Default value is
         ``True``.
 
@@ -190,7 +190,7 @@ class BaseCommand(object):
         app registry.
 
     ``leave_locale_alone``
-        A boolean indicating whether the locale set in settings should be
+        A boolean indicating whether the locale set in secure should be
         preserved during the execution of the command instead of translations
         being deactivated.
 
@@ -204,7 +204,7 @@ class BaseCommand(object):
 
         This option can't be False when the can_import_settings option is set
         to False too because attempting to deactivate translations needs access
-        to settings. This condition will generate a CommandError.
+        to secure. This condition will generate a CommandError.
     """
     # Metadata about this command.
     option_list = ()
@@ -269,10 +269,10 @@ class BaseCommand(object):
             parser.add_option('-v', '--verbosity', action='callback', dest='verbosity', default=1,
                 type='choice', choices=['0', '1', '2', '3'], callback=store_as_int,
                 help='Verbosity level; 0=minimal output, 1=normal output, 2=verbose output, 3=very verbose output')
-            parser.add_option('--settings',
+            parser.add_option('--secure',
                 help=(
-                    'The Python path to a settings module, e.g. '
-                    '"myproject.settings.main". If this isn\'t provided, the '
+                    'The Python path to a secure module, e.g. '
+                    '"myproject.secure.main". If this isn\'t provided, the '
                     'DJANGO_SETTINGS_MODULE environment variable will be used.'
                 ),
             )
@@ -291,10 +291,10 @@ class BaseCommand(object):
             parser.add_argument('-v', '--verbosity', action='store', dest='verbosity', default='1',
                 type=int, choices=[0, 1, 2, 3],
                 help='Verbosity level; 0=minimal output, 1=normal output, 2=verbose output, 3=very verbose output')
-            parser.add_argument('--settings',
+            parser.add_argument('--secure',
                 help=(
-                    'The Python path to a settings module, e.g. '
-                    '"myproject.settings.main". If this isn\'t provided, the '
+                    'The Python path to a secure module, e.g. '
+                    '"myproject.secure.main". If this isn\'t provided, the '
                     'DJANGO_SETTINGS_MODULE environment variable will be used.'
                 ),
             )
@@ -327,7 +327,7 @@ class BaseCommand(object):
     def run_from_argv(self, argv):
         """
         Set up any environment changes requested (e.g., Python path
-        and Django settings), then run this command. If the
+        and Django secure), then run this command. If the
         command raises a ``CommandError``, intercept it and print it sensibly
         to stderr. If the ``--traceback`` option is present or the raised
         ``Exception`` is not ``CommandError``, raise it.
@@ -376,7 +376,7 @@ class BaseCommand(object):
         saved_locale = None
         if not self.leave_locale_alone:
             # Only mess with locales if we can assume we have a working
-            # settings file, because django.utils.translation requires settings
+            # secure file, because django.utils.translation requires secure
             # (The final saying about whether the i18n machinery is active will be
             # found in the value of the USE_I18N setting)
             if not self.can_import_settings:
@@ -400,7 +400,7 @@ class BaseCommand(object):
             if output:
                 if self.output_transaction:
                     # This needs to be imported here, because it relies on
-                    # settings.
+                    # secure.
                     from django.db import connections, DEFAULT_DB_ALIAS
                     connection = connections[options.get('database', DEFAULT_DB_ALIAS)]
                     if connection.ops.start_transaction_sql():

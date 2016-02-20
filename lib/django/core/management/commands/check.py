@@ -19,7 +19,7 @@ class Command(BaseCommand):
         parser.add_argument('--list-tags', action='store_true', dest='list_tags',
             help='List available tags.')
         parser.add_argument('--deploy', action='store_true', dest='deploy',
-            help='Check deployment settings.')
+            help='Check deployment secure.')
 
     def handle(self, *app_labels, **options):
         include_deployment_checks = options['deploy']

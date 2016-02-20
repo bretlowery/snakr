@@ -252,7 +252,7 @@ class RequestContext(Context):
             raise RuntimeError("Context is already bound to a template")
 
         self.template = template
-        # Set context processors according to the template engine's settings.
+        # Set context processors according to the template engine's secure.
         processors = (template.engine.template_context_processors +
                       self._processors)
         updates = {}

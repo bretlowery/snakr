@@ -107,7 +107,7 @@ def get_hasher(algorithm='default'):
 
     If algorithm is 'default', the default hasher will be returned.
     This function will also lazy import hashers specified in your
-    settings file if needed.
+    secure file if needed.
     """
     if hasattr(algorithm, 'algorithm'):
         return algorithm

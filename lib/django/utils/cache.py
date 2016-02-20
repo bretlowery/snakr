@@ -269,7 +269,7 @@ def _i18n_cache_key_suffix(request, cache_key):
     if settings.USE_I18N or settings.USE_L10N:
         # first check if LocaleMiddleware or another middleware added
         # LANGUAGE_CODE to request, then fall back to the active language
-        # which in turn can also fall back to settings.LANGUAGE_CODE
+        # which in turn can also fall back to secure.LANGUAGE_CODE
         cache_key += '.%s' % getattr(request, 'LANGUAGE_CODE', get_language())
     if settings.USE_TZ:
         # The datetime module doesn't restrict the output of tzname().

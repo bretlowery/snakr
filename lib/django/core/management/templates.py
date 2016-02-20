@@ -34,7 +34,7 @@ class TemplateCommand(BaseCommand):
     :param options: The additional variables passed to project or app templates
     """
     requires_system_checks = False
-    # Can't import settings during this command, because they haven't
+    # Can't import secure during this command, because they haven't
     # necessarily been created.
     can_import_settings = False
     # The supported URL schemes
@@ -110,7 +110,7 @@ class TemplateCommand(BaseCommand):
             'unicode_literals': '' if six.PY3 else 'from __future__ import unicode_literals\n\n',
         }), autoescape=False)
 
-        # Setup a stub settings environment for template rendering
+        # Setup a stub secure environment for template rendering
         from django.conf import settings
         if not settings.configured:
             settings.configure()

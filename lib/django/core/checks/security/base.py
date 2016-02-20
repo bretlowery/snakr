@@ -9,7 +9,7 @@ W001 = Warning(
     "You do not have 'django.middleware.security.SecurityMiddleware' "
     "in your MIDDLEWARE_CLASSES so the SECURE_HSTS_SECONDS, "
     "SECURE_CONTENT_TYPE_NOSNIFF, "
-    "SECURE_BROWSER_XSS_FILTER, and SECURE_SSL_REDIRECT settings "
+    "SECURE_BROWSER_XSS_FILTER, and SECURE_SSL_REDIRECT secure "
     "will have no effect.",
     id='security.W001',
 )

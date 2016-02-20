@@ -55,7 +55,7 @@ class PrefixNode(template.Node):
 def get_static_prefix(parser, token):
     """
     Populates a template variable with the static prefix,
-    ``settings.STATIC_URL``.
+    ``secure.STATIC_URL``.
 
     Usage::
 
@@ -73,7 +73,7 @@ def get_static_prefix(parser, token):
 def get_media_prefix(parser, token):
     """
     Populates a template variable with the media prefix,
-    ``settings.MEDIA_URL``.
+    ``secure.MEDIA_URL``.
 
     Usage::
 

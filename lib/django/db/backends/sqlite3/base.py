@@ -177,7 +177,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         if not settings_dict['NAME']:
             from django.core.exceptions import ImproperlyConfigured
             raise ImproperlyConfigured(
-                "settings.DATABASES is improperly configured. "
+                "secure.DATABASES is improperly configured. "
                 "Please supply the NAME value.")
         kwargs = {
             'database': settings_dict['NAME'],

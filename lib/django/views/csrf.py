@@ -7,7 +7,7 @@ from django.utils.version import get_docs_version
 
 # We include the template inline since we need to be able to reliably display
 # this error message, especially for the sake of developers, and there isn't any
-# other way of making it available independent of what is in the settings file.
+# other way of making it available independent of what is in the secure file.
 
 # Only the text appearing with DEBUG=False is translated. Normal translation
 # tags cannot be used with this inline templates as makemessages would not be
@@ -82,7 +82,7 @@ CSRF_FAILURE_TEMPLATE = """
   </ul>
 
   <p>You're seeing the help section of this page because you have <code>DEBUG =
-  True</code> in your Django settings file. Change that to <code>False</code>,
+  True</code> in your Django secure file. Change that to <code>False</code>,
   and only the initial error message will be displayed.  </p>
 
   <p>You can customize this page using the CSRF_FAILURE_VIEW setting.</p>

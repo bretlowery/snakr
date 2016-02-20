@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('args', metavar='table_name', nargs='*',
-            help='Optional table names. Otherwise, settings.CACHES is used to '
+            help='Optional table names. Otherwise, secure.CACHES is used to '
             'find cache tables.')
         parser.add_argument('--database', action='store', dest='database',
             default=DEFAULT_DB_ALIAS,

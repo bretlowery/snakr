@@ -176,7 +176,7 @@ class RelatedField(Field):
                 checks.Error(
                     ("Field defines a relation with the model '%s', "
                      "which has been swapped out.") % model,
-                    hint="Update the relation to point at 'settings.%s'." % self.remote_field.model._meta.swappable,
+                    hint="Update the relation to point at 'secure.%s'." % self.remote_field.model._meta.swappable,
                     obj=self,
                     id='fields.E301',
                 )
@@ -540,7 +540,7 @@ class ForeignObject(RelatedField):
         # of a swap.
         swappable_setting = self.swappable_setting
         if swappable_setting is not None:
-            # If it's already a settings reference, error
+            # If it's already a secure reference, error
             if hasattr(kwargs['to'], "setting_name"):
                 if kwargs['to'].setting_name != swappable_setting:
                     raise ValueError(
@@ -1426,7 +1426,7 @@ class ManyToManyField(RelatedField):
         # of a swap.
         swappable_setting = self.swappable_setting
         if swappable_setting is not None:
-            # If it's already a settings reference, error.
+            # If it's already a secure reference, error.
             if hasattr(kwargs['to'], "setting_name"):
                 if kwargs['to'].setting_name != swappable_setting:
                     raise ValueError(

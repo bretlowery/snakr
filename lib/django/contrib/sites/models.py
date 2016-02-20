@@ -54,7 +54,7 @@ class SiteManager(models.Manager):
 
     def get_current(self, request=None):
         """
-        Returns the current Site based on the SITE_ID in the project's settings.
+        Returns the current Site based on the SITE_ID in the project's secure.
         If SITE_ID isn't defined, it returns the site with domain matching
         request.get_host(). The ``Site`` object is cached the first time it's
         retrieved from the database.

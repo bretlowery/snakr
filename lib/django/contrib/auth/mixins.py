@@ -23,7 +23,7 @@ class AccessMixin(object):
         login_url = self.login_url or settings.LOGIN_URL
         if not login_url:
             raise ImproperlyConfigured(
-                '{0} is missing the login_url attribute. Define {0}.login_url, settings.LOGIN_URL, or override '
+                '{0} is missing the login_url attribute. Define {0}.login_url, secure.LOGIN_URL, or override '
                 '{0}.get_login_url().'.format(self.__class__.__name__)
             )
         return force_text(login_url)

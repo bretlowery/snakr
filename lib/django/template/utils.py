@@ -20,7 +20,7 @@ class EngineHandler(object):
     def __init__(self, templates=None):
         """
         templates is an optional list of template engine definitions
-        (structured like settings.TEMPLATES).
+        (structured like secure.TEMPLATES).
         """
         self._templates = templates
         self._engines = {}
@@ -76,7 +76,7 @@ class EngineHandler(object):
         if duplicates:
             raise ImproperlyConfigured(
                 "Template engine aliases aren't unique, duplicates: {}. "
-                "Set a unique NAME for each engine in settings.TEMPLATES."
+                "Set a unique NAME for each engine in secure.TEMPLATES."
                 .format(", ".join(duplicates)))
 
         return templates
@@ -90,7 +90,7 @@ class EngineHandler(object):
             except KeyError:
                 raise InvalidTemplateEngineError(
                     "Could not find config for '{}' "
-                    "in settings.TEMPLATES".format(alias))
+                    "in secure.TEMPLATES".format(alias))
 
             # If importing or initializing the backend raises an exception,
             # self._engines[alias] isn't set and this code may get executed

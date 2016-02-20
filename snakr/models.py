@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Import bug workaround: http://stackoverflow.com/questions/32761566/django-1-9-importerror-for-import-module
-from djangoappengine.settings_base import *
+# from djangoappengine.settings_base import *
 
 try:
     from dev_appserver_version import DEV_APPSERVER_VERSION
@@ -21,13 +21,13 @@ except ImportError:
     DEV_APPSERVER_VERSION = 2
 
 # Initialize App Engine SDK if necessary.
-try:
-    from google.appengine.api import apiproxy_stub_map
-except ImportError:
-    from djangoappengine.boot import setup_env
-    setup_env(DEV_APPSERVER_VERSION)
+# try:
+#     from google.appengine.api import apiproxy_stub_map
+# except ImportError:
+#     from djangoappengine.boot import setup_env
+#     setup_env(DEV_APPSERVER_VERSION)
 
-from djangoappengine.utils import on_production_server
+#from djangoappengine.utils import on_production_server
 from django.core.validators import URLValidator
 
 #if not on_production_server:
@@ -62,7 +62,7 @@ class ShortURLs(mydb.Model):
                                      unique=True, null=False)
     shorturl = mydb.CharField(verbose_name='unencoded, unquoted version of the short URL generated', max_length=40,
                                validators=[URLValidator()], null=False, blank=False)
-    shorturl_path_size = mydb.SmallIntegerField(verbose_name='value of settings.SHORTURL_PATH_SIZE when short URL was generated',
+    shorturl_path_size = mydb.SmallIntegerField(verbose_name='value of secure.SHORTURL_PATH_SIZE when short URL was generated',
                                null=False)
     created_on = mydb.DateTimeField(verbose_name='datetime that the short URL was first generated', auto_now=True,
                                      null=False)

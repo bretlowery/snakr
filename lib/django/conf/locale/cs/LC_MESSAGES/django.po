@@ -1144,7 +1144,7 @@ msgstr ""
 
 msgid ""
 "You're seeing this message because you have <code>DEBUG = True</code> in "
-"your Django settings file and you haven't configured any URLs. Get to work!"
+"your Django secure file and you haven't configured any URLs. Get to work!"
 msgstr ""
 "Tuto zprávu vidíte, protože máte v nastavení Djanga zapnutý vývojový režim "
 "<code>DEBUG = True</code> a zatím nemáte nastavena žádná URL. S chutí do "

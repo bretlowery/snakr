@@ -18,7 +18,7 @@ class BaseEngine(object):
         """
         Initializes the template engine.
 
-        Receives the configuration settings as a dict.
+        Receives the configuration secure as a dict.
         """
         params = params.copy()
         self.name = params.pop('NAME')

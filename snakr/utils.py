@@ -2,9 +2,9 @@ import hashlib
 import random
 import urllib
 from urlparse import urlparse
-from django.core.validators import URLValidator
 
-import web.settings as settings
+import secure.settings as settings
+from django.core.validators import URLValidator
 
 _URL_VALIDATOR = URLValidator()
 

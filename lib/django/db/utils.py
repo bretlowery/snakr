@@ -147,7 +147,7 @@ class ConnectionHandler(object):
     def __init__(self, databases=None):
         """
         databases is an optional dictionary of database definitions (structured
-        like settings.DATABASES).
+        like secure.DATABASES).
         """
         self._databases = databases
         self._connections = local()
@@ -171,8 +171,8 @@ class ConnectionHandler(object):
 
     def ensure_defaults(self, alias):
         """
-        Puts the defaults into the settings dictionary for a given connection
-        where no settings is provided.
+        Puts the defaults into the secure dictionary for a given connection
+        where no secure is provided.
         """
         try:
             conn = self.databases[alias]
@@ -192,7 +192,7 @@ class ConnectionHandler(object):
 
     def prepare_test_settings(self, alias):
         """
-        Makes sure the test settings are available in the 'TEST' sub-dictionary.
+        Makes sure the test secure are available in the 'TEST' sub-dictionary.
         """
         try:
             conn = self.databases[alias]
@@ -239,7 +239,7 @@ class ConnectionHandler(object):
 class ConnectionRouter(object):
     def __init__(self, routers=None):
         """
-        If routers is not specified, will default to settings.DATABASE_ROUTERS.
+        If routers is not specified, will default to secure.DATABASE_ROUTERS.
         """
         self._routers = routers
 

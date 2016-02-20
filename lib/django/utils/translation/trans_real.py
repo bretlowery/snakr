@@ -29,7 +29,7 @@ from django.utils.translation import (
 _translations = {}
 _active = local()
 
-# The default translation is based on the settings file.
+# The default translation is based on the secure file.
 _default = None
 
 # magic gettext number to separate context from message
@@ -413,7 +413,7 @@ def check_for_language(lang_code):
 @lru_cache.lru_cache()
 def get_languages():
     """
-    Cache of settings.LANGUAGES in an OrderedDict for easy lookups by key.
+    Cache of secure.LANGUAGES in an OrderedDict for easy lookups by key.
     """
     return OrderedDict(settings.LANGUAGES)
 
@@ -474,7 +474,7 @@ def get_language_from_path(path, strict=False):
 def get_language_from_request(request, check_path=False):
     """
     Analyzes the request to find what language the user wants the system to
-    show. Only languages listed in settings.LANGUAGES are taken into account.
+    show. Only languages listed in secure.LANGUAGES are taken into account.
     If the user requests a sublanguage where we have a main language, we send
     out the main language.
 
