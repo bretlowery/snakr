@@ -1,4 +1,4 @@
-# Snakr 
+# Snakr ALPHA RELEASE
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.5.11](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) backend.
