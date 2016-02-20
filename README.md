@@ -19,7 +19,7 @@ There are downsides to URL shorteners:
 Downside                                          | Reason
 ------------------------------------------------- | ------------------------------
 Short URL as fraud enabler                        | Shorteners have been used to obfuscate the origin of traffic, beat blacklists, track user engagement activity surreptitiously, etc. Shortener services identified as trafficking in a lot of this can find themselves blacklisted, to the detriment of the service’s users and thus the service itself.
-Negative effects on SEO, CTR, etc.                | Shortened URLs may not rank as high or at all in search engine results versus their longer URL parents. This could pose problems is use cases where SEO matters. The same goes true for uses where short URLs are delivered via ads or links exposed to end users who may not recognize them and thus be less likely to clickthru, thereby affecting monetization, traffic, campaign optimization, future campaign targeting accuracy, etc.
+Negative effects on SEO, CTR, etc.                | Shortened URLs may not rank as high or at all in search engine results versus their longer URL parents. This could pose problems is use cases where SEO matters. The same is true when short URLs are delivered via ads or links exposed to end users who may not recognize them and thus be less likely to clickthru, thereby affecting monetization, traffic, campaign optimization, future campaign targeting accuracy, etc.
 
 ## Features Provided 
 1.	A basic HTTP POST/GET interface is provided. 
