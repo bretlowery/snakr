@@ -117,7 +117,7 @@ class ShortURL:
         #
         # Log that a 302 request to the matching long url is about to occur
         #
-        savelog(request, entry_type='R', longurl_id=s.longurl_id, shorturl_id=self.id)
+        savelog(request, entry_type='S', longurl_id=s.longurl_id, shorturl_id=self.id)
         #
         # Return the longurl
         #

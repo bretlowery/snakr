@@ -37,8 +37,6 @@ class LongURL:
         self.longurl_is_preencoded = preencoded
         self.longurl = lurl
         self.id = utils.get_longurlhash(self.normalized_longurl)
-        # raise SuspiciousOperation('{%s} {%s} {%s} {%s} {%s}' % (self.id,self.longurl,self.normalized_longurl,
-        # self.normalized_longurl_scheme,self.longurl_is_preencoded ))
         return
 
     def get_or_make_shorturl(self, request):
@@ -100,7 +98,7 @@ class LongURL:
             #
             # 3. Log the lookup
             #
-            savelog(request, entry_type='X', longurl_id=self.id, shorturl_id=s.id)
+            savelog(request, entry_type='R', longurl_id=self.id, shorturl_id=s.id)
             #
             # 4. Return the short url
             #

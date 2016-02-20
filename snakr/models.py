@@ -77,9 +77,8 @@ class ShortURLs(mydb.Model):
 class Log(mydb.Model):
     ENTRY_TYPE = (
         ('L', 'New Long URL Submitted'),
-        ('S', 'New Short URL Created'),
-        ('R', 'Short URL Requested'),
-        ('X', 'Existing Long URL Resubmitted'),
+        ('S', 'Short URL Requested'),
+        ('R', 'Existing Long URL Resubmitted'),
     )
     log_order = mydb.AutoField(verbose_name='autoincrementing order of log events', primary_key=True, max_length=20,
                                 null=False)
