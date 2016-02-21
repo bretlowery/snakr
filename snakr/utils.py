@@ -4,7 +4,8 @@ import urllib
 from urlparse import urlparse
 import secure.settings as settings
 from django.core.validators import URLValidator
-from django.core.exceptions import SuspiciousOperation
+from django.http import HttpRequest
+import ipaddr
 
 _URL_VALIDATOR = URLValidator()
 
@@ -42,8 +43,10 @@ class utils:
     @staticmethod
     def get_hash(str):
         """Returns a SHA1 hash of the passed string as-encoded"""
-        # it has to fit into a bigint on MySQL (max = 18446744073709551615), hence the 98-bit-shift
-        x = long(hashlib.sha1(str).hexdigest(),16) >> 98
+        if str == 'unknown':
+            x = 0
+        else:
+            x = long(hashlib.sha1(str).hexdigest(),16)
         return x
 
 
@@ -71,11 +74,19 @@ class utils:
 
     @staticmethod
     def get_clientinfo(request):
-        # x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        # if x_forwarded_for:
-        #     ip = x_forwarded_for.split(',')[0]
-        # else:
-        #     ip = request.META.get('REMOTE_ADDR')
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+             readable_ip_address = x_forwarded_for.split(',')[0]
+        else:
+             readable_ip_address = request.META.get('REMOTE_ADDR', 'unknown')
+        if readable_ip_address == 'unknown':
+            binary_ip_address = bin(0)
+        else:
+            try:
+                binary_ip_address = bin(ipaddr.IP(readable_ip_address).broadcast)[2:]
+            except:
+                binary_ip_address = bin(0)
+                pass
         # slatlong = request.META.get('X-AppEngine-CityLatLong')
         # raise SuspiciousOperation("<%s>" % slatlong)
         # if slatlong:
@@ -86,21 +97,13 @@ class utils:
         #     lng = 0.0
         # city = request.META.get('X-AppEngine-City')
         # if not city:
-        #     city="unknown"
+        #     city='unknown'
         # country = request.META.get('X-AppEngine-Country')
         # if not country:
-        #     country="unknown"
-        # http_host = request.META.get('HTTP_HOST')
-        # if not http_host:
-        #     http_host="unknown"
-        # http_referrer = request.META.get('HTTP_REFERRER')
-        # if not http_referrer:
-        #     http_referrer="unknown"
-        # user_agent = request.META.get('USER_AGENT')
-        # if not user_agent:
-        #     user_agent="unknown"
-        # return ip, lat, lng, city, country, http_host, http_referrer, user_agent
-        return 'unknown',0.0,0.0,'unknown','unknown','unknown','unknown','unknown'
+        #     country='unknown'
+        http_host = request.META.get('HTTP_HOST','unknown')
+        http_user_agent = request.META.get('HTTP_USER_AGENT','unknown')
+        return binary_ip_address, 0.0, 0.0, 'unknown', 'unknown', http_host, http_user_agent
 
 
     @staticmethod
@@ -113,3 +116,4 @@ class utils:
                     rtn = False
                     break
         return rtn
+

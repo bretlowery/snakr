@@ -27,30 +27,41 @@ except ImportError:
 #     from djangoappengine.boot import setup_env
 #     setup_env(DEV_APPSERVER_VERSION)
 
-#from djangoappengine.utils import on_production_server
+# from djangoappengine.utils import on_production_server
 from django.core.validators import URLValidator
 
-#if not on_production_server:
+# if not on_production_server:
 #    from django.db import models as mydb
-#else:
+# else:
 #    from google.appengine.ext import ndb as mydb
 
 from django.db import models as mydb
 from utils import utils
-import hashlib
+
 
 class LongURLs(mydb.Model):
     ORIGINALLY_ENCODED = (
         ('Y', 'Yes'),
         ('N', 'No'),
     )
-    id = mydb.BigIntegerField(verbose_name='unique SHA1 binary hash value of the long URL', primary_key=True, null=False)
-    longurl = mydb.CharField(verbose_name='encoded, quoted version of the submitted long URL',
-                              max_length=4096, validators=[URLValidator()], null=False, blank=False)
-    created_on = mydb.DateTimeField(verbose_name='datetime that the long URL was first submitted for shortening',
-                                     auto_now=True)
-    originally_encoded = mydb.CharField(verbose_name='Y=the long URL was encoded when submitted; N=otherwise',
-                                         max_length=1, null=False, choices=ORIGINALLY_ENCODED)
+    id = mydb.BigIntegerField(
+            verbose_name='unique SHA1 binary hash value of the long URL',
+            primary_key=True,
+            null=False)
+    longurl = mydb.CharField(
+            verbose_name='encoded, quoted version of the submitted long URL',
+            max_length=4096,
+            validators=[URLValidator()],
+            null=False,
+            blank=False)
+    created_on = mydb.DateTimeField(
+            verbose_name='datetime that the long URL was first submitted for shortening',
+            auto_now=True)
+    originally_encoded = mydb.CharField(
+            verbose_name='Y=the long URL was encoded when submitted; N=otherwise',
+            max_length=1,
+            null=False,
+            choices=ORIGINALLY_ENCODED)
 
 
 class ShortURLs(mydb.Model):
@@ -58,22 +69,37 @@ class ShortURLs(mydb.Model):
         ('Y', 'Yes'),
         ('N', 'No'),
     )
-    id = mydb.BigIntegerField(verbose_name='unique SHA1 binary hash value of the short URL', primary_key=True, null=False)
-    longurl_id = mydb.BigIntegerField(verbose_name='unique SHA1 binary hash value of the long URL redirected to by the short URL',
-                                     unique=True, null=False)
-    shorturl = mydb.CharField(verbose_name='unencoded, unquoted version of the short URL generated', max_length=40,
-                               validators=[URLValidator()], null=False, blank=False)
-    shorturl_path_size = mydb.SmallIntegerField(verbose_name='value of secure.SHORTURL_PATH_SIZE when short URL was generated',
-                               null=False)
-    created_on = mydb.DateTimeField(verbose_name='datetime that the short URL was first generated', auto_now=True,
-                                     null=False)
+    id = mydb.BigIntegerField(
+            verbose_name='unique SHA1 binary hash value of the short URL',
+            primary_key=True,
+            null=False)
+    longurl_id = mydb.BigIntegerField(
+            verbose_name='unique SHA1 binary hash value of the long URL redirected to by the short URL',
+            unique=True,
+            null=False)
+    shorturl = mydb.CharField(
+            verbose_name='unencoded, unquoted version of the short URL generated',
+            max_length=40,
+            validators=[URLValidator()],
+            null=False,
+            blank=False)
+    shorturl_path_size = mydb.SmallIntegerField(
+            verbose_name='value of secure.SHORTURL_PATH_SIZE when short URL was generated',
+            null=False)
+    created_on = mydb.DateTimeField(
+            verbose_name='datetime that the short URL was first generated',
+            auto_now=True,
+            null=False)
     is_active = mydb.CharField(
             verbose_name='Y=The short URL redirects to the long URL; N=The short URL generates a 404 error',
             max_length=1,
-            null=False, choices=IS_ACTIVE)
-    compression_ratio = mydb.DecimalField(verbose_name='ratio of compression achived long vs short', max_digits=10,
-                                           decimal_places=2, null=False)
-
+            null=False,
+            choices=IS_ACTIVE)
+    compression_ratio = mydb.DecimalField(
+            verbose_name='ratio of compression achived long vs short',
+            max_digits=10,
+            decimal_places=2,
+            null=False)
 
 
 class Log(mydb.Model):
@@ -82,40 +108,102 @@ class Log(mydb.Model):
         ('S', 'Short URL Requested'),
         ('R', 'Existing Long URL Resubmitted'),
     )
-    log_order = mydb.AutoField(verbose_name='autoincrementing order of log events', primary_key=True, max_length=20,
-                                null=False)
-    logged_on = mydb.DateTimeField(verbose_name='datetime that the event was logged', auto_now=True, null=False)
+    log_order = mydb.AutoField(
+            verbose_name='autoincrementing order of log events',
+            primary_key=True,
+            max_length=20,
+            null=False)
+    logged_on = mydb.DateTimeField(
+            verbose_name='datetime that the event was logged',
+            auto_now=True,
+            null=False)
     entry_type = mydb.CharField(
-            verbose_name='L=a new long URL POST was submitted, S=a short URL GET request was made, R=an existing long URL was resubmitted',
-            max_length=1, null=False, choices=ENTRY_TYPE)
-    longurl_id = mydb.BigIntegerField(verbose_name='unique SHA1 binary hash value of the long URL', null=False)
-    shorturl_id = mydb.BigIntegerField(verbose_name='unique SHA1 binary hash value of the corresponding short URL', null=False)
-    cli_ip_address = mydb.CharField(verbose_name='IPv4 or IPv6 address of the origin of the request', max_length=45,
-                                 null=False, blank=False)
-    cli_geo_lat = mydb.DecimalField(verbose_name='latitude location of the origin of the request', max_digits=10,
-                             decimal_places=8, null=False)
-    cli_geo_long = mydb.DecimalField(verbose_name='longitude location of the origin of the request', max_digits=11,
-                              decimal_places=8, null=False)
-    cli_geo_city = mydb.CharField(verbose_name='city of the origin of the request', max_length=100, null=False, blank=False)
-    cli_geo_country = mydb.CharField(verbose_name='country of the origin of the request', max_length=100, null=False, blank=False)
-    cli_http_host = mydb.CharField(verbose_name='HTTP_HOST of the client', max_length=128, null=False, blank=False)
-    cli_http_host_hash =  mydb.BigIntegerField(verbose_name='SHA1 binary hash value of the host', null=False)
-    cli_http_referrer = mydb.CharField(verbose_name='HTTP_REFERRER of the request', max_length=2048, null=False, blank=False)
-    cli_http_referrer_hash =  mydb.BigIntegerField(verbose_name='SHA1 binary hash value of the referrer', null=False)
-    cli_http_user_agent = mydb.CharField(verbose_name='USER_AGENT of the client', max_length=8192, null=False, blank=False)
-    cli_http_user_agent_hash =  mydb.BigIntegerField(verbose_name='SHA1 binary hash value of the user agent', null=False)
+            verbose_name='L=a new long URL POST was submitted, S=a short URL GET request was made, R=an existing long '
+                         'URL was resubmitted',
+            max_length=1,
+            null=False,
+            choices=ENTRY_TYPE)
+    longurl_id = mydb.BigIntegerField(
+            verbose_name='unique SHA1 binary hash value of the long URL',
+            null=False)
+    shorturl_id = mydb.BigIntegerField(
+            verbose_name='unique SHA1 binary hash value of the corresponding short URL',
+            null=False)
+    cli_ip_address = mydb.BinaryField(
+            verbose_name='128-bit binary representation of the IPv4 or IPv6 address of the origin of the request',
+            max_length=128,
+            null=False,
+            blank=False)
+    cli_geo_lat = mydb.DecimalField(
+            verbose_name='latitude location of the origin of the request',
+            max_digits=10,
+            decimal_places=8,
+            null=False)
+    cli_geo_long = mydb.DecimalField(
+            verbose_name='longitude location of the origin of the request',
+            max_digits=11,
+            decimal_places=8,
+            null=False)
+    cli_geo_city = mydb.CharField(
+            verbose_name='city of the origin of the request',
+            max_length=100,
+            null=False,
+            blank=False)
+    cli_geo_country = mydb.CharField(
+            verbose_name='country of the origin of the request',
+            max_length=100,
+            null=False,
+            blank=False)
+    cli_http_host = mydb.CharField(
+            verbose_name='HTTP_HOST value from the client',
+            max_length=128,
+            null=False,
+            blank=False)
+    cli_http_user_agent_id = mydb.BigIntegerField(
+            verbose_name='SHA1 binary hash value of the user agent',
+            null=False)
+
+
+class UserAgents(mydb.Model):
+    id = mydb.BigIntegerField(
+            verbose_name='SHA1 binary hash value of the user agent',
+            primary_key=True,
+            null=False)
+    cli_http_user_agent = mydb.CharField(
+            verbose_name='USER_AGENT of the client',
+            max_length=8192,
+            null=False,
+            blank=False)
 
 
 def savelog(request, entry_type, longurl_id, shorturl_id):
-    ip_address, lat, lng, city, country, http_host, http_referrer, http_user_agent = utils.get_clientinfo(request)
-    l = Log(entry_type=entry_type, longurl_id=longurl_id, shorturl_id=shorturl_id,
-            cli_ip_address=ip_address, cli_geo_lat=lat, cli_geo_long=lng, cli_geo_city=city, cli_geo_country=country,
-            cli_http_host=http_host, cli_http_referrer=http_referrer, cli_http_user_agent=http_user_agent,
-            cli_http_host_hash=utils.get_hash(http_host),cli_http_referrer_hash=utils.get_hash(http_referrer),
-            cli_http_user_agent_hash=utils.get_hash(http_user_agent))
+
+    binary_ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_user_agent = utils.get_clientinfo(request)
+
+    http_user_agent_id = utils.get_hash(http_user_agent)
+    ua_found = True
+    try:
+        ua = UserAgents.objects.get(id = http_user_agent_id)
+    except:
+        ua_found = False
+        pass
+    if not ua_found:
+        ua = UserAgents(id = http_user_agent_id, cli_http_user_agent = http_user_agent)
+
+    l = Log(entry_type=entry_type,
+            longurl_id=longurl_id,
+            shorturl_id=shorturl_id,
+            cli_ip_address=binary_ip_address,
+            cli_geo_lat=geo_lat,
+            cli_geo_long=geo_long,
+            cli_geo_city=geo_city,
+            cli_geo_country=geo_country,
+            cli_http_host=http_host,
+            cli_http_user_agent_id=http_user_agent_id)
     l.save()
+
     return
+
 
 def __str__(self):
     return self.httpurl
-

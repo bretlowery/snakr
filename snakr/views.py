@@ -13,8 +13,7 @@
 # limitations under the License.
 
 import json
-from django.http import HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse
-from django.http import Http404
+from django.http import HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse, Http404
 from shorturls import ShortURL
 from longurls import LongURL
 from urlparse import urlparse, parse_qs
@@ -45,9 +44,13 @@ def get_handler(request, *args, **kwargs):
     # create an instance of the ShortURL object, validate the short URL, and if successful load the ShortURL instance with it
     #
     s = ShortURL()
+    #
     # lookup the long url previously used to generate the short url
+    #
     longurl = s.getlongurl(request)
+    #
     # if found, 302 to it; otherwise, 404
+    #
     if longurl:
         return HttpResponseRedirect(longurl)
     else:
@@ -55,12 +58,18 @@ def get_handler(request, *args, **kwargs):
 
 
 def post_handler(request, *args, **kwargs):
+    #
     # create an instance of the LongURL object, validate the long URL, and if successful load the LongURL instance with it
+    #
     l = LongURL(request)
+    #
     # generate the shorturl and either persist both the long and short urls if new,
     # or lookup the matching short url if it already exists (i.e. the long url was submitted a 2nd or subsequent time)
+    #
     shorturl = l.get_or_make_shorturl(request)
+    #
     # return the shorturl as JSON
+    #
     response_data = {}
     response_data['shorturl'] = shorturl
     return HttpResponse(json.dumps(response_data), content_type="application/json")

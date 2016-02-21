@@ -11,12 +11,13 @@ from django.db import transaction
 class LongURL:
     """Validates and processes the long URL in the POST request."""
 
-    def __init__(self, request):
+    def __init__(self, request, *args, **kwargs):
         self.longurl = ""
         self.longurl_is_preencoded = False
         self.normalized_longurl = ""
         self.normalized_longurl_scheme = ""
         self.id = 0
+
         lurl = ""
 
         found = True
