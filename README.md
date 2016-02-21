@@ -175,12 +175,14 @@ logged_on          | DATETIME                 | UTC datetimestamp of when an act
 entry_type         | CHAR(1)                  | What action occurred. N = a new long URL was successfully shortened, R = an existing long URL was resubmited a 2nd or subsequent time, S = a short URL was submitted for redirection to the long URL.
 longurl_id (UK)    | BIGINT                   | The snakr_longurl.id value of the matching long URL redirected to by the short URL.
 shorturl_id (UK)   | BIGINT                   | The snakr_shorturl.id value of the matching short URL to which the long URL redirects.
-ip_address         | VARCHAR(45)              | The IPv4 or IPv6 X-FORWARDED-FOR (if available) or REMOTE ADDR (if no X-FORWARDED-FOR is available) of the client calling Snakr. Used for tracking/diagnostics/forensics only.
-lat                | FLOAT(10,8)              | Geo location latitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
-long               | FLOAT(11,8)              | Geo location longitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
-city_of_origin     | VARCHAR(100)             | Geo location city name from X-AppEngine-City of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
-country_of_origin  | VARCHAR(100)             | Geo location country name from X-AppEngine-Country of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
-
+cli_ip_address     | VARCHAR(45)              | The IPv4 or IPv6 X-FORWARDED-FOR (if available) or REMOTE ADDR (if no X-FORWARDED-FOR is available) of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
+cli_lat            | FLOAT(10,8)              | Geo location latitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
+cli_long           | FLOAT(11,8)              | Geo location longitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
+cli_city           | VARCHAR(100)             | Geo location city name from X-AppEngine-City of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
+cli_country        | VARCHAR(100)             | Geo location country name from X-AppEngine-Country of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
+cli_http_host      | VARCHAR(128)             | The HTTP_HOST of the client. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
+cli_http_referrer  | VARCHAR(4096)            | The HTTP_REFERRER of the call. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
+cli_http_user_agent| VARCHAR(8192)            | The USER_AGENT of the client. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
 
 ### Installing Libraries
 See the [Third party libraries](https://developers.google.com/appengine/docs/python/tools/libraries27)

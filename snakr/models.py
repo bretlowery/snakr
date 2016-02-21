@@ -37,6 +37,7 @@ from django.core.validators import URLValidator
 
 from django.db import models as mydb
 from utils import utils
+import hashlib
 
 class LongURLs(mydb.Model):
     ORIGINALLY_ENCODED = (
@@ -74,6 +75,7 @@ class ShortURLs(mydb.Model):
                                            decimal_places=2, null=False)
 
 
+
 class Log(mydb.Model):
     ENTRY_TYPE = (
         ('L', 'New Long URL Submitted'),
@@ -84,25 +86,33 @@ class Log(mydb.Model):
                                 null=False)
     logged_on = mydb.DateTimeField(verbose_name='datetime that the event was logged', auto_now=True, null=False)
     entry_type = mydb.CharField(
-            verbose_name='NL=a new long URL was submitted, NS=a new short URL was created, RS=a short URL request was '
-                         'made, RL=an existing long URL was resubmitted',
+            verbose_name='L=a new long URL POST was submitted, S=a short URL GET request was made, R=an existing long URL was resubmitted',
             max_length=1, null=False, choices=ENTRY_TYPE)
     longurl_id = mydb.BigIntegerField(verbose_name='unique SHA1 binary hash value of the long URL', null=False)
     shorturl_id = mydb.BigIntegerField(verbose_name='unique SHA1 binary hash value of the corresponding short URL', null=False)
-    ip_address = mydb.CharField(verbose_name='IPv4 or IPv6 address of the origin of the request', max_length=45,
+    cli_ip_address = mydb.CharField(verbose_name='IPv4 or IPv6 address of the origin of the request', max_length=45,
                                  null=False, blank=False)
-    lat = mydb.DecimalField(verbose_name='latitude location of the origin of the request', max_digits=10,
+    cli_geo_lat = mydb.DecimalField(verbose_name='latitude location of the origin of the request', max_digits=10,
                              decimal_places=8, null=False)
-    long = mydb.DecimalField(verbose_name='longitude location of the origin of the request', max_digits=11,
+    cli_geo_long = mydb.DecimalField(verbose_name='longitude location of the origin of the request', max_digits=11,
                               decimal_places=8, null=False)
-    city_of_origin = mydb.CharField(verbose_name='city of the origin of the request', max_length=100, null=False, blank=False)
-    country_of_origin = mydb.CharField(verbose_name='country of the origin of the request', max_length=100, null=False, blank=False)
+    cli_geo_city = mydb.CharField(verbose_name='city of the origin of the request', max_length=100, null=False, blank=False)
+    cli_geo_country = mydb.CharField(verbose_name='country of the origin of the request', max_length=100, null=False, blank=False)
+    cli_http_host = mydb.CharField(verbose_name='HTTP_HOST of the client', max_length=128, null=False, blank=False)
+    cli_http_host_hash =  mydb.BigIntegerField(verbose_name='SHA1 binary hash value of the host', null=False)
+    cli_http_referrer = mydb.CharField(verbose_name='HTTP_REFERRER of the request', max_length=2048, null=False, blank=False)
+    cli_http_referrer_hash =  mydb.BigIntegerField(verbose_name='SHA1 binary hash value of the referrer', null=False)
+    cli_http_user_agent = mydb.CharField(verbose_name='USER_AGENT of the client', max_length=8192, null=False, blank=False)
+    cli_http_user_agent_hash =  mydb.BigIntegerField(verbose_name='SHA1 binary hash value of the user agent', null=False)
 
 
 def savelog(request, entry_type, longurl_id, shorturl_id):
-    ip_address, lat, lng, city, country = utils.get_demographics(request)
+    ip_address, lat, lng, city, country, http_host, http_referrer, http_user_agent = utils.get_clientinfo(request)
     l = Log(entry_type=entry_type, longurl_id=longurl_id, shorturl_id=shorturl_id,
-            ip_address=ip_address, lat=lat, long=lng, city_of_origin=city, country_of_origin=country)
+            cli_ip_address=ip_address, cli_geo_lat=lat, cli_geo_long=lng, cli_geo_city=city, cli_geo_country=country,
+            cli_http_host=http_host, cli_http_referrer=http_referrer, cli_http_user_agent=http_user_agent,
+            cli_http_host_hash=utils.get_hash(http_host),cli_http_referrer_hash=utils.get_hash(http_referrer),
+            cli_http_user_agent_hash=utils.get_hash(http_user_agent))
     l.save()
     return
 

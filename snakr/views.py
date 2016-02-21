@@ -17,6 +17,7 @@ from django.http import HttpResponseNotAllowed, HttpResponseRedirect, HttpRespon
 from django.http import Http404
 from shorturls import ShortURL
 from longurls import LongURL
+from urlparse import urlparse, parse_qs
 
 def dispatcher(**table):
 
@@ -32,7 +33,17 @@ def dispatcher(**table):
 
 
 def get_handler(request, *args, **kwargs):
+    #
+    # check to see if a long url was submitted for shortening via a query parameter
+    #
+    url_parts = urlparse(request.build_absolute_uri())
+    if url_parts.query:
+        qsurl = parse_qs(urlparse(request.build_absolute_uri()))["u"]
+        if qsurl:
+            return post_handler(request)
+    #
     # create an instance of the ShortURL object, validate the short URL, and if successful load the ShortURL instance with it
+    #
     s = ShortURL()
     # lookup the long url previously used to generate the short url
     longurl = s.getlongurl(request)
