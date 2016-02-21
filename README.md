@@ -46,36 +46,31 @@ Negative effects on SEO, CTR, etc.                      | Shortened URLs may not
 
 ## Known Issues / Future Features
 1. Django 1.5.11's SuspiciousOperation returns HTTP 500, not HTTP 400 (see http://stackoverflow.com/questions/35439621/django-suspiciousoperation-returns-as-http-500-on-google-app-engine-not-http-40). This means among other things that a badly formatted URL crashes WSGI, which is NOT good. This is my top priority to fix by applying the workaround mentioned in the StackOverflow page to run under Django 1.9.2 or latest possible.
-
-**UPDATE:** I worked around this by implementing a custom /django/core/handlers/base.py that includes Django 1.9's SuspiciousOperation exception block with some minor changes. Unknown short URLs etc. now return HTPP 400 with a meaningful error message.
+   **UPDATE:** I worked around this by implementing a custom /django/core/handlers/base.py that includes Django 1.9's SuspiciousOperation exception block with some minor changes. Unknown short URLs etc. now return HTPP 400 with a meaningful error message.
 
 2. Request filtering is not yet robust. Some non-supported requests will return HTTP 500 due to the previous issue.
-
-**UPDATE:** Much improved. Not fully tested yet. Haven't gone through all of the use cases.
+   **UPDATE:** Much improved. Not fully tested yet. Haven't gone through all of the use cases.
 
 3. There is no admin page or reporting. Will add that.
 
 4. Geolocation detection is not working (see http://stackoverflow.com/questions/35492617/x-appengine-citylatlong-not-populated-on-google-app-engine-django-1-5-11-when-us). Will workaround or fix.
-
-**UPDATE:** Something going on with GAE here not passing their X-AppEngine geo headers through, or Django not recognizing/handling them correctly. Haven't really investigated this yet in depth.
+   **UPDATE:** Something going on with GAE here not passing their X-AppEngine geo headers through, or Django not recognizing/handling them correctly. Haven't really investigated this yet in depth.
 
 5. Other diagnostic/tracking info to be added to snakr_log.
-
-**UPDATE:** Added storage for some of these. Looks like I'm hinting that I'm adding a robust demo fraud and abuse detection system later.
+   **UPDATE:** Added storage for some of these. Looks like I'm hinting that I'm adding a robust demo fraud and abuse detection system later.
 
 6. snakr_log collects IPs with no encryption. This may not be legit for your applicable privacy and/or compliance needs. No other PII is collected. Check with your legal department or ex-spouse for all bad news.
 
-7. Local testing with a local MySQL db was not tested or used with this. 
+7. Local testing with a local MySQL db was not tested or used with this.
 
-8. The GAE Development Environ was not tested or used with this. 
+8. The GAE Development Environ was not tested or used with this.
 
 9. No test units are yet defined. It's a pretty simple app functionally; I'm not so sure this is really warranted.
 
 10. No GAE endpoints for mobile are coded or supported. I may or may not add that. Feel free to do so.
 
 11. Submission of a long url via a POST with a query string (e.g. "http://snakrv2.appspot.com/?u=http://www.shortenthisurlplease.com") may be added. Feel free to do so.
-
-**UPDATE:** I'm going to add this shortly, no pun intended. Some code already implemented for this.
+   **UPDATE:** I'm going to add this shortly, no pun intended. Some code already implemented for this.
 
 12. No aging or cleanup of URLs based on usage age-off or other rules is not provided. I did add a is_active status to support this in the future.
 
