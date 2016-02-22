@@ -109,7 +109,7 @@ class LongURL:
                 raise SuspiciousOperation(
                     'HASH COLLISION DETECTED on lookup of long URL {%s}' % self.normalized_longurl)
             #
-            # 2. Lookup the short url
+            # 2. Lookup the short url. It must be active.
             #
             s = ShortURLs.objects.get(longurl_id=self.id, is_active='Y')
             if not s:

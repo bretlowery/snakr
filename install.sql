@@ -34,15 +34,20 @@ CREATE TABLE `snakr_log` (
   `cli_geo_long` decimal(11,8) NOT NULL,
   `cli_geo_city` varchar(100) NOT NULL,
   `cli_geo_country` varchar(100) NOT NULL,
-  `cli_http_host` varchar(128) NOT NULL,
+  `cli_http_host` varchar(253) NOT NULL,
   `cli_http_user_agent_id` BIGINT NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+CREATE UNIQUE INDEX `i_longurl_id` ON `snakr_log`(`longurl_id`, `id`);
+CREATE UNIQUE INDEX `i_shorturl_id` ON `snakr_log`(`shorturl_id`, `id`);
 
 
 CREATE TABLE `snakr_useragents` (
   `id` bigint NOT NULL,
   `cli_http_user_agent` VARCHAR(8192) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 

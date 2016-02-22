@@ -195,11 +195,11 @@ cli_lat                  | FLOAT(10,8)              | Geo location latitude from
 cli_long                 | FLOAT(11,8)              | Geo location longitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
 cli_city                 | VARCHAR(100)             | Geo location city name from X-AppEngine-City of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
 cli_country              | VARCHAR(100)             | Geo location country name from X-AppEngine-Country of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
-cli_http_host            | VARCHAR(128)             | The HTTP_HOST of the client. Used for tracking/diagnostics/forensics only.
+cli_http_host            | VARCHAR(253)             | The HTTP_HOST of the client. Used for tracking/diagnostics/forensics only.
 cli_http_user_agent_id   | BIGINT                   | 64-bit integer version of the hexdigest of the long integer hash of a USER_AGENT stored in snakr_useragents. Could be useful for forensic cluster analysis for fraud or abuse patterns in the log.
 
 ####Table snakr_useragents
-One row per unique HTTP_USER_AGENT string seen by Snakr.
+One row per unique HTTP_USER_AGENT string seen by Snakr. This was normalized out of snakr_log for storage space savings.
 
 Column                   | Datatype (all NOT NULL)  | Description
 ------------------------ | ------------------------ | ------------

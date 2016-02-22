@@ -214,17 +214,12 @@ class BaseHandler(object):
                 force_text(exc),
                 extra={
                     'status_code': 400,
-                    'request': requestHttpResponse
+                    'request': request
                 })
             if settings.DEBUG:
                 return debug.technical_500_response(request, *sys.exc_info(), status_code=400)
             else:
                 return HttpResponse("<H1>Bad Request (400)</H1><H2>%s</H2>" % force_text(exc), status=400)
-            #response = self.get_exception_response(request, resolver, 400, exc)
-
-            #response = self.get_exception_response(request, resolver, 400, sys.exc_info())
-            #return debug.technical_500_response(request, *sys.exc_info(), status_code=500)
-            #return HttpResponseBadRequest(sys.exc_info())
 
         except SystemExit:
             # Allow sys.exit() to actually exit. See tickets #1023 and #4701

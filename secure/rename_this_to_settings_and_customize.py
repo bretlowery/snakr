@@ -28,12 +28,23 @@ https://docs.djangoproject.com/en/1.8/ref/secure/
 import os
 import string
 
+#from djangoappengine.settings_base import *
+
 try:
     from dev_appserver_version import DEV_APPSERVER_VERSION
 except ImportError:
     DEV_APPSERVER_VERSION = 2
 
-DEBUG = True
+# Initialize App Engine SDK if necessary.
+# try:
+#     from google.appengine.api import apiproxy_stub_map
+# except ImportError:
+#     from djangoappengine.boot import setup_env
+#     setup_env(DEV_APPSERVER_VERSION)
+
+# from djangoappengine.utils import on_production_server
+
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,13 +54,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '???????????????????????????????????????????????????'
-
+SECRET_KEY  = '??????????????????????????????????????????????????'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
 ALLOWED_HOSTS = [
-    'your url host (netloc) here',
+    'yourgaehost.appspot.com',
+    'your short url domain that CNAMES to yourgaehost.appspot.com, if you use one',
 ]
 
 # Application definition
@@ -62,6 +73,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'snakr',
+    #'djangotoolbox',
+    #'autoload',
+    #'dbindexer',
+    ## djangoappengine should come last, so it can override a few manage.py commands
+    #'djangoappengine',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,6 +104,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
             ],
         },
     },
@@ -121,11 +138,26 @@ USE_TZ = True
 STATIC_ROOT='static'
 STATIC_URL = '/static/'
 
+# PREPARE_UPLOAD_BACKEND = 'djangoappengine.storage.prepare_upload'
+# SERVE_FILE_BACKEND = 'djangoappengine.storage.serve_file'
+# DEFAULT_FILE_STORAGE = 'djangoappengine.storage.BlobstoreStorage'
+# FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024
+# FILE_UPLOAD_HANDLERS = (
+#     'djangoappengine.storage.BlobstoreFileUploadHandler',
+#     'django.core.files.uploadhandler.MemoryFileUploadHandler',
+# )
+#
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'TIMEOUT': 0,
+#     }
+# }
+#
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 ADMINS = ()
 MANAGERS = ADMINS
-
-
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -138,39 +170,46 @@ if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/your app id:your GCS instance name',
-            'NAME': 'your schema name',
+            'HOST': '/cloudsql/your_gae_appid:your_gcs_instancename',
+            'NAME': 'your_gcs_schemaname',
             'USER': 'root',    # sounds crazy, but "root" is required by GAE (hmmmmmmmmmm)
         }
+        # 'default': {
+        #     'ENGINE': 'djangoappengine.db',
+        # }
     }
 elif SNAKRDB_MODE == "REMOTE":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': 'your IP address',
-            'NAME': 'your schema name',
-            'USER': 'your user name',    # sounds crazy, but "root" is required by GAE (hmmmmmmmmmm)
-            'PASSWORD': 'your password'
+            'HOST': 'your_gcs_ipv4_or_ipv6_address',
+            'NAME': 'your_gcs_schemaname',
+            'USER': 'your_mysqlworkbench_username_NOT_ROOT',
+            'PASSWORD': 'your_mysqlworkbench_password'
         }
+        # 'default': {
+        #     'ENGINE': 'djangoappengine.db',
+        # }
     }
 elif SNAKRDB_MODE == "LOCAL":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'your local schema name',
-            'USER': 'your local user name',
-            'PASSWORD': 'your local password',
-            'HOST': '127.0.0.1 or similar',
-            'PORT': '3306',
+            'NAME': 'your_local_mysql_schema',
+            'USER': 'your_local_mysql_username',
+            'PASSWORD': 'your_local_mysql_password',
+            'HOST': '127.0.0.1_or_localhost',
+            'PORT': '3306_or_your_custom_mysql_port',
         }
     }
 # [END db_setup]
 
-# Max retries on hash collision detection
+# Max retries on hash collision detection. You shouldn't need to change this.
 MAX_RETRIES = 3
 
-# host (netloc) of the short URL to use
-SHORTURL_HOST = "your GAE appid.appspot.com OR other short url host/netloc"
+# host (netloc) of the short URL to use.
+# Replace with a short domain name that CNAMES to your_gae_appid.appspot.com if desired.
+SHORTURL_HOST = "your_gae_appid.appspot.com"
 
 # Number of alphabetic characters in the short URL path (min 6, max 12)
 SHORTURL_PATH_SIZE = 6
@@ -178,3 +217,6 @@ SHORTURL_PATH_SIZE = 6
 # Character set to use for the short URL path. Remove easily-confused characters "0", "O", "o", "1", and "l". Keep "L".
 SHORTURL_PATH_ALPHABET = string.digits + string.letters
 SHORTURL_PATH_ALPHABET = SHORTURL_PATH_ALPHABET.replace("0","").replace("O","").replace("o","").replace("1","").replace("l","")
+
+# DON'T change this
+APPEND_SLASH=False

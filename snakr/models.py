@@ -45,7 +45,7 @@ class LongURLs(mydb.Model):
         ('N', 'No'),
     )
     id = mydb.BigIntegerField(
-            verbose_name='unique SHA1 binary hash value of the long URL',
+            verbose_name='unique 64-bit integer binary hash value of the long URL',
             primary_key=True,
             null=False)
     longurl = mydb.CharField(
@@ -70,11 +70,11 @@ class ShortURLs(mydb.Model):
         ('N', 'No'),
     )
     id = mydb.BigIntegerField(
-            verbose_name='unique SHA1 binary hash value of the short URL',
+            verbose_name='unique 64-bit integer binary hash value of the short URL',
             primary_key=True,
             null=False)
     longurl_id = mydb.BigIntegerField(
-            verbose_name='unique SHA1 binary hash value of the long URL redirected to by the short URL',
+            verbose_name='unique 64-bit integer binary hash value of the long URL redirected to by the short URL',
             unique=True,
             null=False)
     shorturl = mydb.CharField(
@@ -124,10 +124,10 @@ class Log(mydb.Model):
             null=False,
             choices=ENTRY_TYPE)
     longurl_id = mydb.BigIntegerField(
-            verbose_name='unique SHA1 binary hash value of the long URL',
+            verbose_name='unique 64-bit integer binary hash value of the long URL',
             null=False)
     shorturl_id = mydb.BigIntegerField(
-            verbose_name='unique SHA1 binary hash value of the corresponding short URL',
+            verbose_name='unique 64-bit integer binary hash value of the corresponding short URL',
             null=False)
     cli_ip_address = mydb.BinaryField(
             verbose_name='128-bit binary representation of the IPv4 or IPv6 address of the origin of the request',
@@ -156,17 +156,17 @@ class Log(mydb.Model):
             blank=False)
     cli_http_host = mydb.CharField(
             verbose_name='HTTP_HOST value from the client',
-            max_length=128,
+            max_length=253,
             null=False,
             blank=False)
     cli_http_user_agent_id = mydb.BigIntegerField(
-            verbose_name='SHA1 binary hash value of the user agent',
+            verbose_name='64-bit integer binary hash value of the user agent',
             null=False)
 
 
 class UserAgents(mydb.Model):
     id = mydb.BigIntegerField(
-            verbose_name='SHA1 binary hash value of the user agent',
+            verbose_name='64-bit integer binary hash value of the user agent',
             primary_key=True,
             null=False)
     cli_http_user_agent = mydb.CharField(

@@ -98,7 +98,7 @@ class ShortURL:
         #
         # raise SuspiciousOperation('{%s} {%s} {%s}' % (self.id, self.shorturl,self.normalized_shorturl))
         try:
-            s = ShortURLs.objects.get(id = self.id, is_active='Y')
+            s = ShortURLs.objects.get(id = self.id)
             if not s:
                 raise SuspiciousOperation('ERROR: URL {%s} is not recognized by this service.' % self.shorturl)
         except:
@@ -106,6 +106,10 @@ class ShortURL:
         if s.shorturl != self.shorturl:
             raise SuspiciousOperation('ERROR: the short URL sent to this service is different from the original short URL provided and may pose a security risk. DO NOT USE the altered version.')
         #
+        # If the short URL is not active, 404
+        #
+        if s.is_active != 'Y':
+            raise Http404
         # Lookup the matching long url by the short url's id.
         # If it doesn't exist, 404.
         # If it does, decode it.
