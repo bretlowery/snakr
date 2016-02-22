@@ -209,7 +209,8 @@ MAX_RETRIES = 3
 
 # host (netloc) of the short URL to use.
 # Replace with a short domain name that CNAMES to your_gae_appid.appspot.com if desired.
-SHORTURL_HOST = "your_gae_appid.appspot.com"
+SHORTURL_HOST        = "your_gae_appid.appspot.com" # or your short domain name that CNAMEs to your_gae_appid.appspot.com
+SECURE_SHORTURL_HOST = "your_gae_appid.appspot.com" # or your short domain name that CNAMEs to your_gae_appid.appspot.com
 
 # Number of alphabetic characters in the short URL path (min 6, max 12)
 SHORTURL_PATH_SIZE = 6
