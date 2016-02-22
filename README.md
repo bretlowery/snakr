@@ -101,9 +101,9 @@ Alternatively, you can use your short domain for short HTTP urls and yorudomain.
     # host (netloc) of the short URL to use for HTTPS urls
     SECURE_SHORTURL_HOST    = "snakrv2.appspot.com"
     ```
-
-Once you have your SSL certficate and secure redirection turned on, you can use the same short domain on both:
-
+    
+    Once you have your SSL certficate and secure redirection turned on, you can use the same short domain on both:
+    
     ```
     SHORTURL_HOST           = "bret.guru"   
     SECURE_SHORTURL_HOST    = "bret.guru"

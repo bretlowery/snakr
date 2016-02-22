@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e97d469-436f-4ac1-9d9d-fb46df745c6f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/install.sql" afterPath="$PROJECT_DIR$/install.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/django/core/handlers/base.py" afterPath="$PROJECT_DIR$/lib/django/core/handlers/base.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py" afterPath="$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/longurls.py" afterPath="$PROJECT_DIR$/snakr/longurls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/models.py" afterPath="$PROJECT_DIR$/snakr/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/shorturls.py" afterPath="$PROJECT_DIR$/snakr/shorturls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/utils.py" afterPath="$PROJECT_DIR$/snakr/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/views.py" afterPath="$PROJECT_DIR$/snakr/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/urls.py" afterPath="$PROJECT_DIR$/web/urls.py" />
     </list>
     <ignored path="Snakr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,8 +83,8 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.8465473">
-                <caret line="109" column="7" selection-start-line="109" selection-start-column="7" selection-end-line="109" selection-end-column="7" />
+              <first_editor vertical-scroll-proportion="0.6163683">
+                <caret line="103" column="4" selection-start-line="103" selection-start-column="4" selection-end-line="103" selection-end-column="4" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -1209,8 +1199,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.8465473">
-            <caret line="109" column="7" selection-start-line="109" selection-start-column="7" selection-end-line="109" selection-end-column="7" />
+          <first_editor vertical-scroll-proportion="0.6163683">
+            <caret line="103" column="4" selection-start-line="103" selection-start-column="4" selection-end-line="103" selection-end-column="4" />
             <folding />
           </first_editor>
           <second_editor />
