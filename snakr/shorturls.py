@@ -2,9 +2,9 @@ import secure.settings as settings
 from urlparse import urlparse, urlunparse
 from django.core.exceptions import SuspiciousOperation
 from django.http import Http404
-from models import ShortURLs, LongURLs, savelog
+from models import ShortURLs, LongURLs, writelog
 from utils import utils
-from django.db import transaction
+# from django.db import transaction
 
 class ShortURL:
     """Validates and processes the short URL in the GET request."""
@@ -28,7 +28,10 @@ class ShortURL:
         # 1. Build the front of the short url. Match the scheme to the one used by the longurl.
         #    This is done so that a http longurl --> http shorturl, and a https long url --> https short url.
         #
-        shorturl_prefix = normalized_longurl_scheme + '://' + settings.SHORTURL_HOST + '/'
+        if normalized_longurl_scheme in ('https','ftps'):
+            shorturl_prefix = normalized_longurl_scheme + '://' + settings.SECURE_SHORTURL_HOST + '/'
+        else:
+            shorturl_prefix = normalized_longurl_scheme + '://' + settings.SHORTURL_HOST + '/'
         #
         # 2. Make a short url with SHORTURL_PATH_SIZE characters from SHORTURL_PATH_ALPHABET. Does it exist already?
         #    If so, regenerate it and try again.
@@ -121,7 +124,7 @@ class ShortURL:
         #
         # Log that a 302 request to the matching long url is about to occur
         #
-        savelog(request, entry_type='S', longurl_id=s.longurl_id, shorturl_id=self.id)
+        writelog(request, entry_type='S', longurl_id=s.longurl_id, shorturl_id=self.id)
         #
         # Return the longurl
         #

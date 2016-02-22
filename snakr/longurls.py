@@ -3,7 +3,7 @@ from urlparse import urlparse, parse_qs
 import secure.settings as settings
 from django.core.exceptions import SuspiciousOperation
 from django.http import Http404
-from models import LongURLs, ShortURLs, savelog
+from models import LongURLs, ShortURLs, writelog
 from shorturls import ShortURL
 from utils import utils
 from django.db import transaction
@@ -40,16 +40,15 @@ class LongURL:
         if not found:
             raise SuspiciousOperation('No long URL found to shorten. Long URLs must be passed into Snakr using either a JSON payload value with a key of "u", or via a querystring "u" parameter (e.g. /?u="the_url").')
 
+        if not utils.is_url_valid(lurl):
+            raise SuspiciousOperation('The URL submitted for shortening {%s} is not a valid URL.' % lurl)
+
         if lurl == utils.get_decodedurl(lurl):
             preencoded = False
             self.normalized_longurl = utils.get_encodedurl(lurl)
         else:
             preencoded = True
             self.normalized_longurl = lurl
-        if not utils.is_url_valid(self.normalized_longurl):
-            raise SuspiciousOperation(
-                'The URL submitted for shortening ({%s}) is not a valid URL.' %
-                self.normalized_longurl)
 
         self.normalized_longurl_scheme = urlparse(lurl).scheme.lower()
         self.longurl_is_preencoded = preencoded
@@ -94,7 +93,7 @@ class LongURL:
             #
             ldata.save()
             sdata.save()
-            savelog(request, entry_type='N', longurl_id=ldata.id, shorturl_id=s.id)
+            writelog(request, entry_type='N', longurl_id=ldata.id, shorturl_id=s.id)
             #
             # 5. Return the short url
             #
@@ -117,7 +116,7 @@ class LongURL:
             #
             # 3. Log the lookup
             #
-            savelog(request, entry_type='R', longurl_id=self.id, shorturl_id=s.id)
+            writelog(request, entry_type='R', longurl_id=self.id, shorturl_id=s.id)
             #
             # 4. Return the short url
             #

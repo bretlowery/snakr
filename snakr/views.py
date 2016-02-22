@@ -17,6 +17,8 @@ from django.http import HttpResponseNotAllowed, HttpResponseRedirect, HttpRespon
 from shorturls import ShortURL
 from longurls import LongURL
 from urlparse import urlparse, parse_qs
+from google.appengine.api import users
+from django.core.exceptions import SuspiciousOperation
 
 def dispatcher(**table):
 
@@ -58,6 +60,17 @@ def get_handler(request, *args, **kwargs):
 
 
 def post_handler(request, *args, **kwargs):
+    #
+    # Restrict new short url creation to GAE project owners
+    # Outside offworlders will get a 404 on POST
+    #
+    # user = users.get_current_user()
+    # # raise SuspiciousOperation(str(user))
+    # if user:
+    #     if not users.is_current_user_admin():
+    #         raise Http404
+    # else:
+    #     raise Http404
     #
     # create an instance of the LongURL object, validate the long URL, and if successful load the LongURL instance with it
     #

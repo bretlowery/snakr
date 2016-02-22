@@ -16,7 +16,6 @@ from django.conf.urls import patterns
 from django.views.decorators.csrf import csrf_exempt
 from snakr.views import dispatcher, get_handler, post_handler
 
-
 urlpatterns = patterns(
         '',
         (r'^.*', csrf_exempt(dispatcher(

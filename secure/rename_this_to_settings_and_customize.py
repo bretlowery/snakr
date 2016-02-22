@@ -220,3 +220,6 @@ SHORTURL_PATH_ALPHABET = SHORTURL_PATH_ALPHABET.replace("0","").replace("O","").
 
 # DON'T change this
 APPEND_SLASH=False
+
+# Set to True to persist 400 (SuspiciousOperation) errors to snakr_log
+SNAKR_LOG_400_ERRORS = True

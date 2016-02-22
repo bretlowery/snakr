@@ -15,6 +15,9 @@
 # Import bug workaround: http://stackoverflow.com/questions/32761566/django-1-9-importerror-for-import-module
 # from djangoappengine.settings_base import *
 
+import ipaddr
+import os
+
 try:
     from dev_appserver_version import DEV_APPSERVER_VERSION
 except ImportError:
@@ -176,9 +179,43 @@ class UserAgents(mydb.Model):
             blank=False)
 
 
-def savelog(request, entry_type, longurl_id, shorturl_id):
+def get_clientinfo(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+         readable_ip_address = x_forwarded_for.split(',')[0]
+    else:
+        readable_ip_address = request.META.get('REMOTE_ADDR', 'unknown')
+    if readable_ip_address == 'unknown':
+        binary_ip_address = bin(0)
+    else:
+        try:
+            binary_ip_address = bin(ipaddr.IP(readable_ip_address).broadcast)[2:]
+        except:
+            binary_ip_address = bin(0)
+            pass
+    # slatlong = request.META.get('X-AppEngine-CityLatLong', '0.0,0.0')
+    # geo_lat = slatlong.split(',')[0]
+    # geo_long = slatlong.split(',')[1]
+    geo_lat = 0.0
+    geo_long = 0.0
+    try:
+        geo_city = os.environ.get('X-AppEngine-City', 'unknown')
+    except:
+        geo_city = 'unknown'
+        pass
+    try:
+        geo_country = os.environ.get('X-AppEngine-Country','unknown')
+    except:
+        geo_country = 'unknown'
+        pass
+    http_host = request.META.get('HTTP_HOST','unknown')
+    http_user_agent = request.META.get('HTTP_USER_AGENT','unknown')
+    return binary_ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_user_agent
 
-    binary_ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_user_agent = utils.get_clientinfo(request)
+
+def writelog(request, entry_type, longurl_id, shorturl_id):
+
+    binary_ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_user_agent = get_clientinfo(request)
 
     http_user_agent_id = utils.get_hash(http_user_agent)
     ua_found = True
