@@ -102,12 +102,28 @@ Alternatively, you can use your short domain for short HTTP urls and yorudomain.
     SECURE_SHORTURL_HOST    = "snakrv2.appspot.com"
     ```
     
+    
+    This produces short URLs:
+    
+    ```
+    http://bret.guru/xxxxxx
+    https://snakrv2.appspot.com/xxxxxx
+    ```
+    
     Once you have your SSL certficate and secure redirection turned on, you can use the same short domain on both:
     
     ```
     SHORTURL_HOST           = "bret.guru"   
     SECURE_SHORTURL_HOST    = "bret.guru"
     ```
+    
+    producing:
+    
+    ```
+    http://bret.guru/xxxxxx
+    https://bret.guru/xxxxxx
+    ```
+    
 
 ## Test It Online
 1. Install curl or another REST client testing tool like [Advanced Rest Client Application for Chrome](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo/reviews?hl=en-US&utm_source=ARC)
