@@ -48,7 +48,7 @@ Negative effects on SEO, CTR, etc.                      | Shortened URLs may not
 
 ## GAE Caveats (2/2016)
 
-GAE's Python SDK includes a distro of Django 1.5.11 (later versions are not officially supported). It is possible to run later versions of Django on GAE but some functions won't work (those you'd expect around security, networking, etc. that would conflict with GAE's ecosystem). I plan on slowly integrating Django 1.9 as possible. Note that Django 1.9.2 is included in my lib folder, while 1.5.11 is in the GAE SDK external library. Behavior may not be what you expect in your dev and other environs as a result. Be advised.
+GAE's Python SDK includes a distro of Django 1.5.11 (later versions are not officially supported). It is possible to run later versions of Django on GAE but some functions won't work (those you'd expect around security, networking, etc. that would conflict with GAE's ecosystem). I plan on slowly integrating Django 1.9 where possible. Note that Django 1.9.2 is included in my lib folder, while 1.5.11 is in the GAE SDK external library. Behavior may not be what you expect in your dev and other environs as a result. Be advised.
 
 ## Known Issues / Future Features
 1. Django 1.5.11's SuspiciousOperation returns HTTP 500, not HTTP 400 (see http://stackoverflow.com/questions/35439621/django-suspiciousoperation-returns-as-http-500-on-google-app-engine-not-http-40). This means among other things that a badly formatted URL crashes WSGI, which is NOT good. This is my top priority to fix by applying the workaround mentioned in the StackOverflow page to run under Django 1.9.2 or latest possible.
