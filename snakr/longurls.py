@@ -6,7 +6,7 @@ from django.http import Http404
 from models import LongURLs, ShortURLs, writelog
 from shorturls import ShortURL
 from utils import utils
-from django.db import transaction
+# from django.db import transaction
 
 class LongURL:
     """Validates and processes the long URL in the POST request."""
@@ -57,7 +57,7 @@ class LongURL:
 
         return
 
-    def get_or_make_shorturl(self, request):
+    def get_or_make_shorturl(self, request, *args, **kwargs):
         #
         # Does the long URL already exist?
         #

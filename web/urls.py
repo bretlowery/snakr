@@ -14,12 +14,17 @@
 #
 from django.conf.urls import patterns
 from django.views.decorators.csrf import csrf_exempt
-from snakr.views import dispatcher, get_handler, post_handler
+from snakr.views import Dispatcher, maintenancepage
 
+d = Dispatcher()
 urlpatterns = patterns(
         '',
-        (r'^.*', csrf_exempt(dispatcher(
-                GET=get_handler,
-                POST=post_handler,
+        (r'^.*', csrf_exempt(d.dispatch(
+                GET=d.get_handler,
+                POST=d.post_handler,
                 ))),
+        # (r'^.*', maintenancepage),
 )
+
+
+    

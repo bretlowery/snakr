@@ -193,27 +193,17 @@ def get_clientinfo(request):
         except:
             binary_ip_address = bin(0)
             pass
-    # slatlong = request.META.get('X-AppEngine-CityLatLong', '0.0,0.0')
-    # geo_lat = slatlong.split(',')[0]
-    # geo_long = slatlong.split(',')[1]
-    geo_lat = 0.0
-    geo_long = 0.0
-    try:
-        geo_city = os.environ.get('X-AppEngine-City', 'unknown')
-    except:
-        geo_city = 'unknown'
-        pass
-    try:
-        geo_country = os.environ.get('X-AppEngine-Country','unknown')
-    except:
-        geo_country = 'unknown'
-        pass
+    slatlong = request.META.get('HTTP_X_APPENGINE_CITYLATLONG', '0.0,0.0')
+    geo_lat = slatlong.split(',')[0]
+    geo_long = slatlong.split(',')[1]
+    geo_city = request.META.get('HTTP_X_APPENGINE_CITY', 'unknown')
+    geo_country = request.META.get('HTTP_X_APPENGINE_COUNTRY','unknown')
     http_host = request.META.get('HTTP_HOST','unknown')
     http_user_agent = request.META.get('HTTP_USER_AGENT','unknown')
     return binary_ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_user_agent
 
 
-def writelog(request, entry_type, longurl_id, shorturl_id):
+def writelog(request, entry_type, longurl_id, shorturl_id, **kwargs):
 
     binary_ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_user_agent = get_clientinfo(request)
 

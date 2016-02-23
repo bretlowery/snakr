@@ -23,6 +23,10 @@ Short URL as fraud enabler                              | Shorteners have been u
 Short URLs can hide payload malfeasance in the long URL | URLs may contain payloads such as SQL injection, etc. in the query string or other components. A shortener that encodes and scrubs the URL first for safety can return a short URL that itself is guaranteed not to contain such issues (since it is generated), but return them to the caller when resolved to the long URL.
 Negative effects on SEO, CTR, etc.                      | Shortened URLs may not rank as high or at all in search engine results versus their longer URL parents. This could pose problems is use cases where SEO matters. The same is true when short URLs are delivered via ads or links exposed to end users who may not recognize them and thus be less likely to clickthru, thereby affecting monetization, traffic, campaign optimization, future campaign targeting accuracy, etc.
 
+## Performance
+
+Snakr can create and return a short url in under 200ms. I haven't load tested this at volume but assume GC can handle growth.
+
 ## Features Provided 
 1.	A basic HTTP POST/GET interface is provided. 
   1.	POST is used to turn a long URL into a shortened URL.
@@ -63,8 +67,8 @@ GAE's Python SDK includes a distro of Django 1.5.11 (later versions are not offi
 
 4. Geolocation detection is not working (see http://stackoverflow.com/questions/35492617/x-appengine-citylatlong-not-populated-on-google-app-engine-django-1-5-11-when-us). Will workaround or fix.
 
-   **UPDATE:** Something going on with GAE here not passing their X-AppEngine geo headers through, or Django not recognizing/handling them correctly. Haven't really investigated this yet in depth.
-
+   **UPDATE:** Fixed in latest version.
+   
 5. Other diagnostic/tracking info to be added to snakr_log.
 
    **UPDATE:** Added storage for some of these. Looks like I'm hinting that I'm adding a robust demo fraud and abuse detection system later.
@@ -229,10 +233,10 @@ entry_type               | CHAR(1)                  | What action occurred. N = 
 longurl_id (UK)          | BIGINT                   | The snakr_longurl.id value of the matching long URL redirected to by the short URL.
 shorturl_id (UK)         | BIGINT                   | The snakr_shorturl.id value of the matching short URL to which the long URL redirects.
 cli_ip_address           | BINARY(128)              | The binary-encoded IPv4 or IPv6 X-FORWARDED-FOR (if available) or REMOTE ADDR (if no X-FORWARDED-FOR is available) of the client calling Snakr. Used for tracking/diagnostics/forensics only.
-cli_geo_lat              | FLOAT(10,8)              | Geo location latitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
-cli_geo_long             | FLOAT(11,8)              | Geo location longitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
-cli_geo_city             | VARCHAR(100)             | Geo location city name from X-AppEngine-City of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
-cli_geo_country          | VARCHAR(100)             | Geo location country name from X-AppEngine-Country of the client calling Snakr. Used for tracking/diagnostics/forensics only. NOT CURRENTLY IMPLEMENTED.
+cli_geo_lat              | FLOAT(10,8)              | Geo location latitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only.  
+cli_geo_long             | FLOAT(11,8)              | Geo location longitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
+cli_geo_city             | VARCHAR(100)             | Geo location city name from X-AppEngine-City of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
+cli_geo_country          | VARCHAR(100)             | Geo location country name from X-AppEngine-Country of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
 cli_http_host            | VARCHAR(253)             | The HTTP_HOST of the client. Used for tracking/diagnostics/forensics only.
 cli_http_user_agent_id   | BIGINT                   | 64-bit integer version of the hexdigest of the long integer hash of a USER_AGENT stored in snakr_useragents. Could be useful for forensic cluster analysis for fraud or abuse patterns in the log.
 

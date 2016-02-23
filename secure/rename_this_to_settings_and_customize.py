@@ -224,3 +224,7 @@ APPEND_SLASH=False
 
 # Set to True to persist 400 (SuspiciousOperation) errors to snakr_log
 SNAKR_LOG_400_ERRORS = True
+
+# If the SHORTURL_HOST or SECURE_SHORTURL_HOST value is entered into a browser with no path, it will redirect to this page
+# I use my LinkedIn profile for this, roll your own here
+INDEX_HTML="http://www.linkedin.com/in/bretlowery"

@@ -9,7 +9,6 @@ _URL_VALIDATOR = URLValidator()
 
 class utils:
 
-
     @staticmethod
     def get_encodedurl(myurl):
         """Returns an encoded version of the passed URL."""
@@ -58,7 +57,7 @@ class utils:
     def is_url_valid(myurl):
         rtn = True
         try:
-            #workaroud for django 1.5.11 bug on %20 encoding causing urlvalidation to fail
+            # workaroud for django 1.5.11 bug on %20 encoding causing urlvalidation to fail
             valid = _URL_VALIDATOR(utils.get_decodedurl(myurl.replace("%20","_")))
         except:
             rtn = False
