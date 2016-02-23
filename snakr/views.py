@@ -123,3 +123,4 @@ class Dispatcher(webapp2.RequestHandler):
 
     def test_post_handler(self, request, *args, **kwargs):
         return HttpResponse("<H2>Test value: {%s}</H2>", content_type="text/html")
+
