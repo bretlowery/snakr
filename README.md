@@ -236,33 +236,25 @@ created_on         | DATETIME                 | UTC datetimestamp of when the sh
 is_active          | CHAR(1)                  | "Y" on short URL creation. For future use to add short URL expiration and cleanup/purge functionality.
 compression_ratio  | FLOAT                    | The ratio of short URL size to long URL size.
 
-<!---
-####Table snakr_log
-One row per action performed by Snakr.
+## Logging
 
-Column                   | Datatype (all NOT NULL)  | Description
------------------------- | ------------------------ | ------------
-log_order (PK)           | BIGINT                   | Autoincrementing integer. Chronological order of actions as they occurred.
-logged_on                | DATETIME                 | UTC datetimestamp of when an action occurred.
-entry_type               | CHAR(1)                  | What action occurred. N = a new long URL was successfully shortened, R = an existing long URL was resubmited a 2nd or subsequent time, S = a short URL was submitted for redirection to the long URL.
-longurl_id (UK)          | BIGINT                   | The snakr_longurl.id value of the matching long URL redirected to by the short URL.
-shorturl_id (UK)         | BIGINT                   | The snakr_shorturl.id value of the matching short URL to which the long URL redirects.
-cli_ip_address           | BINARY(128)              | The binary-encoded IPv4 or IPv6 X-FORWARDED-FOR (if available) or REMOTE ADDR (if no X-FORWARDED-FOR is available) of the client calling Snakr. Used for tracking/diagnostics/forensics only.
-cli_geo_lat              | FLOAT(10,8)              | Geo location latitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only.  
-cli_geo_long             | FLOAT(11,8)              | Geo location longitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
-cli_geo_city             | VARCHAR(100)             | Geo location city name from X-AppEngine-City of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
-cli_geo_country          | VARCHAR(100)             | Geo location country name from X-AppEngine-Country of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
-cli_http_host            | VARCHAR(253)             | The HTTP_HOST of the client. Used for tracking/diagnostics/forensics only.
-cli_http_user_agent_id   | BIGINT                   | 64-bit integer version of the hexdigest of the long integer hash of a USER_AGENT stored in snakr_useragents. Could be useful for forensic cluster analysis for fraud or abuse patterns in the log.
+Snakr uses standard Django logging which appears in the Google Cloud Logging console and can be downoaded via the Google Logging API. 
+In addition to standard request and state logging, Snakr also logs the following application-specific data elements to the log in JSON format:
 
-####Table snakr_useragents
-One row per unique HTTP_USER_AGENT string seen by Snakr. This was normalized out of snakr_log for storage space savings.
+Element     | Value                | Default   | Description
+------------| ---------------------| --------- | ------------
+message     | string               | none      | Text message, such as an error or informational message.
+longurl_id  | long                 | -1        | If present, the snakr_longurl.id value of the matching long URL redirected to by the short URL. -1 means unknown, missing, not specified, etc.
+shorturl_id | long                 | -1        | If present, the snakr_shorturl.id value of the matching short URL to which the long URL redirects. -1 means unknown, missing, not specified, etc.
+ip          | IPv4 or IPv6 address | "unknown" | If present, the IPv4 or IPv6 X-FORWARDED-FOR (if available) or REMOTE ADDR (if no X-FORWARDED-FOR is available) of the client calling Snakr. Used for tracking/diagnostics/forensics only.
+lat         | float(10,8)          | 0.0       | If present, the geo location latitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. 0.0 means unknown, missing, not verified...
+long        | float(11,8)          | 0.0       | If present, the geolocation longitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. 0.0 means unknown, missing, not verified...
+city        | string               | "unknown" | If present, the geo location city name from X-AppEngine-City of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
+country     | string               | "unknown" | If present, the geo location country name from X-AppEngine-Country of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
+host        | string               | "unknown" | If present, the HTTP_HOST of the client. Used for tracking/diagnostics/forensics only.
+ua          | string               | "unknown" | If present, the USER_AGENT of the client. Is useful for forensic cluster analysis for fraud or abuse patterns in the log.
+status_code | integer              | 0         | If present, the HTTP status code that has or will be returned to the client.
 
-Column                   | Datatype (all NOT NULL)  | Description
------------------------- | ------------------------ | ------------
-cli_http_user_agent_id   | BIGINT                   | 64-bit integer version of the hexdigest of the long integer hash of a USER_AGENT stored in snakr_useragents. Could be useful for forensic cluster analysis for fraud or abuse patterns in the log.
-cli_http_user_agent      | VARCHAR(8192)            | The USER_AGENT of the client. Used for tracking/diagnostics/forensics only.
--->
 
 ### Installing Libraries
 See the [Third party libraries](https://developers.google.com/appengine/docs/python/tools/libraries27)
