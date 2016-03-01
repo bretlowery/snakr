@@ -61,11 +61,13 @@ GAE's Python SDK includes a distro of Django 1.5.11 (later versions are not offi
 1. Django 1.5.11's SuspiciousOperation returns HTTP 500, not HTTP 400 (see http://stackoverflow.com/questions/35439621/django-suspiciousoperation-returns-as-http-500-on-google-app-engine-not-http-40). This means among other things that a badly formatted URL crashes WSGI, which is NOT good. This is my top priority to fix by applying the workaround mentioned in the StackOverflow page to run under Django 1.9.2 or latest possible.
 
    **UPDATE:** v1.0.0 I worked around this by implementing a custom /django/core/handlers/base.py that includes Django 1.9's SuspiciousOperation exception block with some minor changes. Unknown short URLs etc. now return HTPP 400 with a meaningful error message.
+
    **UPDATE:** v1.0.1 Fixed by implementing Django 1.9 
 
 2. Request filtering is not yet robust. Some non-supported requests will return HTTP 500 due to the previous issue.
 
    **UPDATE:** v1.0.0 Much improved. Not fully tested yet. Haven't gone through all of the use cases.
+
    **UPDATE:** v1.0.1 Fixed by implementing Django 1.9 and a few bug fixes
 
 3. There is no admin page or reporting. Will add that.
@@ -77,11 +79,13 @@ GAE's Python SDK includes a distro of Django 1.5.11 (later versions are not offi
 5. Other diagnostic/tracking info to be added to snakr_log.
 
    **UPDATE:** v1.0.0 Added storage for some of these. Looks like I'm hinting that I'm adding a robust demo fraud and abuse detection system later.
+
    **UPDATE:** v1.0.1 Logging now removed from the db and placed into json logging files.
 
 6. snakr_log collects IPs with no encryption. This may not be legit for your applicable privacy and/or compliance needs. No other PII is collected. Check with your legal department or ex-spouse for all bad news.
 
    **UPDATE:** v1.0.0 I encode these now into binary(128). This is for minimizing storage, NOT for encryption. They are NOT encrypted and can be reversed into the original readable IPs.
+
    **UPDATE:** v1.0.1 Logging now removed from the db and placed into json logging files.
    
 7. Local testing with a local MySQL db was not tested or used with this.
@@ -99,6 +103,7 @@ GAE's Python SDK includes a distro of Django 1.5.11 (later versions are not offi
 11. Submission of a long url via a POST with a query string (e.g. "http://snakrv2.appspot.com/?u=http://www.shortenthisurlplease.com") may be added. Feel free to do so.
 
    **UPDATE:** v1.0.0 I'm going to add this shortly, no pun intended. Some code already implemented for this.
+
    **UPDATE:** v1.0.1 CANCELLED: this makes the app vulnerable to certain attacks when the GET is redirected into a PUT. Not implementing.
 
 12. No aging or cleanup of URLs based on usage age-off or other rules is not provided. I did add a is_active status to support this in the future.
