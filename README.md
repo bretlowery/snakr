@@ -1,4 +1,4 @@
-# Snakr v1.0
+# Snakr BETA v1.0
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.5.11](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) backend.
@@ -128,7 +128,9 @@ Alternatively, you can use your short domain for short HTTP urls and yorudomain.
     https://bret.guru/xxxxxx
     ```
     
-
+    16. A mobile app/endpoints would be neat.
+    
+    
 ## Test It Online
 1. Install curl or another REST client testing tool like [Advanced Rest Client Application for Chrome](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo/reviews?hl=en-US&utm_source=ARC)
 

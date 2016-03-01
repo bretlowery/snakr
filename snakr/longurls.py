@@ -3,10 +3,11 @@ from urlparse import urlparse, parse_qs
 import secure.settings as settings
 from django.core.exceptions import SuspiciousOperation
 from django.http import Http404
-from models import LongURLs, ShortURLs, writelog
+from models import LongURLs, ShortURLs
 from shorturls import ShortURL
 from utils import utils
-# from django.db import transaction
+from django.db import transaction as xaction
+import logger
 
 class LongURL:
     """Validates and processes the long URL in the POST request."""
@@ -17,6 +18,8 @@ class LongURL:
         self.normalized_longurl = ""
         self.normalized_longurl_scheme = ""
         self.id = 0
+        self.vanity_path = ''
+        self.log = logger.Loggr(request)
 
         lurl = ""
 
@@ -38,10 +41,19 @@ class LongURL:
             else:
                 found = True
         if not found:
-            raise SuspiciousOperation('No long URL found to shorten. Long URLs must be passed into Snakr using either a JSON payload value with a key of "u", or via a querystring "u" parameter (e.g. /?u="the_url").')
+            raise self.log.event(messagekey='LONG_URL_MISSING', status_code=400)
 
         if not utils.is_url_valid(lurl):
-            raise SuspiciousOperation('The URL submitted for shortening {%s} is not a valid URL.' % lurl)
+            raise self.log.event(messagekey='LONG_URL_INVALID', value=lurl, status_code=400)
+
+        if json_data:
+            try:
+               vanurl = json_data["v"]
+            except:
+                vanurl = None
+                pass
+        else:
+            vanurl = None
 
         if lurl == utils.get_decodedurl(lurl):
             preencoded = False
@@ -54,9 +66,11 @@ class LongURL:
         self.longurl_is_preencoded = preencoded
         self.longurl = lurl
         self.id = utils.get_longurlhash(self.normalized_longurl)
+        self.vanity_path = vanurl
 
         return
 
+    @xaction.atomic
     def get_or_make_shorturl(self, request, *args, **kwargs):
         #
         # Does the long URL already exist?
@@ -80,8 +94,8 @@ class LongURL:
             #
             # 2. Generate a short url for it (with collision handling) and calc its compression ratio vs the long url
             #
-            s = ShortURL()
-            s.make(self.normalized_longurl_scheme)
+            s = ShortURL(request)
+            s.make(self.normalized_longurl_scheme, self.vanity_path)
             compression_ratio = float(len(s.shorturl)) / float(len(self.normalized_longurl))
             #
             # 3. Create a matching ShortURLs persistence object
@@ -93,7 +107,7 @@ class LongURL:
             #
             ldata.save()
             sdata.save()
-            writelog(request, entry_type='N', longurl_id=ldata.id, shorturl_id=s.id)
+            self.log.event(event_type='L', messagekey='HTTP_200', value=self.normalized_longurl, longurl_id=self.id, shorturl_id=s.id, status_code=200)
             #
             # 5. Return the short url
             #
@@ -105,8 +119,7 @@ class LongURL:
             # 1. Check for potential collision
             #
             if l.longurl != self.normalized_longurl:
-                raise SuspiciousOperation(
-                    'HASH COLLISION DETECTED on lookup of long URL {%s}' % self.normalized_longurl)
+                raise self.log.event(messagekey='HASH_COLLISION', value=self.normalized_longurl, status_code=400)
             #
             # 2. Lookup the short url. It must be active.
             #
@@ -116,7 +129,7 @@ class LongURL:
             #
             # 3. Log the lookup
             #
-            writelog(request, entry_type='R', longurl_id=self.id, shorturl_id=s.id)
+            self.log.event(event_type='R', messagekey='LONG_URL_RESUBMITTED', value=self.normalized_longurl, longurl_id=self.id, shorturl_id=s.id, status_code=200)
             #
             # 4. Return the short url
             #

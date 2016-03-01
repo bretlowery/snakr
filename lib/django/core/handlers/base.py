@@ -20,6 +20,8 @@ from django.utils.module_loading import import_string
 from django.views import debug
 from django.http import HttpResponse, HttpResponseBadRequest
 
+
+
 logger = logging.getLogger('django.request')
 
 
@@ -217,8 +219,6 @@ class BaseHandler(object):
                     'request': request
                 })
 
-            # 2/21/16 bml
-            # if settings.SNAKR_LOG_400_ERRORS:
             if settings.DEBUG:
                 return debug.technical_500_response(request, *sys.exc_info(), status_code=400)
             else:

@@ -20,8 +20,14 @@ from urlparse import urlparse, parse_qs
 import webapp2
 import secure.settings as settings
 from PyOpenGraph import PyOpenGraph
+from google.appengine.api import urlfetch
+from bs4 import BeautifulSoup
+# from django.views.generic import TemplateView
+from django.shortcuts import render_to_response
+import logger
 
-def maintenancepage(self, request):
+
+def maintenance_page(self, request):
     return HttpResponse("<H1>The system is down for maintenance.</H1>", content_type="text/html")
 
 
@@ -42,6 +48,13 @@ class Dispatcher(webapp2.RequestHandler):
 
         return d
 
+
+    def robot_handler(self, request, *args, **kwargs):
+        log = logger.Loggr(request)
+        log.event(messagekey='ROBOT', verbose=True, status_code=200)
+        return lambda r: HttpResponse("User-agent: *\nDisallow: /", content_type="text/plain")
+
+
     def get_handler(self, request, *args, **kwargs):
         #
         # check to see if a long url was submitted for shortening via a query parameter
@@ -54,7 +67,7 @@ class Dispatcher(webapp2.RequestHandler):
         #
         # create an instance of the ShortURL object, validate the short URL, and if successful load the ShortURL instance with it
         #
-        s = ShortURL()
+        s = ShortURL(request)
         #
         # lookup the long url previously used to generate the short url
         #
@@ -92,23 +105,31 @@ class Dispatcher(webapp2.RequestHandler):
         # prepare to return the shorturl as JSON
         #
         response_data = {}
-        response_data['shorturl'] = shorturl
         #
         # if settings.OGTITLE = True, get the OpenGraph title meta tag value and include it in the output
         # see: http://ogp.me
         # for the Python PyOpenGraph site: https://pypi.python.org/pypi/PyOpenGraph
         #
-        og_title = ''
-        if settings.OGTITLE:
-            og = PyOpenGraph.PyOpenGraph(l.longurl)
-            if og.is_valid():
-                og_title = og.metadata['title']
-                if og_title:
-                    response_data['og:title'] = og_title
+        title_exists = False
+        try:
+            title = PyOpenGraph.PyOpenGraph(l.longurl)
+            title_exists = title.is_valid()
+        except UnicodeDecodeError:
+            pass
+        if title_exists:
+            title = title.metadata['title'].decode('utf-8')
+        else:
+            try:
+                longurl_page = urlfetch.fetch(l.normalized_longurl)
+                longurl_html = BeautifulSoup(longurl_page)
+                title = longurl_html.title.decode('utf-8').string
+            except:
+                title = ''
+                pass
         #
         # return meta tag values as well if requested
         #
-        if settings.DEBUG_META:
+        if settings.RETURN_ALL_META:
             j = json.JSONEncoder()
             for key, value in request.META.items():
                 if isinstance(key, (list, dict, str, unicode, int, float, bool, type(None))):
@@ -119,6 +140,16 @@ class Dispatcher(webapp2.RequestHandler):
         #
         # return JSON to caller
         #
+        response_data['shorturl'] = shorturl
+        if title_exists:
+            ls = len(shorturl)
+            lt = len(title)
+            ltmax = 140 - ls - 1
+            if lt > ltmax:
+                tweet = title[:ltmax-3]+'... '+shorturl
+            else:
+                tweet = title + ' ' + shorturl
+            response_data['twitterfriendly'] = tweet
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
     def test_post_handler(self, request, *args, **kwargs):

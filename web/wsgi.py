@@ -22,7 +22,15 @@ https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 """
 
 import os
+import sys
+import django
+import snakr.logger as log
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "secure.settings")
+_log = log.Loggr()
+_log.event(messagekey='STARTUP')
+_log.event(messagekey='PYTHON_VERSION', value=sys.version)
+_log.event(messagekey='DJANGO_VERSION', value=django.get_version())
+
 application = get_wsgi_application()

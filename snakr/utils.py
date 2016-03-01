@@ -12,7 +12,7 @@ class utils:
     @staticmethod
     def get_encodedurl(myurl):
         """Returns an encoded version of the passed URL."""
-        return urllib.quote(myurl).encode('utf8')
+        return urllib.quote(myurl).encode('utf8').replace('%3A//','://')
 
 
     @staticmethod
@@ -48,6 +48,13 @@ class utils:
 
 
     @staticmethod
+    def get_iphash(str):
+        """Returns a SHA1 hash of the passed IP address"""
+        import ipaddr
+        return x
+
+
+    @staticmethod
     def get_shorturlcandidate():
         return ''.join(random.SystemRandom().choice(settings.SHORTURL_PATH_ALPHABET) for _ in range(
             settings.SHORTURL_PATH_SIZE))
@@ -70,14 +77,4 @@ class utils:
         return urlparse('http://www.dummyurl.com')  # this is a django 1.5.11 bug workaround
 
 
-    @staticmethod
-    def is_validnsp(normalized_shorturl_path):
-        rtn = False
-        if normalized_shorturl_path.startswith('/'):
-            rtn = True
-            for c in normalized_shorturl_path[1:]:
-                if settings.SHORTURL_PATH_ALPHABET.find(c) == -1:
-                    rtn = False
-                    break
-        return rtn
 
