@@ -99,7 +99,7 @@ GAE's Python SDK includes a distro of Django 1.5.11 (later versions are not offi
 11. Submission of a long url via a POST with a query string (e.g. "http://snakrv2.appspot.com/?u=http://www.shortenthisurlplease.com") may be added. Feel free to do so.
 
    **UPDATE:** v1.0.0 I'm going to add this shortly, no pun intended. Some code already implemented for this.
-   **UPDATE:** v1.0.1 Will be implemented fully in next release 1.0.2.
+   **UPDATE:** v1.0.1 CANCELLED: this makes the app vulnerable to certain attacks when the GET is redirected into a PUT. Not implementing.
 
 12. No aging or cleanup of URLs based on usage age-off or other rules is not provided. I did add a is_active status to support this in the future.
 
