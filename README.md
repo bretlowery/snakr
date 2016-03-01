@@ -153,7 +153,7 @@ Alternatively, you can use your short domain for short HTTP urls and yorudomain.
 
 2. Using your REST testing tool, test the POST action:
     ```
-    URL: http://your.appspot.com
+    URL: http://bret.guru
     POST:
         Content-Type: application/json
         Payload:      {"u":"<the url you want to shorten goes here without the angle brackets>"}
