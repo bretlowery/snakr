@@ -1,7 +1,10 @@
-# Snakr BETA v1.0
+# Snakr BETA v1.0.1
 
-A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.5.11](https://www.djangoproject.com/)
-on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) backend.
+v1.0.1 now supports Django 1.9 on Google App Engine
+
+A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
+on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) backend. 
+The install loads Django 1.9 in the app's lib folder, overriding GAE's Django 1.5.11 supported install.
 
 This is intended as a learning exercise, so it does not use the [Google URL Shortener API](https://developers.google.com/url-shortener/).
 
@@ -57,29 +60,37 @@ GAE's Python SDK includes a distro of Django 1.5.11 (later versions are not offi
 ## Known Issues / Future Features
 1. Django 1.5.11's SuspiciousOperation returns HTTP 500, not HTTP 400 (see http://stackoverflow.com/questions/35439621/django-suspiciousoperation-returns-as-http-500-on-google-app-engine-not-http-40). This means among other things that a badly formatted URL crashes WSGI, which is NOT good. This is my top priority to fix by applying the workaround mentioned in the StackOverflow page to run under Django 1.9.2 or latest possible.
 
-   **UPDATE:** I worked around this by implementing a custom /django/core/handlers/base.py that includes Django 1.9's SuspiciousOperation exception block with some minor changes. Unknown short URLs etc. now return HTPP 400 with a meaningful error message.
+   **UPDATE:** v1.0.0 I worked around this by implementing a custom /django/core/handlers/base.py that includes Django 1.9's SuspiciousOperation exception block with some minor changes. Unknown short URLs etc. now return HTPP 400 with a meaningful error message.
+   **UPDATE:** v1.0.1 Fixed by implementing Django 1.9 
 
 2. Request filtering is not yet robust. Some non-supported requests will return HTTP 500 due to the previous issue.
 
-   **UPDATE:** Much improved. Not fully tested yet. Haven't gone through all of the use cases.
+   **UPDATE:** v1.0.0 Much improved. Not fully tested yet. Haven't gone through all of the use cases.
+   **UPDATE:** v1.0.1 Fixed by implementing Django 1.9 and a few bug fixes
 
 3. There is no admin page or reporting. Will add that.
 
 4. Geolocation detection is not working (see http://stackoverflow.com/questions/35492617/x-appengine-citylatlong-not-populated-on-google-app-engine-django-1-5-11-when-us). Will workaround or fix.
 
-   **UPDATE:** Fixed in latest version.
+   **UPDATE:** v1.0.0 Fixed  
    
 5. Other diagnostic/tracking info to be added to snakr_log.
 
-   **UPDATE:** Added storage for some of these. Looks like I'm hinting that I'm adding a robust demo fraud and abuse detection system later.
+   **UPDATE:** v1.0.0 Added storage for some of these. Looks like I'm hinting that I'm adding a robust demo fraud and abuse detection system later.
+   **UPDATE:** v1.0.1 Logging now removed from the db and placed into json logging files.
 
 6. snakr_log collects IPs with no encryption. This may not be legit for your applicable privacy and/or compliance needs. No other PII is collected. Check with your legal department or ex-spouse for all bad news.
 
-   **UPDATE:** I encode these now into binary(128). This is for minimizing storage, NOT for encryption. They are NOT encrypted and can be reversed into the original readable IPs.
-
+   **UPDATE:** v1.0.0 I encode these now into binary(128). This is for minimizing storage, NOT for encryption. They are NOT encrypted and can be reversed into the original readable IPs.
+   **UPDATE:** v1.0.1 Logging now removed from the db and placed into json logging files.
+   
 7. Local testing with a local MySQL db was not tested or used with this.
 
+   **UPDATE:** v1.0.1 Local dev and QA now supported using local dev_appserver.py against either local MySQL or remote GCS.
+
 8. The GAE Development Environ was not tested or used with this.
+
+   **UPDATE:** v1.0.1 Local dev and QA now supported using local dev_appserver.py against either local MySQL or remote GCS.
 
 9. No test units are yet defined. It's a pretty simple app functionally; I'm not so sure this is really warranted.
 
@@ -87,7 +98,8 @@ GAE's Python SDK includes a distro of Django 1.5.11 (later versions are not offi
 
 11. Submission of a long url via a POST with a query string (e.g. "http://snakrv2.appspot.com/?u=http://www.shortenthisurlplease.com") may be added. Feel free to do so.
 
-   **UPDATE:** I'm going to add this shortly, no pun intended. Some code already implemented for this.
+   **UPDATE:** v1.0.0 I'm going to add this shortly, no pun intended. Some code already implemented for this.
+   **UPDATE:** v1.0.1 Will be implemented fully in next release 1.0.2.
 
 12. No aging or cleanup of URLs based on usage age-off or other rules is not provided. I did add a is_active status to support this in the future.
 
@@ -136,7 +148,7 @@ Alternatively, you can use your short domain for short HTTP urls and yorudomain.
 
 2. Using your REST testing tool, test the POST action:
     ```
-    URL: http://snakrv2.appspot.com
+    URL: http://your.appspot.com
     POST:
         Content-Type: application/json
         Payload:      {"u":"<the url you want to shorten goes here without the angle brackets>"}
@@ -224,6 +236,7 @@ created_on         | DATETIME                 | UTC datetimestamp of when the sh
 is_active          | CHAR(1)                  | "Y" on short URL creation. For future use to add short URL expiration and cleanup/purge functionality.
 compression_ratio  | FLOAT                    | The ratio of short URL size to long URL size.
 
+<!---
 ####Table snakr_log
 One row per action performed by Snakr.
 
@@ -249,7 +262,7 @@ Column                   | Datatype (all NOT NULL)  | Description
 ------------------------ | ------------------------ | ------------
 cli_http_user_agent_id   | BIGINT                   | 64-bit integer version of the hexdigest of the long integer hash of a USER_AGENT stored in snakr_useragents. Could be useful for forensic cluster analysis for fraud or abuse patterns in the log.
 cli_http_user_agent      | VARCHAR(8192)            | The USER_AGENT of the client. Used for tracking/diagnostics/forensics only.
-
+-->
 
 ### Installing Libraries
 See the [Third party libraries](https://developers.google.com/appengine/docs/python/tools/libraries27)
