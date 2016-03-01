@@ -27,22 +27,17 @@ https://docs.djangoproject.com/en/1.8/ref/secure/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import string
-
-#from djangoappengine.settings_base import *
+import snakr.ipaddr
 
 try:
     from dev_appserver_version import DEV_APPSERVER_VERSION
 except ImportError:
     DEV_APPSERVER_VERSION = 2
 
-# Initialize App Engine SDK if necessary.
-# try:
-#     from google.appengine.api import apiproxy_stub_map
-# except ImportError:
-#     from djangoappengine.boot import setup_env
-#     setup_env(DEV_APPSERVER_VERSION)
-
-# from djangoappengine.utils import on_production_server
+GAE_APP_NAME = 'your-GAE-app-name-here'
+GAE_PROJECT_ID = 'your-GAE-project-id'
+GAE_HOST = GAE_PROJECT_ID + '.appspot.com'
+GCS_INSTANCE_NAME = 'your-GCS-instance-name'
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -54,14 +49,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY  = '??????????????????????????????????????????????????'
+SECRET_KEY  = '???????????????????????????????????????????????????'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
-ALLOWED_HOSTS = [
-    'yourgaehost.appspot.com',
-    'your short url domain that CNAMES to yourgaehost.appspot.com, if you use one',
-]
 
 # Application definition
 
@@ -72,12 +62,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'snakr',
-    #'djangotoolbox',
-    #'autoload',
-    #'dbindexer',
-    ## djangoappengine should come last, so it can override a few manage.py commands
-    #'djangoappengine',
+    GAE_APP_NAME,
 )
 
 MIDDLEWARE_CLASSES = (
@@ -85,10 +70,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-#    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'web.urls'
@@ -137,80 +120,92 @@ USE_TZ = True
 
 STATIC_ROOT='static'
 STATIC_URL = '/static/'
-
-# PREPARE_UPLOAD_BACKEND = 'djangoappengine.storage.prepare_upload'
-# SERVE_FILE_BACKEND = 'djangoappengine.storage.serve_file'
-# DEFAULT_FILE_STORAGE = 'djangoappengine.storage.BlobstoreStorage'
-# FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024
-# FILE_UPLOAD_HANDLERS = (
-#     'djangoappengine.storage.BlobstoreFileUploadHandler',
-#     'django.core.files.uploadhandler.MemoryFileUploadHandler',
-# )
-#
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'TIMEOUT': 0,
-#     }
-# }
-#
-# SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+__SNAKR__VERSION__ = '1.0.1'
 
 ADMINS = ()
 MANAGERS = ADMINS
 
+LOG_PATH = '{}/logs'.format(BASE_DIR)
+IGNORED_PATHS = ['/admin', '/static', '/logs']
+RESPONSE_FIELDS = ('status', 'reason', 'charset', 'headers', 'content')
+
+# host (netloc) of the short URL to use
+SHORTURL_HOST = "your.short.com"
+SECURE_SHORTURL_HOST = GAE_HOST
+
+ALLOWED_HOSTS = [
+    GAE_HOST,
+    SHORTURL_HOST,
+    u'127.0.0.1',
+    u'localhost'
+]
+
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-# [START db_setup]
+SNAKRDB_DEBUG_DB = "DEBUG"
+
 import os
-SNAKRDB_MODE = "REMOTE"
 if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+
     # Running on production App Engine, so use a Google Cloud SQL database.
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/your_gae_appid:your_gcs_instancename',
-            'NAME': 'your_gcs_schemaname',
-            'USER': 'root',    # sounds crazy, but "root" is required by GAE (hmmmmmmmmmm)
+            'HOST': '/cloudsql/your-GAE-project-id:your-GCS-instance-name',
+            'NAME': 'your-GCS-database-name',
+            'USER': 'root',    # sounds crazy, but "root" is required by GAE for production connection (hmmmmmmmmmm)
         }
-        # 'default': {
-        #     'ENGINE': 'djangoappengine.db',
-        # }
     }
-elif SNAKRDB_MODE == "REMOTE":
+
+elif SNAKRDB_DEBUG_DB == "DEBUG":
+
+    from json import loads
+    from google.appengine.api import urlfetch
+
+    mypublicIP = snakr.ipaddr.IP(loads(urlfetch.fetch('http://jsonip.com').content)['ip'])
+    if mypublicIP.version == 6:
+        gcsIP = 'your-GCS-IPv6-address'
+    else:
+        gcsIP = 'your-GCS-IPv4-address'
+
+    # host (netloc) of the short URL to use
+    SHORTURL_HOST = "localhost:8080"
+    SECURE_SHORTURL_HOST = SHORTURL_HOST
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': 'your_gcs_ipv4_or_ipv6_address',
-            'NAME': 'your_gcs_schemaname',
-            'USER': 'your_mysqlworkbench_username_NOT_ROOT',
-            'PASSWORD': 'your_mysqlworkbench_password'
+            'HOST': gcsIP,
+            'NAME': 'your-GCS-database-name',
+            'USER': 'your-GCS-remote-QA-user-name-do-not-use-root-for-this',
+            'PASSWORD': 'your-GCS-remote-QA-user-password',
+            'OPTIONS':  {
+                        'ssl': {'ca':   '/path-to-your-local-server-ca.pem',
+                                'cert': '/path-to-your-local-client-cert.pem',
+                                'key':  '/path-to-your-local-client-key.pem'
+                                }
+                          },
         }
-        # 'default': {
-        #     'ENGINE': 'djangoappengine.db',
-        # }
     }
-elif SNAKRDB_MODE == "LOCAL":
+
+else:
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'your_local_mysql_schema',
-            'USER': 'your_local_mysql_username',
-            'PASSWORD': 'your_local_mysql_password',
-            'HOST': '127.0.0.1_or_localhost',
-            'PORT': '3306_or_your_custom_mysql_port',
+            'NAME': 'your-GCS-database-name',
+            'USER': 'your-GCS-local-user-name',
+            'PASSWORD': 'your-GCS-local-user-password',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
         }
     }
+
 # [END db_setup]
 
-# Max retries on hash collision detection. You shouldn't need to change this.
+# Max retries on hash collision detection
 MAX_RETRIES = 3
-
-# host (netloc) of the short URL to use.
-# Replace with a short domain name that CNAMES to your_gae_appid.appspot.com if desired.
-SHORTURL_HOST        = "your_gae_appid.appspot.com" # or your short domain name that CNAMEs to your_gae_appid.appspot.com
-SECURE_SHORTURL_HOST = "your_gae_appid.appspot.com" # or your short domain name that CNAMEs to your_gae_appid.appspot.com
 
 # Number of alphabetic characters in the short URL path (min 6, max 12)
 SHORTURL_PATH_SIZE = 6
@@ -219,13 +214,51 @@ SHORTURL_PATH_SIZE = 6
 SHORTURL_PATH_ALPHABET = string.digits + string.letters
 SHORTURL_PATH_ALPHABET = SHORTURL_PATH_ALPHABET.replace("0","").replace("O","").replace("o","").replace("1","").replace("l","")
 
-# DON'T change this
+# DON"T change this
 APPEND_SLASH=False
 
-# Set to True to log 400 (SuspiciousOperation)
-LOG_HTTP400 = True
-
 # If the SHORTURL_HOST or SECURE_SHORTURL_HOST value is entered into a browser with no path, it will redirect to this page
-# I use my LinkedIn profile for this, roll your own here
-INDEX_HTML="http://www.linkedin.com/in/bretlowery"
+INDEX_HTML="your-desired-static-index-html-page"
 
+# If True, enable capture of the target long url's OpenGraph title ("og:title") and return it in the JSON along with the short url
+# See: http://ogp.me
+# For the Python PyOpenGraph site: https://pypi.python.org/pypi/PyOpenGraph
+OGTITLE = True
+
+ENABLE_LOGGING = True
+
+RETURN_ALL_META = DEBUG
+
+#
+# Logging messages
+#
+# Enable/disable HTTP 302, 400, 404 error logging
+LOG_HTTP200 = True
+LOG_HTTP302 = True
+LOG_HTTP400 = True
+LOG_HTTP404 = True
+
+CANONICAL_MESSAGES = {
+        'STARTUP'                       : 'Snakr starting',
+        'PYTHON_VERSION'                : 'Python version %s',
+        'DJANGO_VERSION'                : 'Django version %s',
+        'STARTUP'                       : 'Snakr starting',
+        'SHUTDOWN'                      : 'Snakr stopping',
+        'ROBOT'                         : '403 Permission Denied',
+        'HTTP_200'                      : '200 Long URL {%s}',
+        'HTTP_302'                      : '302 Redirecting to {%s}',
+        'HTTP_404'                      : 'ERROR, URL {%s} not found (404)',
+        'ILLEGAL MAX_RETRIES'           : 'ERROR, MAX_RETRIES must be between 1 and 3, but is actually set to %d' % MAX_RETRIES,
+        'EXCEEDED_MAX_RETRIES'          : 'ERROR, exceeded %d tries to generate new short URL.' % MAX_RETRIES,
+        'VANITY_PATH_EXISTS'            : 'ERROR, the proposed vanity path for the new short URL is already in use.',
+        'SHORT_URL_ENCODING_MISMATCH'   : 'ERROR, the short URL sent to this service is encoded differently from the original short URL provided and may pose a security risk. DO NOT USE the altered version.',
+        'SHORT_URL_NOT_FOUND'           : 'ERROR, URL {%s} is not recognized by this service.',
+        'SHORT_URL_MISMATCH'            : 'ERROR, the short URL sent to this service is different from the original short URL provided and may pose a security risk. DO NOT USE the altered version.',
+        'LONG_URL_MISSING'              : 'ERROR, no long URL was submitted to the service.',
+        'LONG_URL_INVALID'              : 'ERROR, the URL {%s} submitted for shortening is invalid.',
+        'LONG_URL_SUBMITTED'            : 'ERROR, the URL {%s} submitted for shortening is invalid.',
+        'LONG_URL_RESUBMITTED'          : 'INFO, URL {%s} resubmitted.',
+        'HASH_COLLISION'                : 'WARNING, hash collision detected on URL {%s}.',
+    }
+
+MESSAGE_OF_LAST_RESORT = 'ERROR, an unknown exception occurred'
