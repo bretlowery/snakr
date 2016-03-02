@@ -20,10 +20,8 @@ from urlparse import urlparse, parse_qs
 import webapp2
 import secure.settings as settings
 from PyOpenGraph import PyOpenGraph
-from google.appengine.api import urlfetch
+import urllib2
 from bs4 import BeautifulSoup
-# from django.views.generic import TemplateView
-from django.shortcuts import render_to_response
 import logger
 
 
@@ -48,24 +46,20 @@ class Dispatcher(webapp2.RequestHandler):
 
         return d
 
-
     def robot_handler(self, request, *args, **kwargs):
         log = logger.Loggr(request)
         log.event(messagekey='ROBOT', verbose=True, status_code=200)
         return lambda r: HttpResponse("User-agent: *\nDisallow: /", content_type="text/plain")
 
-
     def get_handler(self, request, *args, **kwargs):
+        log = logger.Loggr(request)
         #
-        # check to see if a long url was submitted for shortening via a query parameter
+        # check to see if a long url was submitted for shortening via the "u" query parameter
         #
         url_parts = urlparse(request.build_absolute_uri())
-        if url_parts.query:
-            qsurl = parse_qs(urlparse(request.build_absolute_uri()))["u"]
-            if qsurl:
-                return self.post_handler(request)
         #
-        # create an instance of the ShortURL object, validate the short URL, and if successful load the ShortURL instance with it
+        # if not, create an instance of the ShortURL object, validate the short URL,
+        # #and if successful load the ShortURL instance with it
         #
         s = ShortURL(request)
         #
@@ -112,20 +106,22 @@ class Dispatcher(webapp2.RequestHandler):
         #
         title_exists = False
         try:
-            title = PyOpenGraph.PyOpenGraph(l.longurl)
-            title_exists = title.is_valid()
+            target = PyOpenGraph.PyOpenGraph(l.longurl)
+            title_exists = target.is_valid()
         except UnicodeDecodeError:
             pass
         if title_exists:
-            title = title.metadata['title'].decode('utf-8')
+            title = target.metadata['title'].decode('utf-8')
         else:
+            opener = urllib2.build_opener()
+            longurl_html = opener.open(l.longurl).read().decode('utf-8')
+            parsed_longurl_html = BeautifulSoup(longurl_html, "html.parser")
             try:
-                longurl_page = urlfetch.fetch(l.normalized_longurl)
-                longurl_html = BeautifulSoup(longurl_page)
-                title = longurl_html.title.decode('utf-8').string
+                title = parsed_longurl_html.title.string
+                title_exists = True
             except:
-                title = ''
                 pass
+
         #
         # return meta tag values as well if requested
         #
@@ -146,10 +142,10 @@ class Dispatcher(webapp2.RequestHandler):
             lt = len(title)
             ltmax = 140 - ls - 1
             if lt > ltmax:
-                tweet = title[:ltmax-3]+'... '+shorturl
+                socialmediapost = title[:ltmax-3]+'... '+shorturl
             else:
-                tweet = title + ' ' + shorturl
-            response_data['twitterfriendly'] = tweet
+                socialmediapost = title + ' ' + shorturl
+            response_data['socialmediapost'] = socialmediapost
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
     def test_post_handler(self, request, *args, **kwargs):

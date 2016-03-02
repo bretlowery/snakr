@@ -2,7 +2,6 @@ from django.apps import AppConfig
 import secure.settings as settings
 import logger
 
-
 class Config(AppConfig):
 
     name = settings.GAE_APP_NAME

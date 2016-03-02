@@ -34,6 +34,7 @@ class Loggr(Exception):
         self.__formatter = jsonlogger.JsonFormatter()
         self.__logHandler.setFormatter(self.__formatter)
         self.logger.addHandler(self.__logHandler)
+        self.__last = None
         #
         if request:
             #

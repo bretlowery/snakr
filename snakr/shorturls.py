@@ -1,7 +1,7 @@
 import secure.settings as settings
 from urlparse import urlparse, urlunparse
 from models import ShortURLs, LongURLs
-from utils import utils
+from utilities import utils
 from django.db import transaction as xaction
 import logger
 

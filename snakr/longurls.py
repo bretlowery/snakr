@@ -1,11 +1,10 @@
 import json
 from urlparse import urlparse, parse_qs
 import secure.settings as settings
-from django.core.exceptions import SuspiciousOperation
 from django.http import Http404
 from models import LongURLs, ShortURLs
 from shorturls import ShortURL
-from utils import utils
+from utilities import utils
 from django.db import transaction as xaction
 import logger
 
