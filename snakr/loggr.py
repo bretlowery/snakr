@@ -23,9 +23,10 @@ class SnakrEventLogger(Exception):
         ('D', 'Debug'),
     )
 
-    def __init__(self, *args):
+    def __init__(self, *args, **kwargs):
         #
         # there can be only one
+        # to minimize the duplication of messages that Django is known for
         # see Method 3 on http://stackoverflow.com/questions/6760685/creating-a-singleton-in-python
         #
         __metaclass__ = Singleton
@@ -33,19 +34,23 @@ class SnakrEventLogger(Exception):
         # initialize python-json-logger
         # see: https://github.com/madzak/python-json-logger
         #
-        self.logger = logging.getLogger()
+        self.logger = logging.getLogger(settings.GAE_PROJECT_ID)
+        self.logger.handlers = []
         self.__logHandler = logging.StreamHandler()
         self.__formatter = jsonlogger.JsonFormatter()
         self.__logHandler.setFormatter(self.__formatter)
         self.logger.addHandler(self.__logHandler)
         self.__last = None
+        self.last_ip_address = 'N/A'
+        self.last_dtnow = 'N/A'
+        self.last_http_user_agent = 'N/A'
         return
 
     def log(self, **kwargs):
         #
         # get parameters
         #
-        if settings.ENABLE_LOGGING != True:
+        if not settings.ENABLE_LOGGING:
             return
         request = kwargs.pop("request", None)
         if not isinstance(request, HttpRequest):
@@ -95,7 +100,7 @@ class SnakrEventLogger(Exception):
         #
         if entry_type == 'I':
             status_code = 0
-        if status_code == 200:
+        if status_code == 200 and entry_type == 'W':
             entry_type = 'I'
         if status_code not in (0,200,400,404,422,500):
             status_code = 403
@@ -116,41 +121,56 @@ class SnakrEventLogger(Exception):
         if value is not None and value != 'None':
             info = info % value
 
-        jsondata = {}
-        jsondata["snakr"] = dtnow
-        jsondata["type"] = entry_type
-        jsondata["code"] = status_code
-        if verbose and request:
-            jsondata['lid'] = str(longurl_id)
-            jsondata['sid'] = str(shorturl_id)
-            jsondata['ip'] = ip_address
-            jsondata['lat'] = str(geo_lat)
-            jsondata['long'] = str(geo_long)
-            jsondata['city'] = str(geo_city)
-            jsondata['cnty'] = str(geo_country)
-            jsondata['host'] = str(http_host)
-            jsondata['ua'] = str(http_user_agent)
+        dupe_message = False
+        if request:
+            if ip_address == self.last_ip_address:
+                if http_user_agent == self.last_http_user_agent:
+                    if dtnow == self.last_dtnow:
+                        dupe_message = True
 
-        if (status_code <= 200 and settings.LOG_HTTP200) or (status_code == 404 and settings.LOG_HTTP404) or (status_code == 302 and settings.LOG_HTTP302):
-            self.logger.info(info, extra=jsondata)
-        elif status_code == 400 and settings.LOG_HTTP400:
-            self.logger.warning(info, extra=jsondata)
-        else:
-            self.logger.critical(info, extra=jsondata)
+        if not dupe_message:
 
-        def switch(x):
-            return {
-                200: info,
-                302: info,
-                400: SuspiciousOperation(info),
-                403: SuspiciousOperation(info),
-                404: Http404,
-                422: SuspiciousOperation(info),
-                500: HttpResponseServerError(info),
-            }.get(x, 200)
+            jsondata = {}
+            if verbose and request:
+                jsondata = {
+                    'snakr':    dtnow,
+                    'type':     entry_type,
+                    'code':     str(status_code),
+                    'lid':      str(longurl_id),
+                    'sid':      str(shorturl_id),
+                    'ip':       ip_address,
+                    'lat':      str(geo_lat),
+                    'long':     str(geo_long),
+                    'city':     str(geo_city),
+                    'cnty':     str(geo_country),
+                    'host':     str(http_host),
+                    'ua':       str(http_user_agent),
+                }
+            else:
+                jsondata = {
+                    'snakr':    dtnow,
+                    'type':     entry_type,
+                    'code':     str(status_code),
+                }
+            if (status_code <= 200 and settings.LOG_HTTP200) or (status_code == 404 and settings.LOG_HTTP404) or (status_code == 302 and settings.LOG_HTTP302):
+                self.logger.info(info, extra=jsondata)
+            elif status_code == 400 and settings.LOG_HTTP400:
+                self.logger.warning(info, extra=jsondata)
+            else:
+                self.logger.critical(info, extra=jsondata)
 
-        if status_code == 0:
-            return
-        else:
-            return switch(status_code)
+            def switch(x):
+                return {
+                    200: info,
+                    302: info,
+                    400: SuspiciousOperation(info),
+                    403: SuspiciousOperation(info),
+                    404: Http404,
+                    422: SuspiciousOperation(info),
+                    500: HttpResponseServerError(info),
+                }.get(x, 200)
 
+            if status_code != 0:
+                return switch(status_code)
+
+        return
