@@ -1,17 +1,3 @@
-# Copyright 2015 Google Inc. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import json
 from django.http import HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse, Http404
 from shorturls import ShortURL
@@ -19,10 +5,7 @@ from longurls import LongURL
 from urlparse import urlparse, parse_qs
 import webapp2
 import secure.settings as settings
-from PyOpenGraph import PyOpenGraph
-import urllib2
-from bs4 import BeautifulSoup
-import logger
+import parsers
 
 
 def maintenance_page(self, request):
@@ -32,6 +15,7 @@ def maintenance_page(self, request):
 class Dispatcher(webapp2.RequestHandler):
 
     def __init__(self):
+        super(Dispatcher, self).__init__()
         return
 
     def dispatch(self, **table):
@@ -47,12 +31,10 @@ class Dispatcher(webapp2.RequestHandler):
         return d
 
     def robot_handler(self, request, *args, **kwargs):
-        log = logger.Loggr(request)
-        log.event(messagekey='ROBOT', verbose=True, status_code=200)
+        settings.loggr(messagekey='ROBOT', verbose=True, status_code=200)
         return lambda r: HttpResponse("User-agent: *\nDisallow: /", content_type="text/plain")
 
     def get_handler(self, request, *args, **kwargs):
-        log = logger.Loggr(request)
         #
         # check to see if a long url was submitted for shortening via the "u" query parameter
         #
@@ -100,28 +82,10 @@ class Dispatcher(webapp2.RequestHandler):
         #
         response_data = {}
         #
-        # if settings.OGTITLE = True, get the OpenGraph title meta tag value and include it in the output
-        # see: http://ogp.me
-        # for the Python PyOpenGraph site: https://pypi.python.org/pypi/PyOpenGraph
+        # get document title if possible
         #
-        title_exists = False
-        try:
-            target = PyOpenGraph.PyOpenGraph(l.longurl)
-            title_exists = target.is_valid()
-        except UnicodeDecodeError:
-            pass
-        if title_exists:
-            title = target.metadata['title'].decode('utf-8')
-        else:
-            opener = urllib2.build_opener()
-            longurl_html = opener.open(l.longurl).read().decode('utf-8')
-            parsed_longurl_html = BeautifulSoup(longurl_html, "html.parser")
-            try:
-                title = parsed_longurl_html.title.string
-                title_exists = True
-            except:
-                pass
-
+        p = parsers.Parsers()
+        title = p.get_title(l.longurl)
         #
         # return meta tag values as well if requested
         #
@@ -137,7 +101,7 @@ class Dispatcher(webapp2.RequestHandler):
         # return JSON to caller
         #
         response_data['shorturl'] = shorturl
-        if title_exists:
+        if title:
             ls = len(shorturl)
             lt = len(title)
             ltmax = 140 - ls - 1

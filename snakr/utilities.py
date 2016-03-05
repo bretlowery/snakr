@@ -4,6 +4,7 @@ import urllib
 from urlparse import urlparse
 import secure.settings as settings
 from django.core.validators import URLValidator
+import json
 
 _URL_VALIDATOR = URLValidator()
 
@@ -55,9 +56,15 @@ class utils:
 
 
     @staticmethod
-    def get_shorturlcandidate():
-        return ''.join(random.SystemRandom().choice(settings.SHORTURL_PATH_ALPHABET) for _ in range(
-            settings.SHORTURL_PATH_SIZE))
+    def get_shortpathcandidate(**kwargs):
+        digits_only = kwargs.pop("digits_only", False)
+        if digits_only:
+            import string
+            return ''.join(random.SystemRandom().choice(string.digits) for _ in range(
+                settings.SHORTURL_PATH_SIZE))
+        else:
+            return ''.join(random.SystemRandom().choice(settings.SHORTURL_PATH_ALPHABET) for _ in range(
+                settings.SHORTURL_PATH_SIZE))
 
 
     @staticmethod
@@ -77,4 +84,18 @@ class utils:
         return urlparse('http://www.dummyurl.com')  # this is a django 1.5.11 bug workaround
 
 
+    @staticmethod
+    def get_json(request, key):
+        try:
+            json_data = json.loads(request.body)
+        except:
+            json_data = None
+            pass
+        try:
+            if json_data:
+                if json_data[key]:
+                    return json_data[key]
+        except:
+            pass
+        return None
 
