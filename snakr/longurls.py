@@ -6,9 +6,10 @@ import secure.settings as settings
 from django.http import Http404
 from models import LongURLs, ShortURLs
 from shorturls import ShortURL
-from utilities import utils
+from utilities import Utils
 from django.db import transaction as xaction
 import loggr
+import mimetypes
 
 class LongURL:
     """Validates and processes the long URL in the POST request."""
@@ -24,18 +25,24 @@ class LongURL:
 
         lurl = ""
 
-        lurl = utils.get_json(request, 'u')
+        lurl = Utils.get_json(request, 'u')
         if not lurl:
             raise self.event.log(messagekey='LONG_URL_MISSING', status_code=400)
 
-        if not utils.is_url_valid(lurl):
+        if not Utils.is_url_valid(lurl):
             raise self.event.log(messagekey='LONG_URL_INVALID', value=lurl, status_code=400)
 
-        self.vanity_path = utils.get_json(request, 'vp')
+        self.vanity_path = Utils.get_json(request, 'vp')
 
-        if lurl == utils.get_decodedurl(lurl):
+        # image_url = Utils.get_json(request, 'img')
+        # if Utils.is_image(image_url):
+        #     self.linked_image = image_url
+        # else:
+        #     self.linked_image = None
+
+        if lurl == Utils.get_decodedurl(lurl):
             preencoded = False
-            self.normalized_longurl = utils.get_encodedurl(lurl)
+            self.normalized_longurl = Utils.get_encodedurl(lurl)
         else:
             preencoded = True
             self.normalized_longurl = lurl
@@ -43,13 +50,13 @@ class LongURL:
         self.normalized_longurl_scheme = urlparse(lurl).scheme.lower()
         self.longurl_is_preencoded = preencoded
         self.longurl = lurl
-        self.id = utils.get_longurlhash(self.normalized_longurl)
+        self.id = Utils.get_longurlhash(self.normalized_longurl)
 
         return
 
     @xaction.atomic
     def get_or_make_shorturl(self, request, *args, **kwargs):
-        nopersist = utils.get_json(request, 'nopersist')
+        nopersist = Utils.get_json(request, 'nopersist')
         #
         # Does the long URL already exist?
         #
@@ -81,14 +88,17 @@ class LongURL:
             sdata = ShortURLs(id=s.id, longurl_id=ldata.id, shorturl=s.shorturl, is_active='Y',
                               compression_ratio=compression_ratio, shorturl_path_size=settings.SHORTURL_PATH_SIZE)
             #
-            # 4. Persist everything
+            # 4. Is there an associated image? If so, download it to static,
+            #
+            #
+            # 5. Persist everything
             #
             if not nopersist:
                 ldata.save()
                 sdata.save()
                 self.event.log(event_type='L', messagekey='HTTP_200', value=self.normalized_longurl, longurl_id=self.id, shorturl_id=s.id, status_code=200)
             #
-            # 5. Return the short url
+            # 6. Return the short url
             #
         else:
             #

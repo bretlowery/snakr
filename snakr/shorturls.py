@@ -5,7 +5,7 @@ needed to construct a short URL when a long URL is submitted to Snakr.
 import secure.settings as settings
 from urlparse import urlparse, urlunparse
 from models import ShortURLs, LongURLs
-from utilities import utils
+from utilities import Utils
 from django.db import transaction as xaction
 import loggr
 
@@ -62,10 +62,10 @@ class ShortURL:
                 if use_exact_vanity_path:
                     shorturl_candidate = shorturl_prefix + vp
                 elif vp:
-                    shorturl_candidate = shorturl_prefix + vp + '-' + utils.get_shortpathcandidate(digits_only=True)
+                    shorturl_candidate = shorturl_prefix + vp + '-' + Utils.get_shortpathcandidate(digits_only=True)
                 else:
-                    shorturl_candidate = shorturl_prefix + utils.get_shortpathcandidate()
-                shash = utils.get_shorturlhash(shorturl_candidate)
+                    shorturl_candidate = shorturl_prefix + Utils.get_shortpathcandidate()
+                shash = Utils.get_shorturlhash(shorturl_candidate)
                 s = ShortURLs.objects.filter(id=shash)
                 sc = s.count()
                 if use_exact_vanity_path:
@@ -95,7 +95,7 @@ class ShortURL:
         # cleanse the passed short url
         #
         surl = request.build_absolute_uri()
-        dsurl = utils.get_decodedurl(surl)
+        dsurl = Utils.get_decodedurl(surl)
         sparts = urlparse(dsurl)
         if surl == dsurl:
             preencoded = False
@@ -121,7 +121,7 @@ class ShortURL:
         #
         if self.shorturl != self.normalized_shorturl:
             raise self.event.log(messagekey='SHORT_URL_ENCODING_MISMATCH', status_code=400)
-        self.id = utils.get_shorturlhash(self.normalized_shorturl)
+        self.id = Utils.get_shorturlhash(self.normalized_shorturl)
         #
         # Lookup the short url
         #
@@ -148,11 +148,11 @@ class ShortURL:
         l = LongURLs.objects.get(id = s.longurl_id)
         if not l:
             raise self.event.log(messagekey='HTTP_400', value='unknown', status_code=422)
-        longurl = utils.get_decodedurl(l.longurl)
+        longurl = Utils.get_decodedurl(l.longurl)
         #
         # Log that a 302 request to the matching long url is about to occur
         #
-        log.event(event_type='S', messagekey='HTTP_302', value=longurl, status_code=302)
+        self.event.log(event_type='S', messagekey='HTTP_302', value=longurl, status_code=302)
         #
         # Return the longurl
         #
