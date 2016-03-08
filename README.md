@@ -205,15 +205,34 @@ from your local MySQL Workbench client until you grant your new IP acesss on the
 
 10. In MySQL Workbench, run install.sql to create the db objects.
 
-11. In Settings.py, add your personal GAE config info, db connection info for your GAE Cloud SQL instance, then adjust these parameters accordingly:
+11. In Settings.py, add your personal GAE config info, db connection info for your GAE Cloud SQL instance, etc. Adjust these parameters accordingly:
 
 Setting                | Value
 ---------------------- | ------------------------------
-SHORTURL_HOST          | The root host (netloc) to append to the front of the non-secure (HTTP/FTP) short urls generated. Use your own small domain name for this and forward its traffic to your GAE public URL. The [GAE site](http://cloud.google.com) has instructions.
-SECURE_SHORTURL_HOST   | The root host (netloc) to append to the front of the secure (HTTPS/SFTP) short urls generated. Use your own small domain name for this and forward its traffic to your GAE public URL. The [GAE site](http://cloud.google.com) has instructions.
-SHORTURL_PATH_SIZE     | How many characters in the 'shorten_using' alphabet to use in building short URLs, from 6 to 12. Note that this can be changed at will to a larger or smaller value between 6 and 12, and all historical short URLs will still work.
-SHORTURL_PATH_ALPHABET | The alphabet containing the characters from which to build the short URL. This CANNOT be changed at will without possible breaking previously generated short URLs. This can occur if a character or digit is removed form the alphabet but which still appears in a previously-generated short URL. Those short URLs will break the next time they are used.
+ALLOWED_HOSTS          | A whitelist of all host names and IPs allowed to submit admin and POST requests to snakr.
+CANONICAL_MESSAGES     | The list of snakr service error and warning messages.
+ENABLE_LOGGING         | If True, logs service requests to the snakr log. False turns off logging.
+GAE_APP_NAME           | "snakr"
+GAE_APP_KEY            | The Google API key to use for the app. Provided by the Google API admin dashboard.
+GAE_HOST               | Derived; DO NOT CHANGE.
+GAE_PROJECT_ID         | The Google App Engine project ID from the GAE dashboard.
+GCS_INSTANCE_NAME      | The Google Cloud SQL instance name as shown in the GCS dashboard.
+INDEX_HTML             | If the SHORTURL_HOST or SECURE_SHORTURL_HOST value is entered into a browser with no path, it will redirect to this page.
+LOG_HTTP200            | If true, logs HTTP 200 events such as short URL creation to the log.
+LOG_HTTP302            | If true, logs HTTP 302 events such as short URL lookup and translation to the log.
+LOG_HTTP400            | If true, logs HTTP 400 events to the log.
+LOG_HTTP404            | If true, logs HTTP 404 events to the log.
 MAX_RETRIES            | The maximum number of retries to attempt before returning an error should a hashing collision occur (odds are appx 1 in 1.886 billion). Defaults to 3. No real need to change this.
+MESSAGE_OF_LAST_RESORT | Catch-all error message if an exception occurs on an exception not in CANONICAL_MESSAGES._
+OGTITLE                | If True, enable capture of the target long url's OpenGraph title ("og:title") and return it in the JSON along with the short url.
+RETURN_ALL_META        | If True, return all request metadata in the JSON at shorturl creation.
+SECURE_SHORTURL_HOST   | The root host (netloc) to append to the front of the secure (HTTPS/SFTP) short urls generated. Use your own small domain name for this and forward its traffic to your GAE public URL. The [GAE site](http://cloud.google.com) has instructions.
+SHORTURL_HOST          | The root host (netloc) to append to the front of the non-secure (HTTP/FTP) short urls generated. Use your own small domain name for this and forward its traffic to your GAE public URL. The [GAE site](http://cloud.google.com) has instructions.
+SHORTURL_PATH_ALPHABET | The alphabet containing the characters from which to build the short URL. This CANNOT be changed at will without possible breaking previously generated short URLs. This can occur if a character or digit is removed form the alphabet but which still appears in a previously-generated short URL. Those short URLs will break the next time they are used.
+SHORTURL_PATH_SIZE     | How many characters in the 'shorten_using' alphabet to use in building short URLs, from 6 to 12. Note that this can be changed at will to a larger or smaller value between 6 and 12, and all historical short URLs will still work.
+SNAKRDB_DEBUG_DB       | When set to DEBUG and snakr is run locally from devappserver.py, local snakr will connect to remote GCS rather than local MySQL.
+VERBOSE_LOGGING        | If True appends a JSON info record containing the requestor's IP, lat, long, user agent, host, city, and country of origin to the logging record for the URL request._
+
 
 ## Storage
 
