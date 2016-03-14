@@ -70,15 +70,15 @@ class ShortURLs(mydb.Model):
 
 class EventLog(mydb.Model):
     ENTRY_TYPE = (
-        ('I', 'Information'),
-        ('L', 'New Long URL Submitted'),
-        ('S', 'Short URL 302'),
-        ('R', 'Existing Long URL Resubmitted'),
-        ('X', 'Exception'),
-        ('E', 'Error'),
-        ('W', 'Warning'),
+        ('B', '403 Bot/Blacklisted'),
         ('D', 'Debug'),
-        ('B', 'Known Bot'),
+        ('E', 'Error'),
+        ('I', 'Information'),
+        ('L', '200 New Long URL Submitted'),
+        ('R', '200 Existing Long URL Resubmitted'),
+        ('S', '302 Short URL Redirect'),
+        ('W', 'Warning'),
+        ('X', 'Exception'),
     )
     id = mydb.AutoField(
             verbose_name='unique 64-bit integer autoincrement; gives order of events (200s, 302s, 400s, 404s, 500s...) as they occurred',
