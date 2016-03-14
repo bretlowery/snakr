@@ -294,15 +294,74 @@ status_code | integer              | 0         | If present, the HTTP status cod
 referer     | string               | "none"    | If present, the HTTP_REFERER of the client.
 ua          | string               | "none"    | If present, the HTTP__USER_AGENT of the client. Is useful for forensic cluster analysis for fraud or abuse patterns in the log.
 
-If database logging is enabled, this information is stored in snakr_eventlog and a set of associated dimension tables:
+If database logging is enabled, this information is stored in table **snakr_eventlog** and a set of associated dimension tables. The values above are stored in the tables below.
 
-snakr_citylog
-snakr_countrylog
-snakr_hostlog
-snakr_iplog
-snakr_refererlog
-snakr_useragentlog
-_
+#### Table snakr_eventlog
+One row per Snakr-submitted event.
+
+Column             | Datatype (all NOT NULL)  | Description
+------------------ | ------------------------ | ------------
+id (PK)            | BIGINT                   | 64-bit auto incrementing integer; specifies the order in which events occurred.
+logged_on          | DATETIME                 | Datetime at which the event was logged.
+event_type         | CHAR(1)                  | B=Blacklisted/Bot (403), D=Debug, E=Error, I=Information, L=New LongURL Submitted (200), R=Existing Long URL Resubmitted (200), S=Short URL Redirect (302), W=Warning, X=Exception 
+http_status_code   | INT                      | The HTTP status code retruned to the caller.
+message            | VARCHAR(8192)            | Dev-defined text message
+longurl_id         | BIGINT                   | The long URL hash of the long URL associated with the event, if any. If none, -1.
+shorturl_id        | BIGINT                   | The short URL hash of the short URL associated with the event. If none, -1.
+ip_id              | BIGINT                   | The 64-bit hash of the IP address of the origination of the event.
+lat                | DECIMAL(10,8)            | The latitude of the client where the event originated, if any. If unknown, 0.
+lng                | DECIMAL(11,8)            | The longitude of the client where the event originated, if any. If unknown, 0.
+city_id            | BIGINT                   | The 64-bit hash of the city name of the origination of the event.
+country_id         | BIGINT                   | The 64-bit hash of the country name of the origination of the event.
+host_id            | BIGINT                   | The 64-bit hash of the HTTP_HOST of the origination of the event.
+useragent_id       | BIGINT                   | The 64-bit hash of the HTTP_USER_AGENT submitted by the client in the request.
+referer            | VARCHAR(2083)            | The HTTP_REFERER value submitted by the client in the request.
+
+#### Table snakr_citylog
+One row per city of traffic origination in any request to Snakr.
+
+Column             | Datatype (all NOT NULL)  | Description
+------------------ | ------------------------ | ------------
+id (PK)            | BIGINT                   | The 64-bit hash of the city name of the origination of one or more events.
+city               | VARCHAR(100)             | The city name of the origination of one or more events, from X-AppEngine-City.
+is_blacklisted     | CHAR(1)                  | Y=The city is blacklisted. All requests from the city will be 403d. N=The city is not blacklisted. This is *not* queried per request, but cached at Snakr start. If this value is updated, Snakr must be restarted to recache the change.
+
+#### Table snakr_countrylog
+One row per country of traffic origination in any request to Snakr.
+
+Column             | Datatype (all NOT NULL)  | Description
+------------------ | ------------------------ | ------------
+id (PK)            | BIGINT                   | The 64-bit hash of the country name of the origination of one or more events.
+country            | VARCHAR(100)             | The country name of the origination of one or more events, from X-AppEngine-Country.
+is_blacklisted     | CHAR(1)                  | Y=The country is blacklisted. All requests from the country will be 403d. N=The country is not blacklisted. This is *not* queried per request, but cached at Snakr start. If this value is updated, Snakr must be restarted to recache the change.
+
+#### Table snakr_hostlog
+One row per unique HTTP_HOST in any request to Snakr.
+
+Column             | Datatype (all NOT NULL)  | Description
+------------------ | ------------------------ | ------------
+id (PK)            | BIGINT                   | The 64-bit hash of the HTTP_HOST of the origination of one or more events.
+country            | VARCHAR(100)             | The HTTP_HOST of the origination of one or more events.
+is_blacklisted     | CHAR(1)                  | Y=The host is blacklisted. All requests from the host will be 403d. N=The host is not blacklisted. This is *not* queried per request, but cached at Snakr start. If this value is updated, Snakr must be restarted to recache the change.
+
+#### Table snakr_iplog
+One row per unique absolute IPv4 or IPv6 address in any request to Snakr.
+
+Column             | Datatype (all NOT NULL)  | Description
+------------------ | ------------------------ | ------------
+id (PK)            | BIGINT                   | The 64-bit hash of the absolute IPv4 or IPv6 address of the origination of one or more events.
+ip                 | VARCHAR(45)              | The absolute IPv4 or IPv6 address of the origination of one or more events.
+is_blacklisted     | CHAR(1)                  | Y=The IP is blacklisted. All requests from the IP will be 403d. N=The IP is not blacklisted. This is *not* queried per request, but cached at Snakr start. If this value is updated, Snakr must be restarted to recache the change.
+
+#### Table snakr_useragentlog
+One row per unique HTTP_USER_AGENT in any request to Snakr.
+
+Column             | Datatype (all NOT NULL)  | Description
+------------------ | ------------------------ | ------------
+id (PK)            | BIGINT                   | The 64-bit hash of the HTTP_USER_AGENT of the origination of one or more events.
+useragent          | VARCHAR(8192)            | The HTTP_USER_AGENT of the origination of one or more events.
+is_blacklisted     | CHAR(1)                  | Y=The user agent is blacklisted. All requests from a client with this exact user agent will be 403d. N=The user agent is not blacklisted. This is *not* queried per request, but cached at Snakr start. If this value is updated, Snakr must be restarted to recache the change.
+
 
 ### Installing Libraries
 See the [Third party libraries](https://developers.google.com/appengine/docs/python/tools/libraries27)
