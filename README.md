@@ -1,13 +1,15 @@
 # Snakr v1.0.2
 
-v1.0.1 now supports Django 1.9 on Google App Engine
-v1.0.2 adds optional database event logging and basic bot/crawler blocking
-
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) backend. 
 The install loads Django 1.9 in the app's lib folder, overriding GAE's Django 1.5.11 supported install.
 
 This is intended as a learning exercise (for me), so it does not use the [Google URL Shortener API](https://developers.google.com/url-shortener/).
+
+**v1.0.1**
+Supports Django 1.9 on Google App Engine.
+**v1.0.2** 
+Adds optional database event logging, basic bot/crawler blocking, and optional blacklisting at the city, country, IP, http host, and/or http useragent levels.
 
 ## Background 
 URL shorteners are used to generate a smaller “abbreviated” version of a URL so that the smaller URL can be used as an alias in place of the longer URL. Subsequent calls to the smaller URL will redirect to the same resource originally identified by the longer URL, including all querystring parameters and other valid URL components. This is useful for several reasons:
