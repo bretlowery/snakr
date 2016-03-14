@@ -190,8 +190,10 @@ See the README file for directions. You'll need python 2.7 and [pip 1.4 or later
 
    ```
    cd snakr
-   pip install -r requirements.txt -t lib
+   pip install -r requirements-local.txt -t lib
+   pip install -r requirements-vendor.txt -t lib
    ```
+   
 4. Create your GAE and Cloud SQL instances.
 
 5. Upload from your Python IDE to GAE. I like [Pycharm](https://www.jetbrains.com/pycharm/).
