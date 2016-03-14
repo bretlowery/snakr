@@ -1,8 +1,10 @@
 from patterns.singleton import Singleton
 import loggr
 from utilities import Utils
-from django.db.models.functions import Lower
 import secure.settings as settings
+from gae import gaeinit
+gaeinit()
+# from google.appengine.api import mail
 
 class BotDetector():
 
@@ -66,19 +68,18 @@ class BotDetector():
                             'cfschedule', 'searchme.com/support/', 'b2w', 'coast', 'combine', 'crawl', 'crescent', 'curl', 'dialer', 'echo',
                             'fetch', 'grub', 'harvest', 'httrack', 'newsapp', 'ng/2.0', 'obot', 'pita', 'sohu', 'spider', 'spike', 'stuff',
                             'teleport', 'webtrends', 'worm', 'yandex', 'freedom',
-                            'livelapbot','help@dataminr.com','everyonesocialbot']
+                            'livelapbot','help@dataminr.com','everyonesocialbot','tweetedtimes.com','metauri api']
         #
         # load blacklisted cities, countries, ips, user agents
         # at scale, a memchached solution would be better (say Snakr v2)
         #
         from snakr.models import CityLog, CountryLog, IPLog, HostLog, UserAgentLog
-        if settings.DATABASE_LOGGING:
-            self._blacklisted_cities        = self._load_blacklist(CityLog, 'cities', 'city')
-            self._blacklisted_countries     = self._load_blacklist(CountryLog, 'countries', 'country')
-            self._blacklisted_ips           = self._load_blacklist(IPLog, 'ips', 'ip')
-            self._blacklisted_hosts         = self._load_blacklist(HostLog, 'hosts', 'host')
-            self._blacklisted_useragents    = self._load_blacklist(UserAgentLog, 'useragents', 'useragent')
-            self._event.log(event_type='I', message='Botdetector loaded.')
+        self._blacklisted_cities        = self._load_blacklist(CityLog, 'cities', 'city')
+        self._blacklisted_countries     = self._load_blacklist(CountryLog, 'countries', 'country')
+        self._blacklisted_ips           = self._load_blacklist(IPLog, 'ips', 'ip')
+        self._blacklisted_hosts         = self._load_blacklist(HostLog, 'hosts', 'host')
+        self._blacklisted_useragents    = self._load_blacklist(UserAgentLog, 'useragents', 'useragent')
+        self._event.log(event_type='I', message='Botdetector loaded.')
 
     def if_bot_then_403(self, request):
         ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_useragent, http_referer = Utils.get_meta(request, True)
@@ -86,26 +87,24 @@ class BotDetector():
         # at scale, this should be multithreaded/multi-processed in parallel
         # or implemented as a set of microservice lookups to a separate memcached lookup service
         #
-        self._event.log(request=request, event_type='I', message='CHECKING BLACKLIST', status_code=0)
         for bot in self._known_bots:
             if bot in http_useragent:
                 raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Known Bot {%}' % bot, status_code=-403)
-        if settings.DATABASE_LOGGING:
-            for bad in self._blacklisted_useragents:
-                if http_useragent == bad:
-                    raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted Useragent {%s}' % http_useragent, status_code=-403)
-            for bad in self._blacklisted_countries:
-                if geo_country == bad:
-                    raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted Country {%s}' % geo_country, status_code=-403)
-            for bad in self._blacklisted_cities:
-                if geo_city == bad:
-                    raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted City {%s}' % geo_city, status_code=-403)
-            for bad in self._blacklisted_hosts:
-                if http_host == bad:
-                    raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted Host {%s}' % http_host, status_code=-403)
-            for bad in self._blacklisted_ips:
-                if ip_address == bad:
-                    raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted IP {%s}' % ip_address, status_code=-403)
+        for bad in self._blacklisted_useragents:
+            if http_useragent == bad:
+                raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted Useragent {%s}' % http_useragent, status_code=-403)
+        for bad in self._blacklisted_countries:
+            if geo_country == bad:
+                raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted Country {%s}' % geo_country, status_code=-403)
+        for bad in self._blacklisted_cities:
+            if geo_city == bad:
+                raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted City {%s}' % geo_city, status_code=-403)
+        for bad in self._blacklisted_hosts:
+            if http_host == bad:
+                raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted Host {%s}' % http_host, status_code=-403)
+        for bad in self._blacklisted_ips:
+            if ip_address == bad:
+                raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted IP {%s}' % ip_address, status_code=-403)
         return
 
     def _load_blacklist(self, modelclass, pluralname, element):
