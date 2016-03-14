@@ -40,12 +40,13 @@ class Utils:
         return x
 
     @staticmethod
-    def get_hash(str):
+    def get_hash(value):
         """Returns a SHA1 hash of the passed string as-encoded"""
+        # it has to fit into a bigint on MySQL (max = 18446744073709551615), hence the 98-bit-shift
         if str == 'unknown':
             x = 0
         else:
-            x = long(hashlib.sha1(str).hexdigest(),16)
+            x = long(hashlib.sha1(value).hexdigest(),16) >> 98
         return x
 
     @staticmethod
@@ -97,3 +98,41 @@ class Utils:
         except:
             pass
         return False
+
+    @staticmethod
+    def true_or_false(value):
+        def switch(x):
+            return {
+                str(value)[0:1].upper() in ['T','Y','1']: True,
+                str(value).upper() in ['TRUE','YES']: True,
+                }.get(x, False)
+        return switch(value)
+
+    @staticmethod
+    def get_meta(request, normalize):
+        #
+        # 1. User's IP address
+        #
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip_address = x_forwarded_for.split(',')[0]
+        else:
+            ip_address = request.META.get('REMOTE_ADDR', 'unknown')
+        #
+        # 2. User's geolocation
+        #
+        slatlong = request.META.get('HTTP_X_APPENGINE_CITYLATLONG', '0.0,0.0')
+        geo_lat = slatlong.split(',')[0]
+        geo_long = slatlong.split(',')[1]
+        geo_city = request.META.get('HTTP_X_APPENGINE_CITY', 'unknown')
+        geo_country = request.META.get('HTTP_X_APPENGINE_COUNTRY','unknown')
+        #
+        # 3. Relevant, useful http headers
+        #
+        http_host = request.META.get('HTTP_HOST','unknown')
+        http_useragent = request.META.get('HTTP_USER_AGENT', 'unknown')
+        http_referer = request.META.get('HTTP_REFERER','unknown')
+        if normalize:
+            return ip_address.lower(), geo_lat, geo_long, geo_city.lower(), geo_country.lower(), http_host.lower(), http_useragent.lower(), http_referer.lower()
+        else:
+            return ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_useragent, http_referer

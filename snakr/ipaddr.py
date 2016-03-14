@@ -11,13 +11,15 @@ __version__ = '1.0.2'
 
 import struct
 from json import loads
+from gae import gaeinit
+gaeinit()
 from google.appengine.api import urlfetch
 
-@staticmethod
 class PublicIP:
     def __init__(self):
         return
-    def get(self):
+    @staticmethod
+    def get():
         return IP(loads(urlfetch.fetch('http://jsonip.com').content)['ip'])
 
 

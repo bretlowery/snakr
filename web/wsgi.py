@@ -11,11 +11,11 @@ import os
 import sys
 import django
 from django.core.wsgi import get_wsgi_application
-import snakr.loggr as loggr
 import datetime
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "secure.settings")
 
+import snakr.loggr as loggr
 event = loggr.SnakrEventLogger()
 dt = datetime.datetime.now()
 event.log(messagekey='STARTUP', dt=dt.isoformat())

@@ -2,10 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e97d469-436f-4ac1-9d9d-fb46df745c6f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/snakr/botprotection.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/snakr/gae.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/install.sql" afterPath="$PROJECT_DIR$/install.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manage.py" afterPath="$PROJECT_DIR$/manage.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py" afterPath="$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/ipaddr.py" afterPath="$PROJECT_DIR$/snakr/ipaddr.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/loggr.py" afterPath="$PROJECT_DIR$/snakr/loggr.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/longurls.py" afterPath="$PROJECT_DIR$/snakr/longurls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/models.py" afterPath="$PROJECT_DIR$/snakr/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/parsers.py" afterPath="$PROJECT_DIR$/snakr/parsers.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/shorturls.py" afterPath="$PROJECT_DIR$/snakr/shorturls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/utilities.py" afterPath="$PROJECT_DIR$/snakr/utilities.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/views.py" afterPath="$PROJECT_DIR$/snakr/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/urls.py" afterPath="$PROJECT_DIR$/web/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/wsgi.py" afterPath="$PROJECT_DIR$/web/wsgi.py" />
     </list>
     <ignored path="Snakr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -19,8 +35,9 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Snakr$Test__install_sql.coverage" NAME="Test: install.sql Coverage Results" MODIFIED="1457884033376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="PyCharm50/coverage/Snakr$models.coverage" NAME="models Coverage Results" MODIFIED="1456331568225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/snakr" />
-    <SUITE FILE_PATH="coverage/Snakr$Snakr.coverage" NAME="Snakr Coverage Results" MODIFIED="1456837007249" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Snakr$Snakr.coverage" NAME="Snakr Coverage Results" MODIFIED="1457659402795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="PyCharm50/coverage/Snakr$views.coverage" NAME="views Coverage Results" MODIFIED="1456232699948" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/snakr" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -39,35 +56,51 @@
         <entry file="file://$PROJECT_DIR$/secure/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="14" />
+              <caret line="256" column="41" selection-start-line="256" selection-start-column="41" selection-end-line="256" selection-end-column="41" />
               <folding>
-                <element signature="e#368#377#0" expanded="true" />
+                <element signature="e#1#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="longurls.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4256293">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-              <folding>
-                <element signature="e#102#141#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shorturls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snakr/shorturls.py">
+      <file leaf-file-name="rename_this_to_settings_and_customize.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="157" column="9" selection-start-line="157" selection-start-column="9" selection-end-line="157" selection-end-column="9" />
+              <caret line="231" column="0" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
               <folding>
-                <element signature="e#209#243#0" expanded="true" />
+                <element signature="e#1#10#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="botprotection.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/snakr/botprotection.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.1089588">
+              <caret line="101" column="112" selection-start-line="101" selection-start-column="112" selection-end-line="101" selection-end-column="112" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.7032967">
+                <caret line="301" column="15" selection-start-line="301" selection-start-column="15" selection-end-line="301" selection-end-column="15" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
           </provider>
         </entry>
       </file>
@@ -75,21 +108,9 @@
         <entry file="file://$PROJECT_DIR$/snakr/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <caret line="75" column="8" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="8" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="utilities.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snakr/utilities.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="98" column="20" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,7 +120,7 @@
         <entry file="file://$PROJECT_DIR$/snakr/loggr.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="171" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
+              <caret line="155" column="30" selection-start-line="155" selection-start-column="30" selection-end-line="155" selection-end-column="30" />
               <folding>
                 <element signature="e#113#127#0" expanded="true" />
               </folding>
@@ -107,46 +128,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parsers.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snakr/parsers.py">
+      <file leaf-file-name="utilities.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/snakr/utilities.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="16" />
+              <caret line="137" column="76" selection-start-line="137" selection-start-column="76" selection-end-line="137" selection-end-column="76" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/urls.py">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/snakr/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="202" column="0" selection-start-line="201" selection-start-column="22" selection-end-line="202" selection-end-column="0" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="e#0#47#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ipaddr.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snakr/ipaddr.py">
+      <file leaf-file-name="install.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/install.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+            <state vertical-scroll-proportion="6.4444447">
+              <caret line="418" column="62" selection-start-line="418" selection-start-column="62" selection-end-line="418" selection-end-column="62" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wsgi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/wsgi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
-              <folding>
-                <element signature="e#219#228#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -170,19 +179,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/snakr/post.py" />
-        <option value="$PROJECT_DIR$/snakr/reponse.html" />
-        <option value="$PROJECT_DIR$/web/reponse.html" />
-        <option value="$PROJECT_DIR$/snakr/get_shorturl.py" />
-        <option value="$PROJECT_DIR$/snakr/post_longurl.py" />
-        <option value="$PROJECT_DIR$/snakr/settings.py" />
-        <option value="$PROJECT_DIR$/snakr/customfields.py" />
-        <option value="$PROJECT_DIR$/web/public_settings_rename_this_to_settings.py" />
-        <option value="$PROJECT_DIR$/web/settings.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/secure/logging_filters.py" />
-        <option value="/usr/local/google_appengine/lib/django-1.5/django/core/handlers/base.py" />
-        <option value="$PROJECT_DIR$/snakr/ipaddresses.py" />
         <option value="$PROJECT_DIR$/snakr/exception_handling.py" />
         <option value="$PROJECT_DIR$/lib/PyOpenGraph/PyOpenGraph.py" />
         <option value="$PROJECT_DIR$/snakr/exceptions.py" />
@@ -193,11 +189,9 @@
         <option value="$PROJECT_DIR$/snakr/basesnakr.py" />
         <option value="$PROJECT_DIR$/static/robots.txt" />
         <option value="$PROJECT_DIR$/appengine_config.py" />
-        <option value="$PROJECT_DIR$/install.sql" />
         <option value="$PROJECT_DIR$/requirements-vendor.txt" />
         <option value="$PROJECT_DIR$/snakr/snakr.py" />
         <option value="$PROJECT_DIR$/snakr/config.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/snakr/central.py" />
         <option value="$PROJECT_DIR$/snakr/logger.py" />
         <option value="$PROJECT_DIR$/snakr/governor.py" />
@@ -207,20 +201,35 @@
         <option value="$PROJECT_DIR$/patterns/singleton.py" />
         <option value="$PROJECT_DIR$/snakr/scribe.py" />
         <option value="$PROJECT_DIR$/snakr/log.py" />
-        <option value="$PROJECT_DIR$/snakr/parsers.py" />
-        <option value="$PROJECT_DIR$/snakr/ipaddr.py" />
-        <option value="$PROJECT_DIR$/snakr/models.py" />
         <option value="$PROJECT_DIR$/snakr/tests.py" />
+        <option value="$PROJECT_DIR$/admin/admin.py" />
+        <option value="$PROJECT_DIR$/manage.py" />
+        <option value="$PROJECT_DIR$/snakr/parsers.py" />
+        <option value="$PROJECT_DIR$/lib/__init__.py" />
+        <option value="$PROJECT_DIR$/admin/__init__.py" />
+        <option value="$PROJECT_DIR$/lib/admin_tools/dashboard/dashboards.py" />
+        <option value="$PROJECT_DIR$/lib/admin_tools/dashboard/models.py" />
+        <option value="$PROJECT_DIR$/lib/admin_tools/menu/models.py" />
         <option value="$PROJECT_DIR$/web/urls.py" />
-        <option value="$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py" />
+        <option value="$PROJECT_DIR$/snakr/gaeinit.py" />
+        <option value="$PROJECT_DIR$/snakr/ipaddr.py" />
+        <option value="$PROJECT_DIR$/snakr/gae.py" />
+        <option value="$PROJECT_DIR$/snakr/shorturls.py" />
+        <option value="$PROJECT_DIR$/web/wsgi.py" />
+        <option value="$PROJECT_DIR$/snakr/longurls.py" />
+        <option value="$PROJECT_DIR$/secure/iab_known_bots_list.txt" />
+        <option value="$PROJECT_DIR$/snakr/startup.py" />
+        <option value="$PROJECT_DIR$/patterns/hashtable.py" />
         <option value="$PROJECT_DIR$/snakr/views.py" />
         <option value="$PROJECT_DIR$/secure/settings.py" />
-        <option value="$PROJECT_DIR$/snakr/startup.py" />
-        <option value="$PROJECT_DIR$/web/wsgi.py" />
-        <option value="$PROJECT_DIR$/snakr/loggr.py" />
+        <option value="$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/install.sql" />
+        <option value="$PROJECT_DIR$/snakr/models.py" />
+        <option value="$PROJECT_DIR$/snakr/requestmeta.py" />
         <option value="$PROJECT_DIR$/snakr/utilities.py" />
-        <option value="$PROJECT_DIR$/snakr/shorturls.py" />
-        <option value="$PROJECT_DIR$/snakr/longurls.py" />
+        <option value="$PROJECT_DIR$/snakr/botprotection.py" />
+        <option value="$PROJECT_DIR$/snakr/loggr.py" />
       </list>
     </option>
   </component>
@@ -230,9 +239,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1321" />
+    <option name="x" value="34" />
     <option name="y" value="23" />
-    <option name="width" value="1297" />
+    <option name="width" value="1332" />
     <option name="height" value="745" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -280,16 +289,13 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="Snakr" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -299,6 +305,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Snakr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snakr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snakr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -330,32 +350,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snakr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Snakr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="patterns" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/snakr" />
+    <property name="last_opened_file_path" value="/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/management/commands/migrate.py" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates" />
-      <recent name="$PROJECT_DIR$/web" />
-      <recent name="$PROJECT_DIR$/snakr" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/secure" />
+      <recent name="$PROJECT_DIR$/web" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/secure" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/web" />
     </key>
   </component>
-  <component name="RunManager" selected="App Engine server.Snakr">
+  <component name="RunManager" selected="Django tests.Test: install.sql">
     <configuration default="false" name="views" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -390,6 +424,26 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/snakr/models.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Test: install.sql" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Snakr" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="install.sql" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
       <method />
     </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
@@ -665,16 +719,18 @@
       <option name="customRunCommand" value="" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="App Engine server.Snakr" />
       <item index="1" class="java.lang.String" itemvalue="Django server.Snakr" />
       <item index="2" class="java.lang.String" itemvalue="Python.views" />
       <item index="3" class="java.lang.String" itemvalue="Python.models" />
+      <item index="4" class="java.lang.String" itemvalue="Django tests.Test: install.sql" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.models" />
-        <item index="1" class="java.lang.String" itemvalue="Python.views" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Django tests.Test: install.sql" />
+        <item index="1" class="java.lang.String" itemvalue="Python.models" />
+        <item index="2" class="java.lang.String" itemvalue="Python.views" />
       </list>
     </recent_temporary>
   </component>
@@ -691,13 +747,18 @@
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="Test__install_sql - 2016.03.13 at 11h 47m 15s.xml">
+      <configuration name="Test: install.sql" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-1321" y="23" width="1297" height="745" extended-state="0" />
+    <frame x="34" y="23" width="1332" height="745" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17501928" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16741742" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="App Config Tool" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31213018" sideWeight="0.4969088" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="App Config Tool" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34763312" sideWeight="0.4969088" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5030912" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -706,13 +767,13 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24941905" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32824427" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49112427" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37573963" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3239645" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20118344" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917318" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
     </layout>
@@ -755,7 +816,7 @@
       <breakpoints>
         <line-breakpoint type="python-line">
           <url>file://$PROJECT_DIR$/secure/settings.py</url>
-          <line>13</line>
+          <line>1</line>
         </line-breakpoint>
         <line-breakpoint type="python-line">
           <url>file://$PROJECT_DIR$/snakr/shorturls.py</url>
@@ -764,7 +825,7 @@
         </line-breakpoint>
         <line-breakpoint type="python-line">
           <url>file://$PROJECT_DIR$/secure/settings.py</url>
-          <line>179</line>
+          <line>144</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -774,7 +835,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py</url>
-          <line>211</line>
+          <line>202</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
@@ -788,240 +849,89 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="25" />
+      <option name="time" value="27" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/wsgi.py">
+    <entry file="file://$PROJECT_DIR$/snakr/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
           <folding>
-            <element signature="e#219#228#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/google_appengine/lib/django-1.4/django/db/models/fields/__init__.py">
+    <entry file="file://$PROJECT_DIR$/snakr/ipaddr.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36204147">
-          <caret line="430" column="11" selection-start-line="430" selection-start-column="8" selection-end-line="430" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
+    <entry file="file://$PROJECT_DIR$/snakr/gae.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4516129">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/snakr/utilities.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="12" selection-start-line="49" selection-start-column="12" selection-end-line="49" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/google_appengine/lib/django-1.5/django/core/handlers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42559522">
-          <caret line="205" column="0" selection-start-line="205" selection-start-column="0" selection-end-line="207" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/google_appengine/lib/django-1.5/django/views/debug.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.4074073">
-          <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/google_appengine/lib/django-1.5/django/core/handlers/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.024">
-          <caret line="127" column="34" selection-start-line="127" selection-start-column="18" selection-end-line="127" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/google_appengine/lib/django-1.5/django/utils/six.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.095318">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/devappserver2/module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1175" column="0" selection-start-line="1175" selection-start-column="0" selection-end-line="1175" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/devappserver2/request_rewriter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="346" column="0" selection-start-line="346" selection-start-column="0" selection-end-line="346" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/lib/cherrypy/cherrypy/wsgiserver/wsgiserver2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1298" column="0" selection-start-line="1298" selection-start-column="0" selection-end-line="1298" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/devappserver2/python/request_handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.275">
-          <caret line="171" column="15" selection-start-line="171" selection-start-column="15" selection-end-line="171" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/runtime/runtime.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29333332">
-          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/runtime/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.725">
-          <caret line="328" column="0" selection-start-line="328" selection-start-column="0" selection-end-line="328" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/cgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-31.414967">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/devappserver2/wsgi_server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2246696">
-          <caret line="341" column="78" selection-start-line="341" selection-start-column="78" selection-end-line="341" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/google_appengine/lib/django-1.5/django/db/transaction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.982709">
-          <caret line="207" column="8" selection-start-line="207" selection-start-column="8" selection-end-line="207" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appengine_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66831684">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/genericpath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/posixpath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/devappserver2/python/stubs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.1695762">
-          <caret line="1363" column="48" selection-start-line="1363" selection-start-column="48" selection-end-line="1363" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/install.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.444445">
-          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements-vendor.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/google/appengine/tools/devappserver2/python/sandbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="821" column="0" selection-start-line="821" selection-start-column="0" selection-end-line="821" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06864989">
-          <caret line="2" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.0">
-            <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/django/http/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.023148147">
-          <caret line="183" column="0" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharm50/python_stubs/-1856293957/__builtin__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32407406">
-          <caret line="414" column="4" selection-start-line="414" selection-start-column="4" selection-end-line="414" selection-end-column="4" />
+          <caret line="101" column="21" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="21" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/loggr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="40" />
+          <folding>
+            <element signature="e#113#127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="24" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/shorturls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="127" column="51" selection-start-line="127" selection-start-column="16" selection-end-line="127" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -1039,14 +949,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/patterns/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1058,13 +960,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3472222">
           <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1082,27 +977,243 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py">
+    <entry file="file://$PROJECT_DIR$/lib/PyOpenGraph/PyOpenGraph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="211" column="0" selection-start-line="211" selection-start-column="0" selection-end-line="211" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/startup.py">
+    <entry file="file://$PROJECT_DIR$/snakr/parsers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bs4/dammit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.3148148">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/django/core/management/sql.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/django/contrib/sites/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14351852">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="86" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37037036">
+          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/django/core/management/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/django/core/management/commands/migrate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/admin_tools/menu/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/admin_tools/menu/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/ipaddr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="14" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/migrations/executor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="240" column="38" selection-start-line="240" selection-start-column="38" selection-end-line="240" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/migrations/recorder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="33" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="118" column="8" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/management/commands/migrate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.5972222">
+          <caret line="88" column="24" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/gae.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/shorturls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="149" column="9" selection-start-line="149" selection-start-column="9" selection-end-line="149" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
+          <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/startup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06993007">
+          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9705882">
+          <caret line="123" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="231" column="0" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
           <folding>
-            <element signature="e#219#228#0" expanded="true" />
+            <element signature="e#1#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/secure/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="256" column="41" selection-start-line="256" selection-start-column="41" selection-end-line="256" selection-end-column="41" />
+          <folding>
+            <element signature="e#1#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.7032967">
+            <caret line="301" column="15" selection-start-line="301" selection-start-column="15" selection-end-line="301" selection-end-column="15" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06864989">
+          <caret line="2" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/install.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.4444447">
+          <caret line="418" column="62" selection-start-line="418" selection-start-column="62" selection-end-line="418" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="137" column="76" selection-start-line="137" selection-start-column="76" selection-end-line="137" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="202" column="0" selection-start-line="201" selection-start-column="22" selection-end-line="202" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1110,7 +1221,7 @@
     <entry file="file://$PROJECT_DIR$/snakr/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <caret line="75" column="8" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="8" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -1120,75 +1231,19 @@
     <entry file="file://$PROJECT_DIR$/snakr/loggr.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="171" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
+          <caret line="155" column="30" selection-start-line="155" selection-start-column="30" selection-end-line="155" selection-end-column="30" />
           <folding>
             <element signature="e#113#127#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/secure/settings.py">
+    <entry file="file://$PROJECT_DIR$/snakr/botprotection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="14" />
+        <state vertical-scroll-proportion="1.1089588">
+          <caret line="101" column="112" selection-start-line="101" selection-start-column="112" selection-end-line="101" selection-end-column="112" />
           <folding>
-            <element signature="e#368#377#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/ipaddr.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/parsers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/utilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="20" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/shorturls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="157" column="9" selection-start-line="157" selection-start-column="9" selection-end-line="157" selection-end-column="9" />
-          <folding>
-            <element signature="e#209#243#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4256293">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="e#102#141#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>

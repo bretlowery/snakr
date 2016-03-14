@@ -1,12 +1,13 @@
-# Snakr BETA v1.0.1
+# Snakr v1.0.2
 
 v1.0.1 now supports Django 1.9 on Google App Engine
+v1.0.2 adds optional database event logging and basic bot/crawler blocking
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) backend. 
 The install loads Django 1.9 in the app's lib folder, overriding GAE's Django 1.5.11 supported install.
 
-This is intended as a learning exercise, so it does not use the [Google URL Shortener API](https://developers.google.com/url-shortener/).
+This is intended as a learning exercise (for me), so it does not use the [Google URL Shortener API](https://developers.google.com/url-shortener/).
 
 ## Background 
 URL shorteners are used to generate a smaller “abbreviated” version of a URL so that the smaller URL can be used as an alias in place of the longer URL. Subsequent calls to the smaller URL will redirect to the same resource originally identified by the longer URL, including all querystring parameters and other valid URL components. This is useful for several reasons:
@@ -31,6 +32,12 @@ Negative effects on SEO, CTR, etc.                      | Shortened URLs may not
 Snakr can create and return a short url in under 200ms. I haven't load tested this at volume but assume GC can handle growth.
 
 ## Features Provided 
+
+**NEW IN 1.0.2**
+1. Events can be optionally logged to Google Cloud SQL (when settings.DATABASE_LOGGING = True). Events are always logged to Google App Engine logging.
+2. Basic bot and crawler blocking is available. A blacklist of known bot user agent strings is provided. Any request coming from a user agent containing one of the strings in the blacklist will be 403d.
+
+**Existing Features**
 1.	A basic HTTP POST/GET interface is provided. 
   1.	POST is used to turn a long URL into a shortened URL.
   2.	A subsequent GET is used to redirect the shortened URL to its long URL target.
@@ -211,6 +218,7 @@ Setting                | Value
 ---------------------- | ------------------------------
 ALLOWED_HOSTS          | A whitelist of all host names and IPs allowed to submit admin and POST requests to snakr.
 CANONICAL_MESSAGES     | The list of snakr service error and warning messages.
+DATABASE_LOGGING       | If True, logs events and request metadata into the snakr_eventlog and other snakr_XXXlog tables in Google Cloud SQL.
 ENABLE_LOGGING         | If True, logs service requests to the snakr log. False turns off logging.
 GAE_APP_NAME           | "snakr"
 GAE_APP_KEY            | The Google API key to use for the app. Provided by the Google API admin dashboard.
@@ -221,9 +229,10 @@ INDEX_HTML             | If the SHORTURL_HOST or SECURE_SHORTURL_HOST value is e
 LOG_HTTP200            | If true, logs HTTP 200 events such as short URL creation to the log.
 LOG_HTTP302            | If true, logs HTTP 302 events such as short URL lookup and translation to the log.
 LOG_HTTP400            | If true, logs HTTP 400 events to the log.
+LOG_HTTP403            | If true, logs HTTP 403 events to the log.
 LOG_HTTP404            | If true, logs HTTP 404 events to the log.
 MAX_RETRIES            | The maximum number of retries to attempt before returning an error should a hashing collision occur (odds are appx 1 in 1.886 billion). Defaults to 3. No real need to change this.
-MESSAGE_OF_LAST_RESORT | Catch-all error message if an exception occurs on an exception not in CANONICAL_MESSAGES._
+MESSAGE_OF_LAST_RESORT | Catch-all error message if an exception occurs that's not in CANONICAL_MESSAGES._
 OGTITLE                | If True, enable capture of the target long url's OpenGraph title ("og:title") and return it in the JSON along with the short url.
 RETURN_ALL_META        | If True, return all request metadata in the JSON at shorturl creation.
 SECURE_SHORTURL_HOST   | The root host (netloc) to append to the front of the secure (HTTPS/SFTP) short urls generated. Use your own small domain name for this and forward its traffic to your GAE public URL. The [GAE site](http://cloud.google.com) has instructions.
@@ -266,22 +275,32 @@ compression_ratio  | FLOAT                    | The ratio of short URL size to l
 ## Logging
 
 Snakr uses standard Django logging which appears in the Google Cloud Logging console and can be downoaded via the Google Logging API. 
-In addition to standard request and state logging, Snakr also logs the following application-specific data elements to the log in JSON format:
+In addition to standard request and state logging, Snakr also logs the following application-specific data elements to the log in JSON format, and to the snakrdb database if settings.DATABASE_LOGGING = True:
 
 Element     | Value                | Default   | Description
 ------------| ---------------------| --------- | ------------
-message     | string               | none      | Text message, such as an error or informational message.
-longurl_id  | long                 | -1        | If present, the snakr_longurl.id value of the matching long URL redirected to by the short URL. -1 means unknown, missing, not specified, etc.
-shorturl_id | long                 | -1        | If present, the snakr_shorturl.id value of the matching short URL to which the long URL redirects. -1 means unknown, missing, not specified, etc.
-ip          | IPv4 or IPv6 address | "unknown" | If present, the IPv4 or IPv6 X-FORWARDED-FOR (if available) or REMOTE ADDR (if no X-FORWARDED-FOR is available) of the client calling Snakr. Used for tracking/diagnostics/forensics only.
+city        | string               | "none"    | If present, the geo location city name from X-AppEngine-City of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
+country     | string               | "none"    | If present, the geo location country name from X-AppEngine-Country of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
+host        | string               | "none"    | If present, the HTTP_HOST of the client. Used for tracking/diagnostics/forensics only.
+ip          | IPv4 or IPv6 address | "none"    | If present, the IPv4 or IPv6 X-FORWARDED-FOR (if available) or REMOTE ADDR (if no X-FORWARDED-FOR is available) of the client calling Snakr. Used for tracking/diagnostics/forensics only.
 lat         | float(10,8)          | 0.0       | If present, the geo location latitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. 0.0 means unknown, missing, not verified...
 long        | float(11,8)          | 0.0       | If present, the geolocation longitude from X-AppEngine-CityLatLong of the client calling Snakr. Used for tracking/diagnostics/forensics only. 0.0 means unknown, missing, not verified...
-city        | string               | "unknown" | If present, the geo location city name from X-AppEngine-City of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
-country     | string               | "unknown" | If present, the geo location country name from X-AppEngine-Country of the client calling Snakr. Used for tracking/diagnostics/forensics only. 
-host        | string               | "unknown" | If present, the HTTP_HOST of the client. Used for tracking/diagnostics/forensics only.
-ua          | string               | "unknown" | If present, the USER_AGENT of the client. Is useful for forensic cluster analysis for fraud or abuse patterns in the log.
+longurl_id  | long                 | -1        | If present, the snakr_longurl.id value of the matching long URL redirected to by the short URL. -1 means unknown, missing, not specified, etc.
+message     | string               | none      | Text message, such as an error or informational message.
+shorturl_id | long                 | -1        | If present, the snakr_shorturl.id value of the matching short URL to which the long URL redirects. -1 means unknown, missing, not specified, etc.
 status_code | integer              | 0         | If present, the HTTP status code that has or will be returned to the client.
+referer     | string               | "none"    | If present, the HTTP_REFERER of the client.
+ua          | string               | "none"    | If present, the HTTP__USER_AGENT of the client. Is useful for forensic cluster analysis for fraud or abuse patterns in the log.
 
+If database logging is enabled, this information is stored in snakr_eventlog and a set of associated dimension tables:
+
+snakr_citylog
+snakr_countrylog
+snakr_hostlog
+snakr_iplog
+snakr_refererlog
+snakr_useragentlog
+_
 
 ### Installing Libraries
 See the [Third party libraries](https://developers.google.com/appengine/docs/python/tools/libraries27)

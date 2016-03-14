@@ -9,7 +9,7 @@ from shorturls import ShortURL
 from utilities import Utils
 from django.db import transaction as xaction
 import loggr
-import mimetypes
+# from filetransfers.api import serve_file
 
 class LongURL:
     """Validates and processes the long URL in the POST request."""
@@ -34,11 +34,11 @@ class LongURL:
 
         self.vanity_path = Utils.get_json(request, 'vp')
 
-        # image_url = Utils.get_json(request, 'img')
-        # if Utils.is_image(image_url):
-        #     self.linked_image = image_url
-        # else:
-        #     self.linked_image = None
+        image_url = Utils.get_json(request, 'img')
+        if Utils.is_image(image_url):
+            self.linked_image = image_url
+        else:
+            self.linked_image = None
 
         if lurl == Utils.get_decodedurl(lurl):
             preencoded = False
@@ -56,7 +56,7 @@ class LongURL:
 
     @xaction.atomic
     def get_or_make_shorturl(self, request, *args, **kwargs):
-        nopersist = Utils.get_json(request, 'nopersist')
+        nopersist = Utils.true_or_false(Utils.get_json(request, 'nopersist'))
         #
         # Does the long URL already exist?
         #
@@ -90,13 +90,15 @@ class LongURL:
             #
             # 4. Is there an associated image? If so, download it to static,
             #
+            if self.linked_image:
+                ft = file
             #
             # 5. Persist everything
             #
             if not nopersist:
                 ldata.save()
                 sdata.save()
-                self.event.log(event_type='L', messagekey='HTTP_200', value=self.normalized_longurl, longurl_id=self.id, shorturl_id=s.id, status_code=200)
+                self.event.log(request=request, event_type='L', messagekey='LONG_URL_SUBMITTED', value=self.normalized_longurl, longurl_id=self.id, shorturl_id=s.id, status_code=200)
             #
             # 6. Return the short url
             #
@@ -108,7 +110,7 @@ class LongURL:
             # 1. Check for potential collision
             #
             if l.longurl != self.normalized_longurl:
-                raise self.event.log(messagekey='HASH_COLLISION', value=self.normalized_longurl, status_code=400)
+                raise self.event.log(request=request, messagekey='HASH_COLLISION', value=self.normalized_longurl, status_code=400)
             #
             # 2. Lookup the short url. It must be active.
             #
@@ -118,7 +120,7 @@ class LongURL:
             #
             # 3. Log the lookup
             #
-            self.event.log(event_type='R', messagekey='LONG_URL_RESUBMITTED', value=self.normalized_longurl, longurl_id=self.id, shorturl_id=s.id, status_code=200)
+            self.event.log(request=request, event_type='R', messagekey='LONG_URL_RESUBMITTED', value=self.normalized_longurl, longurl_id=self.id, shorturl_id=s.id, status_code=200)
             #
             # 4. Return the short url
             #

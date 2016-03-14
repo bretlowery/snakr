@@ -2,12 +2,12 @@
 Parser contains methods to open the resource located at the long URL target and extract metadata such as document title
 for return in the JSON data with the short URL.
 '''
-from PyOpenGraph import PyOpenGraph
 import urllib2
 import bs4
 import mimetypes
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
+from PyOpenGraph import PyOpenGraph
 
 class Parsers():
 
