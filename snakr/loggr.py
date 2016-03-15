@@ -193,7 +193,7 @@ class SnakrEventLogger(Exception):
         e = EventLog(
                 logged_on=dt,
                 event_type=event_type,
-                http_status_code=status_code,
+                http_status_code=abs(status_code),
                 message=info,
                 longurl_id=longurl_id,
                 shorturl_id=shorturl_id,

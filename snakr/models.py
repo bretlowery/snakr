@@ -28,6 +28,7 @@ class LongURLs(mydb.Model):
     class Meta:
         managed = False
 
+
 class ShortURLs(mydb.Model):
     IS_ACTIVE = (
         ('Y', 'Yes'),
@@ -149,9 +150,11 @@ class UserAgentLog(mydb.Model):
     is_blacklisted = mydb.CharField(
             verbose_name='If Y, 403 any request received containing this value.',
             max_length=1,
+            default='N',
             null=False)
     class Meta:
-        managed = True
+        managed = False
+
 
 class HostLog(mydb.Model):
     id = mydb.BigIntegerField(
@@ -165,9 +168,11 @@ class HostLog(mydb.Model):
     is_blacklisted = mydb.CharField(
             verbose_name='If Y, 403 any request received containing this value.',
             max_length=1,
+            default='N',
             null=False)
     class Meta:
-        managed = True
+        managed = False
+
 
 class CityLog(mydb.Model):
     id = mydb.BigIntegerField(
@@ -181,9 +186,11 @@ class CityLog(mydb.Model):
     is_blacklisted = mydb.CharField(
             verbose_name='If Y, 403 any request received containing this value.',
             max_length=1,
+            default='N',
             null=False)
     class Meta:
-        managed = True
+        managed = False
+
 
 class CountryLog(mydb.Model):
     id = mydb.BigIntegerField(
@@ -197,9 +204,11 @@ class CountryLog(mydb.Model):
     is_blacklisted = mydb.CharField(
             verbose_name='If Y, 403 any request received containing this value.',
             max_length=1,
+            default='N',
             null=False)
     class Meta:
-        managed = True
+        managed = False
+
 
 class IPLog(mydb.Model):
     id = mydb.BigIntegerField(
@@ -213,9 +222,11 @@ class IPLog(mydb.Model):
     is_blacklisted = mydb.CharField(
             verbose_name='If Y, 403 any request received containing this value.',
             max_length=1,
+            default='N',
             null=False)
     class Meta:
-        managed = True
+        managed = False
+
 
 def __str__(self):
     return self.httpurl

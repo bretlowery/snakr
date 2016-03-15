@@ -4,7 +4,6 @@ from utilities import Utils
 import secure.settings as settings
 from gae import gaeinit
 gaeinit()
-# from google.appengine.api import mail
 
 class BotDetector():
 

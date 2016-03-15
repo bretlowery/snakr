@@ -66,12 +66,21 @@ class Parsers():
         except UnicodeDecodeError:
             pass
         if title_exists:
-            title = target.metadata['title'].decode('utf-8')
-        else:
+            try:
+                title = target.metadata['title'].unquote().decode('utf-8')
+            except:
+                title_exists = False
+                pass
+        if not title_exists:
             try:
                 parsed_longurl_html = self._get_parsedHTMLcontents(document)
-                title = parsed_longurl_html.title.string
-                title_exists = True
+                try:
+                    title = parsed_longurl_html.title.string.unquote().decode('utf-8')
+                    title_exists = True
+                except:
+                    title = None
+                    title_exists = False
+                    pass
             except:
                 pass
         return title

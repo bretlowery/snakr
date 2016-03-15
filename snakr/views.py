@@ -8,7 +8,6 @@ import secure.settings as settings
 import parsers
 from botprotection import BotDetector
 
-
 def maintenance_page(self, request):
     return HttpResponse("<H1>The system is down for maintenance.</H1>", content_type="text/html")
 
