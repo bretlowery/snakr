@@ -23,6 +23,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/snakr/migrations" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

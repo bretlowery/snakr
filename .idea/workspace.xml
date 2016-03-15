@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e97d469-436f-4ac1-9d9d-fb46df745c6f" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snakr/migrations/0001_initial.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snakr/migrations/0002_citylog_countrylog_eventlog_hostlog_iplog_longurls_shorturls_useragentlog.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snakr/migrations/0003_auto_20160314_2359.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snakr/migrations/0004_auto_20160315_0002.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snakr/migrations/0005_auto_20160315_0003.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snakr/migrations/0006_auto_20160315_0010.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snakr/migrations/0007_auto_20160315_0112.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/snakr/migrations/__init__.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Snakr.iml" afterPath="$PROJECT_DIR$/.idea/Snakr.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.yaml" afterPath="$PROJECT_DIR$/app.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/botprotection.py" afterPath="$PROJECT_DIR$/snakr/botprotection.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/loggr.py" afterPath="$PROJECT_DIR$/snakr/loggr.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/models.py" afterPath="$PROJECT_DIR$/snakr/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/parsers.py" afterPath="$PROJECT_DIR$/snakr/parsers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/views.py" afterPath="$PROJECT_DIR$/snakr/views.py" />
     </list>
     <ignored path="Snakr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -136,7 +139,7 @@
       <file leaf-file-name="loggr.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/snakr/loggr.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63616073">
+            <state vertical-scroll-proportion="0.537037">
               <caret line="197" column="38" selection-start-line="197" selection-start-column="38" selection-end-line="197" selection-end-column="38" />
               <folding />
             </state>
@@ -783,11 +786,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="34" y="23" width="1332" height="745" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16741742" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="App Config Tool" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.295858" sideWeight="0.4969088" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="App Config Tool" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.295858" sideWeight="0.4969088" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5030912" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1278,7 +1281,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/snakr/loggr.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63616073">
+        <state vertical-scroll-proportion="0.537037">
           <caret line="197" column="38" selection-start-line="197" selection-start-column="38" selection-end-line="197" selection-end-column="38" />
           <folding />
         </state>
