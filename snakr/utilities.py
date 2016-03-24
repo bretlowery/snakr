@@ -6,6 +6,7 @@ import secure.settings as settings
 from django.core.validators import URLValidator
 import json
 import mimetypes
+import urllib2
 
 _URL_VALIDATOR = URLValidator()
 
@@ -140,3 +141,16 @@ class Utils:
     @staticmethod
     def remove_nonascii(value):
         return "".join(filter(lambda x: ord(x)<128, value))
+
+    @staticmethod
+    def url_exists(url):
+        rtn = False
+        try:
+            r = urllib2.urlopen(url)
+            if r.code in (200, 401):
+                rtn = True
+        except:
+            pass
+        return rtn
+
+

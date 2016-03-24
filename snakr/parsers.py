@@ -20,9 +20,9 @@ class Parsers():
         title = None
         try:
             pdf = PDFDocument(PDFParser(StringIO(urllib2.urlopen(documenturl).read())))
-            title = Utils.remove_nonascii(pdf.info[0]["Title"]).strip().encode("ascii")
+            title = Utils.remove_nonascii(pdf.info[0]["Title"]).strip()
             if not title:
-                title = Utils.remove_nonascii(pdf.info[0]["Subject"]).strip().encode("ascii")
+                title = Utils.remove_nonascii(pdf.info[0]["Subject"]).strip()
             if len(title) < 1:
                 title = None
         except:
@@ -65,5 +65,5 @@ class Parsers():
                             u'html': soup.title.string,
                             }.get(x, None)
                     rtn = dt(doctype)
-        return Utils.remove_nonascii(rtn).strip().encode("ascii")
+        return Utils.remove_nonascii(rtn).strip()
 
