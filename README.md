@@ -8,8 +8,10 @@ This is intended as a learning exercise (for me), so it does not use the [Google
 
 **v1.0.1**
 Supports Django 1.9 on Google App Engine.
+
 **v1.0.2** 
 Adds optional database event logging, basic bot/crawler blocking, and optional blacklisting at the city, country, IP, http host, and/or http useragent levels.
+
 **v1.0.3** 
 Corrected target page title extraction; other bug fixes.
 
