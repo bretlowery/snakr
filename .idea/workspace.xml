@@ -2,38 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e97d469-436f-4ac1-9d9d-fb46df745c6f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/django/contrib/admin/static/admin/fonts/Roboto-Bold-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext.yaml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/botprotection.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/ipaddr.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/loggr.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/longurls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/parsers.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/shorturls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/startup.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/utilities.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vnext/wsgi.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.yaml" afterPath="$PROJECT_DIR$/app.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/install.sql" afterPath="$PROJECT_DIR$/install.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py" afterPath="$PROJECT_DIR$/secure/rename_this_to_settings_and_customize.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/secure/settings.py" afterPath="$PROJECT_DIR$/secure/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/__init__.py" afterPath="$PROJECT_DIR$/snakr/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/botprotection.py" afterPath="$PROJECT_DIR$/snakr/botprotection.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/ipaddr.py" afterPath="$PROJECT_DIR$/snakr/ipaddr.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/longurls.py" afterPath="$PROJECT_DIR$/snakr/longurls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/parsers.py" afterPath="$PROJECT_DIR$/snakr/parsers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/shorturls.py" afterPath="$PROJECT_DIR$/snakr/shorturls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/startup.py" afterPath="$PROJECT_DIR$/snakr/startup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/utilities.py" afterPath="$PROJECT_DIR$/snakr/utilities.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/views.py" afterPath="$PROJECT_DIR$/snakr/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/wsgi.py" afterPath="$PROJECT_DIR$/snakr/wsgi.py" />
     </list>
     <ignored path="Snakr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,11 +35,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/secure/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="57" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
+            <state relative-caret-position="120">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="13" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -92,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/snakr/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1452">
-              <caret line="109" column="9" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="9" />
+            <state relative-caret-position="177">
+              <caret line="99" column="9" selection-start-line="99" selection-start-column="9" selection-end-line="99" selection-end-column="9" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -107,7 +78,7 @@
       <file leaf-file-name="longurls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1470">
+            <state relative-caret-position="995">
               <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
               <folding>
                 <element signature="e#102#131#0" expanded="true" />
@@ -141,8 +112,8 @@
       <file leaf-file-name="app.yaml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
+            <state relative-caret-position="258">
+              <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -244,10 +215,10 @@
         <option value="$PROJECT_DIR$/snakr/shorturls.py" />
         <option value="$PROJECT_DIR$/snakr/startup.py" />
         <option value="$PROJECT_DIR$/snakr/__init__.py" />
-        <option value="$PROJECT_DIR$/snakr/views.py" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/app.yaml" />
         <option value="$PROJECT_DIR$/secure/settings.py" />
+        <option value="$PROJECT_DIR$/app.yaml" />
+        <option value="$PROJECT_DIR$/snakr/views.py" />
       </list>
     </option>
   </component>
@@ -820,12 +791,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="31" y="23" width="1335" height="745" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27865168" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="App Config Tool" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2514793" sideWeight="0.4969088" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5030912" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="App Config Tool" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31508875" sideWeight="0.49363297" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2514793" sideWeight="0.506367" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1205,16 +1176,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1470">
-          <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
-          <folding>
-            <element signature="e#102#131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/snakr/shorturls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2115">
@@ -1249,16 +1210,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1452">
-          <caret line="109" column="9" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -1278,14 +1229,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/secure/gae.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1294,12 +1237,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="995">
+          <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
+          <folding>
+            <element signature="e#102#131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/secure/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="57" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
+        <state relative-caret-position="120">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="13" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="99" column="9" selection-start-line="99" selection-start-column="9" selection-end-line="99" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -93,6 +93,7 @@ class Dispatcher(webapp2.RequestHandler):
         # prepare JSON and add shorturl to return it to the caller
         #
         response_data = {}
+        response_data['version'] = settings.SNAKR_VERSION
         response_data['shorturl'] = shorturl
         #
         # return the doc title too if we got one

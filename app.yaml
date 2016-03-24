@@ -17,7 +17,7 @@
 
 # [START django_app]
 application: snakrv2
-module: snakr
+module: default
 version: 3
 runtime: python27
 api_version: 1
