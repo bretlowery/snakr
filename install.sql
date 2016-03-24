@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `snakrv2` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `snakrv2`;
+CREATE DATABASE  IF NOT EXISTS `snakr` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `snakr`;
 -- MySQL dump 10.13  Distrib 5.7.9, for osx10.9 (x86_64)
 --
 -- ------------------------------------------------------

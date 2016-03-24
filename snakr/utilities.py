@@ -136,3 +136,7 @@ class Utils:
             return ip_address.lower(), geo_lat, geo_long, geo_city.lower(), geo_country.lower(), http_host.lower(), http_useragent.lower(), http_referer.lower()
         else:
             return ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_useragent, http_referer
+
+    @staticmethod
+    def remove_nonascii(value):
+        return "".join(filter(lambda x: ord(x)<128, value))

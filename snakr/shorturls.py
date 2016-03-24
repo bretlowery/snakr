@@ -18,7 +18,7 @@ class ShortURL:
         self.normalized_shorturl = ''
         self.normalized_shorturl_scheme = ''
         self.id = -1
-        self.event = loggr.SnakrEventLogger()
+        self._event = loggr.SnakrEventLogger()
         return
 
     def make(self, normalized_longurl_scheme, vanity_path):
@@ -26,7 +26,7 @@ class ShortURL:
         # Make a new short URL
         #
         if settings.MAX_RETRIES < 1 or settings.MAX_RETRIES > 3:
-            raise self.event.log(messagekey='ILLEGAL_MAX_RETRIES', status_code=400)
+            raise self._event.log(messagekey='ILLEGAL_MAX_RETRIES', status_code=400)
         #
         # Makes a short URL
         #
@@ -70,11 +70,11 @@ class ShortURL:
                 sc = s.count()
                 if use_exact_vanity_path:
                     if sc != 0:
-                        raise self.event.log(messagekey='VANITY_PATH_EXISTS', status_code=400)
+                        raise self._event.log(messagekey='VANITY_PATH_EXISTS', status_code=400)
                     break
 
         if i > settings.MAX_RETRIES:
-            raise self.event.log(messagekey='EXCEEDED_MAX_RETRIES', status_code=400)
+            raise self._event.log(messagekey='EXCEEDED_MAX_RETRIES', status_code=400)
         #
         # 3. SUCCESS! Complete it and return it as a ****decoded**** url (which it is at this point)
         #
@@ -119,7 +119,7 @@ class ShortURL:
         # Was the shorturl encoded or malcoded? If so, don't trust it.
         #
         if self.shorturl != self.normalized_shorturl:
-            raise self.event.log(request=request, messagekey='SHORT_URL_ENCODING_MISMATCH', status_code=400)
+            raise self._event.log(request=request, messagekey='SHORT_URL_ENCODING_MISMATCH', status_code=400)
         #
         # Lookup the short url
         #
@@ -127,17 +127,17 @@ class ShortURL:
         try:
             s = ShortURLs.objects.get(id = self.id)
             if not s:
-                raise self.event.log(request=request, messagekey='SHORT_URL_NOT_FOUND', value=self.shorturl, status_code=400)
+                raise self._event.log(request=request, messagekey='SHORT_URL_NOT_FOUND', value=self.shorturl, status_code=400)
         except:
-            raise self.event.log(request=request, messagekey='SHORT_URL_NOT_FOUND', value=self.shorturl, status_code=400)
+            raise self._event.log(request=request, messagekey='SHORT_URL_NOT_FOUND', value=self.shorturl, status_code=400)
 
         if s.shorturl != self.shorturl:
-            raise self.event.log(request=request, messagekey='SHORT_URL_MISMATCH', status_code=400)
+            raise self._event.log(request=request, messagekey='SHORT_URL_MISMATCH', status_code=400)
         #
         # If the short URL is not active, 404
         #
         if s.is_active != 'Y':
-            raise self.event.log(request=request, messagekey='HTTP_404', value=self.shorturl, status_code=404)
+            raise self._event.log(request=request, messagekey='HTTP_404', value=self.shorturl, status_code=404)
         #
         # Lookup the matching long url by the short url's id.
         # If it doesn't exist, 404.
@@ -145,12 +145,12 @@ class ShortURL:
         #
         l = LongURLs.objects.get(id = s.longurl_id)
         if not l:
-            raise self.event.log(request=request, messagekey='HTTP_404', value='ERROR, HTTP 404 longurl not found', longurl_id=s.longurl_id, shorturl_id=self.id, status_code=422)
+            raise self._event.log(request=request, messagekey='HTTP_404', value='ERROR, HTTP 404 longurl not found', longurl_id=s.longurl_id, shorturl_id=self.id, status_code=422)
         longurl = Utils.get_decodedurl(l.longurl)
         #
         # Log that a 302 request to the matching long url is about to occur
         #
-        self.event.log(request=request, event_type='S', messagekey='HTTP_302', value=longurl, longurl_id=s.longurl_id, shorturl_id=self.id, status_code=302)
+        self._event.log(request=request, event_type='S', messagekey='HTTP_302', value=longurl, longurl_id=s.longurl_id, shorturl_id=self.id, status_code=302)
         #
         # Return the longurl
         #

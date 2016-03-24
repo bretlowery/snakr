@@ -11,7 +11,9 @@ __version__ = '1.0.2'
 
 import struct
 from json import loads
-from gae import gaeinit
+
+from secure.gae import gaeinit
+
 gaeinit()
 from google.appengine.api import urlfetch
 

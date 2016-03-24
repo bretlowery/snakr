@@ -1,4 +1,4 @@
-# Snakr v1.0.2
+# Snakr v1.0.3
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) backend. 
@@ -10,6 +10,8 @@ This is intended as a learning exercise (for me), so it does not use the [Google
 Supports Django 1.9 on Google App Engine.
 **v1.0.2** 
 Adds optional database event logging, basic bot/crawler blocking, and optional blacklisting at the city, country, IP, http host, and/or http useragent levels.
+**v1.0.3** 
+Corrected target page title extraction; other bug fixes.
 
 ## Background 
 URL shorteners are used to generate a smaller “abbreviated” version of a URL so that the smaller URL can be used as an alias in place of the longer URL. Subsequent calls to the smaller URL will redirect to the same resource originally identified by the longer URL, including all querystring parameters and other valid URL components. This is useful for several reasons:
@@ -112,7 +114,7 @@ as a result. Be advised.
 
 10. No GAE endpoints for mobile are coded or supported. I may or may not add that. Feel free to do so.
 
-11. Submission of a long url via a POST with a query string (e.g. "http://snakrv2.appspot.com/?u=http://www.shortenthisurlplease.com") may be added. Feel free to do so.
+11. Submission of a long url via a POST with a query string (e.g. "http://snakr.appspot.com/?u=http://www.shortenthisurlplease.com") may be added. Feel free to do so.
 
    **UPDATE:** v1.0.0 I'm going to add this shortly, no pun intended. Some code already implemented for this.
 
@@ -132,7 +134,7 @@ Alternatively, you can use your short domain for short HTTP urls and yorudomain.
     SHORTURL_HOST           = "bret.guru"  #change to your short domain
     
     # host (netloc) of the short URL to use for HTTPS urls
-    SECURE_SHORTURL_HOST    = "snakrv2.appspot.com"
+    SECURE_SHORTURL_HOST    = "snakr.appspot.com"
     ```
     
     
@@ -140,7 +142,7 @@ Alternatively, you can use your short domain for short HTTP urls and yorudomain.
     
     ```
     http://bret.guru/xxxxxx
-    https://snakrv2.appspot.com/xxxxxx
+    https://snakr.appspot.com/xxxxxx
     ```
     
     Once you have your SSL certficate and secure redirection turned on, you can use the same short domain on both:

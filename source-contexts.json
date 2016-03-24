@@ -1,0 +1,13 @@
+[
+  {
+    "context": {
+      "git": {
+        "revisionId": "ea9f3c1ad1b68e45cf3987f691287e39a525b8c7", 
+        "url": "https://github.com/bretlowery/snakr.git"
+      }
+    }, 
+    "labels": {
+      "category": "remote_repo"
+    }
+  }
+]

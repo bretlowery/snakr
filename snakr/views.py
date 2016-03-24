@@ -5,8 +5,9 @@ from longurls import LongURL
 from urlparse import urlparse
 import webapp2
 import secure.settings as settings
-import parsers
+from parsers import Parsers
 from botprotection import BotDetector
+import loggr
 
 def maintenance_page(self, request):
     return HttpResponse("<H1>The system is down for maintenance.</H1>", content_type="text/html")
@@ -17,6 +18,7 @@ class Dispatcher(webapp2.RequestHandler):
     def __init__(self):
         super(Dispatcher, self).__init__()
         self._botdetector = BotDetector()
+        self._event = loggr.SnakrEventLogger()
         return
 
     def dispatch(self, **table):
@@ -83,16 +85,30 @@ class Dispatcher(webapp2.RequestHandler):
         #
         shorturl = l.get_or_make_shorturl(request)
         #
-        # prepare to return the shorturl as JSON
+        # get document title
         #
-        response_data = {}
-        #
-        # get document title if possible
-        #
-        p = parsers.Parsers()
+        p = Parsers()
         title = p.get_title(l.longurl)
         #
-        # return meta tag values as well if requested
+        # prepare JSON and add shorturl to return it to the caller
+        #
+        response_data = {}
+        response_data['shorturl'] = shorturl
+        #
+        # return the doc title too if we got one
+        #
+        response_data['title'] = title
+        lt = len(title)
+        if lt > 0:
+            ls = len(shorturl)
+            ltmax = 140 - ls - 1
+            if lt > ltmax:
+                socialmediapost = title[:ltmax-3]+'... '+shorturl
+            else:
+                socialmediapost = title + ' ' + shorturl
+            response_data['socialmediapost'] = socialmediapost
+        #
+        # meta tag values as well if requested
         #
         if settings.RETURN_ALL_META:
             j = json.JSONEncoder()
@@ -103,20 +119,11 @@ class Dispatcher(webapp2.RequestHandler):
                     except:
                         response_data[key] = 'nonserializable'
         #
-        # return JSON to caller
+        # return JSON to the caller
         #
-        response_data['shorturl'] = shorturl
-        if title:
-            ls = len(shorturl)
-            lt = len(title)
-            ltmax = 140 - ls - 1
-            if lt > ltmax:
-                socialmediapost = title[:ltmax-3]+'... '+shorturl
-            else:
-                socialmediapost = title + ' ' + shorturl
-            response_data['socialmediapost'] = socialmediapost
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
-    def test_post_handler(self, request, *args, **kwargs):
+
+    def _test_post_handler(self, request, *args, **kwargs):
         return HttpResponse("<H2>Test value: {%s}</H2>", content_type="text/html")
 

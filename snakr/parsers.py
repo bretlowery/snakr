@@ -8,91 +8,62 @@ import mimetypes
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
 from PyOpenGraph import PyOpenGraph
+from utilities import Utils
+from StringIO import StringIO
 
 class Parsers():
 
     def __init__(self):
         return
 
-    def _robobrowser(self):
-        opener = urllib2.build_opener()
-        opener.addheaders = [('User-agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36')]
-        return opener
-
-    def _open_url(self, documenturl):
-        return self._robobrowser().open(documenturl).read()
-
-    def _get_parsedHTMLcontents(self, documenturl):
-        contents = self._open_url(documenturl)
-        parsed_contents = bs4.BeautifulSoup(contents.decode('utf-8'), "html.parser")
-        return parsed_contents
-
-    def _get_doctype(self, document):
-        parsed_contents = self._get_parsedHTMLcontents(document)
-        items = [item for item in parsed_contents if isinstance(item, bs4.Doctype)]
-        return items[0].string if items else None
-
-    def get_title(self, document):
-        mime_type = mimetypes.guess_type(document, strict=True)[0]
-        # log.event(message='%s, mimetype: %s' % (document, mime_type), status_code=0, event_type='I')
-        if mime_type:
-            def mt(x):
-                return {
-                    'text/html': self._get_html_title(document),
-                    'application/pdf': self._get_pdf_title(document),
-                    }.get(x, None)
-            return mt(mime_type)
-        else:
-            doc_type = self._get_doctype(document)
-            # log.event(message='%s, doctype: %s' % (document, doc_type), status_code=0, event_type='I')
-            def dt(x):
-                return {
-                    'html': self._get_html_title(document),
-                    }.get(x, None)
-            return dt(doc_type)
-
-    def _get_html_title(self, document):
-        #
-        # if settings.OGTITLE = True, get the OpenGraph title meta tag value and include it in the output
-        # see: http://ogp.me
-        # for the Python PyOpenGraph site: https://pypi.python.org/pypi/PyOpenGraph
-        #
-        title = None
-        target = None
-        title_exists = False
-        try:
-            target = PyOpenGraph.PyOpenGraph(document)
-            title_exists = target.is_valid()
-        except UnicodeDecodeError:
-            pass
-        if title_exists:
-            try:
-                title = target.metadata['title'].unquote().decode('utf-8')
-            except:
-                title_exists = False
-                pass
-        if not title_exists:
-            try:
-                parsed_longurl_html = self._get_parsedHTMLcontents(document)
-                try:
-                    title = parsed_longurl_html.title.string.unquote().decode('utf-8')
-                    title_exists = True
-                except:
-                    title = None
-                    title_exists = False
-                    pass
-            except:
-                pass
-        return title
-
-    def _get_pdf_title(self, document):
+    def _get_pdf_title(self, documenturl):
         title = None
         try:
-            pdfdoc = self._open_url(document)
-            pdfparser = PDFParser(pdfdoc)
-            pdfparseddoc = PDFDocument(pdfparser)
-            title = pdfparseddoc.info["title"]
+            pdf = PDFDocument(PDFParser(StringIO(urllib2.urlopen(documenturl).read())))
+            title = Utils.remove_nonascii(pdf.info[0]["Title"]).strip().encode("ascii")
+            if not title:
+                title = Utils.remove_nonascii(pdf.info[0]["Subject"]).strip().encode("ascii")
+            if len(title) < 1:
+                title = None
         except:
             pass
         return title
+
+    def get_title(self, documenturl):
+        rtn = None
+        mime_type = None
+        try:
+            mime_type = mimetypes.guess_type(documenturl, strict=True)[0]
+        except:
+            pass
+        if mime_type:
+            def mt(x):
+                return {
+                    'application/pdf': self._get_pdf_title(documenturl),
+                    }.get(x, None)
+            rtn = mt(mime_type)
+        if not mime_type or not rtn:
+            doc_supports_og = False
+            try:
+                ogdoc = PyOpenGraph.PyOpenGraph(documenturl)
+                doc_supports_og = ogdoc.is_valid()
+            except:
+                pass
+            if doc_supports_og:
+                rtn = ogdoc.metadata['title']
+            if not rtn:
+                doctype = None
+                try:
+                    soup = bs4.BeautifulSoup(urllib2.urlopen(documenturl), "html.parser")
+                    items = [item for item in soup if isinstance(item, bs4.Doctype)]
+                    doctype =  items[0].string if items else None
+                except:
+                    pass
+                if doctype:
+                    def dt(x):
+                        return {
+                            u'html': soup.title.string,
+                            }.get(x, None)
+                    rtn = dt(doctype)
+        return Utils.remove_nonascii(rtn).strip().encode("ascii")
 

@@ -13,9 +13,11 @@ import django
 from django.core.wsgi import get_wsgi_application
 import datetime
 
+os.environ.setdefault("SNAKR_GAE_HOST", "snakrv2.appspot.com")
+os.environ.setdefault("SNAKR_ROOT_URLCONF", "snakr.urls")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "secure.settings")
 
-import snakr.loggr as loggr
+import loggr as loggr
 event = loggr.SnakrEventLogger()
 dt = datetime.datetime.now()
 event.log(messagekey='STARTUP', dt=dt.isoformat())

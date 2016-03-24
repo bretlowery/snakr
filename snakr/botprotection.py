@@ -1,9 +1,8 @@
 from patterns.singleton import Singleton
+from secure.gae import gaeinit
+gaeinit()
 import loggr
 from utilities import Utils
-import secure.settings as settings
-from gae import gaeinit
-gaeinit()
 
 class BotDetector():
 
@@ -72,7 +71,7 @@ class BotDetector():
         # load blacklisted cities, countries, ips, user agents
         # at scale, a memchached solution would be better (say Snakr v2)
         #
-        from snakr.models import CityLog, CountryLog, IPLog, HostLog, UserAgentLog
+        from models import CityLog, CountryLog, IPLog, HostLog, UserAgentLog
         self._blacklisted_cities        = self._load_blacklist(CityLog, 'cities', 'city')
         self._blacklisted_countries     = self._load_blacklist(CountryLog, 'countries', 'country')
         self._blacklisted_ips           = self._load_blacklist(IPLog, 'ips', 'ip')

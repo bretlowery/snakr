@@ -1,7 +1,8 @@
-
 import os
 import string
-from snakr.gae import gaeinit
+
+from secure.gae import gaeinit
+
 gaeinit()
 import snakr.ipaddr # must be AFTER gaeinit()
 
