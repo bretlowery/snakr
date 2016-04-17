@@ -10,6 +10,7 @@ _YN = (
     ('N', 'No'),
 )
 
+
 class LongURLs(mydb.Model):
     ORIGINALLY_ENCODED = _YN
     id = mydb.BigIntegerField(
@@ -30,6 +31,7 @@ class LongURLs(mydb.Model):
             max_length=1,
             null=False,
             choices=ORIGINALLY_ENCODED)
+
     class Meta:
         managed = False
 
@@ -67,6 +69,7 @@ class ShortURLs(mydb.Model):
             max_digits=10,
             decimal_places=2,
             null=False)
+
     class Meta:
         managed = False
 
@@ -127,8 +130,10 @@ class EventLog(mydb.Model):
             verbose_name='the HTTP_REFERER from which this event was received',
             max_length=2083,
             null=False)
+
     class Meta:
         managed = False
+
 
 class UserAgentLog(mydb.Model):
     id = mydb.BigIntegerField(
@@ -144,6 +149,7 @@ class UserAgentLog(mydb.Model):
             max_length=1,
             default='N',
             null=False)
+
     class Meta:
         managed = False
 
@@ -162,6 +168,7 @@ class HostLog(mydb.Model):
             max_length=1,
             default='N',
             null=False)
+
     class Meta:
         managed = False
 
@@ -180,6 +187,7 @@ class CityLog(mydb.Model):
             max_length=1,
             default='N',
             null=False)
+
     class Meta:
         managed = False
 
@@ -198,8 +206,10 @@ class CountryLog(mydb.Model):
             max_length=1,
             default='N',
             null=False)
+
     class Meta:
         managed = False
+
 
 class IPLog(mydb.Model):
     id = mydb.BigIntegerField(
@@ -215,16 +225,19 @@ class IPLog(mydb.Model):
             max_length=1,
             default='N',
             null=False)
+
     class Meta:
         managed = False
+
 
 class EventStreamVersion(ndb.Model):
     event_stream_version = ndb.StringProperty(indexed=True)
+
     class Meta:
         managed = False
 
+
 class EventStream(ndb.Model):
-    EVENT_TYPE = _EVENT_TYPE
     logged_on = ndb.DateTimeProperty(indexed=True, auto_now_add=True)
     event_type = ndb.StringProperty(indexed=True)
     event_description = ndb.StringProperty(indexed=False)
@@ -232,17 +245,22 @@ class EventStream(ndb.Model):
     http_status_code = ndb.IntegerProperty(indexed=True)
     info = ndb.StringProperty(indexed=False)
     longurl = ndb.StringProperty(indexed=False)
+    longurl_lower = ndb.ComputedProperty(lambda self: self.longurl.lower())
     shorturl = ndb.StringProperty(indexed=False)
+    shorturl_lower = ndb.ComputedProperty(lambda self: self.shorturl.lower())
     ip_address = ndb.StringProperty(indexed=True)
+    ip_address_lower = ndb.ComputedProperty(lambda self: self.ip_address.lower())
     geo_latlong = ndb.GeoPtProperty(indexed=False)
     geo_city = ndb.StringProperty(indexed=True)
+    geo_city_lower = ndb.ComputedProperty(lambda self: self.geo_city.lower())
     geo_country = ndb.StringProperty(indexed=True)
+    geo_country_lower = ndb.ComputedProperty(lambda self: self.geo_country.lower())
     http_host = ndb.StringProperty(indexed=True)
+    http_host_lower = ndb.ComputedProperty(lambda self: self.http_host.lower())
     http_useragent = ndb.StringProperty(indexed=False)
-    http_referer = ndb.StringProperty(indexed=False)
-    developer_json = ndb.StringProperty(indexed=False)
-    qa_json = ndb.StringProperty(indexed=False)
-    ops_json = ndb.StringProperty(indexed=False)
+    http_useragent_lower = ndb.ComputedProperty(lambda self: self.http_useragent.lower())
+    json_annotation = ndb.StringProperty(indexed=False)
+
     class Meta:
         managed = False
 
@@ -252,42 +270,42 @@ class EventStream(ndb.Model):
 
     @classmethod
     def query_event_by_type(cls, event_type):
-        return cls.query(event_type=event_type).order(-cls.logged_on, cls.geo_country_ordinal, cls.geo_city_ordinal)
+        return cls.query(event_type=event_type).order(-cls.logged_on)
 
     @classmethod
     def query_event_by_http_status_code(cls, http_status_code, order_by_date=True):
         if order_by_date:
-            return cls.query(http_status_code=http_status_code).order(-cls.logged_on, -cls.id)
+            return cls.query(http_status_code=http_status_code).order(-cls.logged_on, cls.event_type, cls.ip_address)
         else:
-            return cls.query(http_status_code=http_status_code).order(-cls.id)
+            return cls.query(http_status_code=http_status_code).order(cls.event_type, cls.ip_address)
 
     @classmethod
     def query_event_by_ip(cls, ip, order_by_date=True):
         if order_by_date:
-            return cls.query(ip=ip).order(-cls.logged_on, -cls.id)
+            return cls.query(ip=ip).order(-cls.logged_on, cls.event_type, cls.ip_address)
         else:
-            return cls.query(ip=ip).order(-cls.id)
+            return cls.query(ip=ip).order(cls.event_type, cls.ip_address)
 
     @classmethod
     def query_event_by_country_and_city(cls, country, city, order_by_date=True):
         if order_by_date:
-            return cls.query(country=country, city=city).order(-cls.logged_on, -cls.id)
+            return cls.query(country=country, city=city).order(-cls.logged_on, cls.event_type, cls.ip_address)
         else:
-            return cls.query(country=country, city=city).order(-cls.id)
+            return cls.query(country=country, city=city).order(cls.event_type, cls.ip_address)
 
     @classmethod
     def query_event_by_http_host(cls, http_host, order_by_date=True):
         if order_by_date:
-            return cls.query(http_host=http_host).order(-cls.logged_on, -cls.id)
+            return cls.query(http_host=http_host).order(-cls.logged_on, cls.event_type, cls.ip_address)
         else:
-            return cls.query(http_host=http_host).order(-cls.id)
+            return cls.query(http_host=http_host).order(cls.event_type, cls.ip_address)
 
     @classmethod
     def query_event_by_http_useragent_hash(cls, http_useragent_hash, order_by_date=True):
         if order_by_date:
-            return cls.query(http_useragent_hash=http_useragent_hash).order(-cls.logged_on, -cls.id)
+            return cls.query(http_useragent_hash=http_useragent_hash).order(-cls.logged_on, cls.event_type, cls.ip_address)
         else:
-            return cls.query(http_useragent_hash=http_useragent_hash).order(-cls.id)
+            return cls.query(http_useragent_hash=http_useragent_hash).order(cls.event_type, cls.ip_address)
 
 def __str__(self):
     return self.httpurl
