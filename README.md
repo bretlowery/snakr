@@ -1,10 +1,10 @@
 # Snakr v1.0.6
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
-on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) backend. 
-The install loads Django 1.9 in the app's lib folder, overriding GAE's Django 1.5.11 supported install.
+on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) and [Google Datastore](https://cloud.google.com/datastore/) backend. 
+The install loads Django 1.9, overriding GAE's Django 1.5.11 supported (as of 3/2016) install.
 
-This is intended as a learning exercise (for me), so it does not use the [Google URL Shortener API](https://developers.google.com/url-shortener/).
+This is intended as a learning exercise, so it does not use the [Google URL Shortener API](https://developers.google.com/url-shortener/).
 
 **v1.0.1**
 Supports Django 1.9 on Google App Engine.
@@ -204,9 +204,9 @@ See the README file for directions. You'll need python 2.7 and [pip 1.4 or later
    
 4. Create your GAE and Cloud SQL instances.
 
-5. Upload from your Python IDE to GAE. I like [Pycharm](https://www.jetbrains.com/pycharm/).
+5. Upload from your Python IDE to GAE. I use [Pycharm](https://www.jetbrains.com/pycharm/) as it has Google Cloud and GAE integration.
 
-6. Create an instance in Cloud SQL to hold the database.
+6. Create an instance in Cloud SQL to hold the database. You do not need to pre-create anything in Google Datastore. 
 
 7. Create a user account in SQL to install the database such as "dbo" with a password. Do NOT use the sql "root" login and
 do NOT change its existing password. GAE will use root@localhost to connect to Cloud SQL on the back end.
