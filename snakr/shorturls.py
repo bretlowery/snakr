@@ -145,12 +145,12 @@ class ShortURL:
         #
         l = LongURLs.objects.get(id = s.longurl_id)
         if not l:
-            raise self._event.log(request=request, messagekey='HTTP_404', value='ERROR, HTTP 404 longurl not found', longurl_id=s.longurl_id, shorturl_id=self.id, status_code=422)
+            raise self._event.log(request=request, messagekey='HTTP_404', value='ERROR, HTTP 404 longurl not found', longurl_id=s.longurl_id, shorturl_id=self.id, shorturl=self.shorturl, status_code=422)
         longurl = Utils.get_decodedurl(l.longurl)
         #
         # Log that a 302 request to the matching long url is about to occur
         #
-        self._event.log(request=request, event_type='S', messagekey='HTTP_302', value=longurl, longurl_id=s.longurl_id, shorturl_id=self.id, status_code=302)
+        self._event.log(request=request, event_type='S', messagekey='HTTP_302', value=self.shorturl, longurl_id=s.longurl_id, longurl=longurl, shorturl_id=self.id, shorturl=self.shorturl, status_code=302)
         #
         # Return the longurl
         #

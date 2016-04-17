@@ -99,7 +99,8 @@ class LongURL:
             if not nopersist:
                 ldata.save()
                 sdata.save()
-                self._event.log(request=request, event_type='L', messagekey='LONG_URL_SUBMITTED', value=self.normalized_longurl, longurl_id=self.id, shorturl_id=s.id, status_code=200)
+                self._event.log(request=request, event_type='L', messagekey='LONG_URL_SUBMITTED', value=self.normalized_longurl,
+                                longurl_id=self.id, shorturl_id=s.id, longurl=self.normalized_longurl, shorturl=s.shorturl, status_code=200)
             #
             # 6. Return the short url
             #
@@ -121,7 +122,7 @@ class LongURL:
             #
             # 3. Log the lookup
             #
-            self._event.log(request=request, event_type='R', messagekey='LONG_URL_RESUBMITTED', value=self.normalized_longurl, longurl_id=self.id, shorturl_id=s.id, status_code=200)
+            self._event.log(request=request, event_type='R', messagekey='LONG_URL_RESUBMITTED', value=self.normalized_longurl, longurl_id=self.id, longurl=self.normalized_longurl, shorturl_id=s.id, shorturl=s.shorturl, status_code=200)
             #
             # 4. Return the short url
             #

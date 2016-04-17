@@ -73,10 +73,6 @@ class Utils:
         return rtn
 
     @staticmethod
-    def initurlparts():
-        return urlparse('http://www.dummyurl.com')  # this is a django 1.5.11 bug workaround
-
-    @staticmethod
     def get_json(request, key):
         try:
             json_data = json.loads(request.body)
@@ -140,7 +136,10 @@ class Utils:
 
     @staticmethod
     def remove_nonascii(value):
-        return "".join(filter(lambda x: ord(x)<128, value))
+        if value is None:
+            return None
+        else:
+            return "".join(filter(lambda x: ord(x)<128, value))
 
     @staticmethod
     def url_exists(url):
@@ -153,4 +152,22 @@ class Utils:
             pass
         return rtn
 
+    @staticmethod
+    def get_geo_country_ordinal(geo_country):
+        if geo_country == 'us':
+            return 0
+        else:
+            return (1000 * ord(geo_country[0].lower())) + ord(geo_country[1].lower())
 
+    @staticmethod
+    def get_geo_city_ordinal(geo_city):
+        c = geo_city.replace(' ','')
+        def ggco_recurse(c, l, o):
+            k = c[0:1]
+            i = ord(k) - 96
+            o = o + (i * 10**-l)
+            l += 1
+        if geo_country == 'us':
+            return 0
+        else:
+            return

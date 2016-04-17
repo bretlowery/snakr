@@ -10,20 +10,11 @@ from django.http import Http404, HttpResponseServerError, HttpRequest
 from patterns.singleton import Singleton
 from utilities import Utils
 from django.db import transaction as xaction
+import googledatastore
 
 class SnakrEventLogger(Exception):
 
-    _ENTRY_TYPE = (
-        ('B', '403 Bot/Blacklisted'),
-        ('D', 'Debug'),
-        ('E', 'Error'),
-        ('I', 'Information'),
-        ('L', '200 New Long URL Submitted'),
-        ('R', '200 Existing Long URL Resubmitted'),
-        ('S', '302 Short URL Redirect'),
-        ('W', 'Warning'),
-        ('X', 'Exception'),
-    )
+    _ENTRY_TYPE = settings.EVENT_TYPES
 
     def __init__(self, *args, **kwargs):
         #
@@ -55,19 +46,21 @@ class SnakrEventLogger(Exception):
         #
         if not settings.ENABLE_LOGGING:
             return
-        request = kwargs.pop("request", None)
+        request = kwargs.pop('request', None)
         if not isinstance(request, HttpRequest):
             request = None
         infokey = kwargs.pop('messagekey', None)
-        info = kwargs.pop('message', None)
+        info = kwargs.pop('message', 'none')
         try:
-            value = str(kwargs.pop('value', None))
+            value = str(kwargs.pop('value', 'none'))
         except:
             value = None
             pass
         event_type = kwargs.pop('event_type', 'W')
         longurl_id = kwargs.pop('longurl_id', -1)
+        longurl = kwargs.pop('longurl', 'none')
         shorturl_id = kwargs.pop('shorturl_id', -1)
+        shorturl = kwargs.pop('shorturl', 'none')
         verbose = kwargs.pop('verbose', False)
         status_code = kwargs.pop('status_code', 200)
         dt = datetime.datetime.now()
@@ -80,8 +73,8 @@ class SnakrEventLogger(Exception):
         #
         if event_type == 'I':
             status_code = 0
-        if status_code == 200:
-            event_type = 'I'
+        #if status_code == 200:
+        #    event_type = 'I'
         if status_code not in (-403,0,200,400,404,422,500):
             status_code = 403
         if settings.DEBUG or settings.VERBOSE_LOGGING or (status_code >= 400 and status_code != 404):
@@ -124,9 +117,6 @@ class SnakrEventLogger(Exception):
             }
 
             db_id = -1
-            if settings.DATABASE_LOGGING and request:
-                db_id = self._log_transaction(dt, event_type, status_code, info, shorturl_id, longurl_id, ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_useragent)
-                jsondata['snakr_eventlog_id'] = str(db_id)
 
             if (settings.VERBOSE_LOGGING or verbose) and request:
                     jsondata['lid'] = str(longurl_id)
@@ -139,6 +129,29 @@ class SnakrEventLogger(Exception):
                     jsondata['host'] = str(http_host)
                     jsondata['ua'] = str(http_useragent)
                     jsondata['ref'] = http_referer
+
+            if settings.DATABASE_LOGGING and request:
+
+                sql_id, ds_id = self._log_transaction(
+                        jsondata = jsondata,
+                        dt = dt,
+                        event_type = event_type,
+                        status_code = status_code,
+                        info = info,
+                        shorturl_id = shorturl_id,
+                        shorturl = shorturl,
+                        longurl_id = longurl_id,
+                        longurl = longurl,
+                        ip_address = ip_address,
+                        geo_lat = geo_lat,
+                        geo_long = geo_long,
+                        geo_city = geo_city,
+                        geo_country = geo_country,
+                        http_host = http_host,
+                        http_useragent = http_useragent
+                )
+                jsondata['snakr_cloudsql_eventlog_id'] = str(sql_id)
+                jsondata['snakr_datastore_eventstream_id'] = str(ds_id)
 
             if abs(status_code) == 403 and settings.LOG_HTTP403:
                 self.logger.warning(info, extra=jsondata)
@@ -167,7 +180,23 @@ class SnakrEventLogger(Exception):
         return
 
     @xaction.atomic
-    def _log_transaction(self, dt, event_type, status_code, info, shorturl_id, longurl_id, ip_address, geo_lat, geo_long, geo_city, geo_country, http_host, http_useragent ):
+    def _log_transaction(self, **kwargs):
+        jsondata = kwargs.pop('jsondata', None)
+        dt = kwargs.pop('dt',  datetime.datetime.now().isoformat())
+        event_type = kwargs.pop('event_type', None)
+        status_code = kwargs.pop('status_code', None)
+        info = kwargs.pop('info', None)
+        shorturl_id = kwargs.pop('shorturl_id', -1)
+        shorturl = kwargs.pop('shorturl', None)
+        longurl_id = kwargs.pop('longurl_id', -1)
+        longurl = kwargs.pop('longurl', None)
+        ip_address = kwargs.pop('ip_address', None)
+        geo_lat = kwargs.pop('geo_lat', 0.0)
+        geo_long = kwargs.pop('geo_long', 0.0)
+        geo_city = kwargs.pop('geo_city', None)
+        geo_country = kwargs.pop('geo_country', None)
+        http_host = kwargs.pop('http_host', None)
+        http_useragent = kwargs.pop('http_useragent', None)
 
         # imports here to keep their code within the scope of the transaction
         from snakr.models import EventLog, UserAgentLog, HostLog, CityLog, CountryLog, IPLog
@@ -184,28 +213,56 @@ class SnakrEventLogger(Exception):
                 hash_key = 0
             return hash_key
 
-        city_hash       = _save_dimension(CityLog, geo_city)
-        country_hash    = _save_dimension(CountryLog, geo_country)
-        host_hash       = _save_dimension(HostLog, http_host)
-        useragent_hash  = _save_dimension(UserAgentLog, http_useragent)
-        ip_hash         = _save_dimension(IPLog, ip_address)
+        city_hash = _save_dimension(CityLog, geo_city)
+        country_hash = _save_dimension(CountryLog, geo_country)
+        host_hash = _save_dimension(HostLog, http_host)
+        useragent_hash = _save_dimension(UserAgentLog, http_useragent)
+        ip_hash = _save_dimension(IPLog, ip_address)
 
-        e = EventLog(
-                logged_on=dt,
-                event_type=event_type,
-                http_status_code=abs(status_code),
-                message=info,
-                longurl_id=longurl_id,
-                shorturl_id=shorturl_id,
-                ip_id=ip_hash,
-                lat=geo_lat,
-                lng=geo_long,
-                city_id=city_hash,
-                country_id=country_hash,
-                host_id = host_hash,
-                useragent_id=useragent_hash
-        )
+        sql_id = -1
+        ds_id = -1
 
-        e.save()
-        return e.id
+        if settings.PERSIST_EVENTSTREAM_TO_CLOUDSQL:
+
+            # self.logger.info('Persisting event to Cloud SQL', extra=jsondata)
+            e = EventLog(
+                    logged_on=dt,
+                    event_type=event_type,
+                    http_status_code=abs(status_code),
+                    message=info,
+                    longurl_id=longurl_id,
+                    shorturl_id=shorturl_id,
+                    ip_id=ip_hash,
+                    lat=geo_lat,
+                    lng=geo_long,
+                    city_id=city_hash,
+                    country_id=country_hash,
+                    host_id=host_hash,
+                    useragent_id=useragent_hash
+            )
+
+            e.save()
+            sql_id = e.id
+
+        if settings.PERSIST_EVENTSTREAM_TO_DATASTORE:
+
+            # self.logger.info('Persisting event to Datastore', extra=jsondata)
+            gds = googledatastore.client()
+            ds_id = gds.persist(
+                    event_type=event_type,
+                    http_status_code=abs(status_code),
+                    info=info,
+                    longurl=longurl,
+                    shorturl=shorturl,
+                    ip_address=ip_address,
+                    geo_lat=geo_lat,
+                    geo_long=geo_long,
+                    geo_city=geo_city,
+                    geo_country=geo_country,
+                    http_host=http_host,
+                    http_useragent=http_useragent
+            )
+
+        return sql_id, ds_id
+
 

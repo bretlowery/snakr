@@ -1,6 +1,6 @@
 import atexit
 
-# default_app_config = 'snakr.startup.Config'
+default_app_config = 'snakr.startup.Config'
 
 def __init__():
     return

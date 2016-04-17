@@ -1,4 +1,6 @@
 Django==1.9.4
+gcloud
+google-api-python-client
 PyOpenGraph==0.2
 BeautifulSoup==3.2.1
 python-json-logger==0.1.4

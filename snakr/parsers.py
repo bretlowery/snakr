@@ -64,6 +64,9 @@ class Parsers():
                         return {
                             u'html': soup.title.string,
                             }.get(x, None)
-                    rtn = dt(doctype)
-        return Utils.remove_nonascii(rtn).strip()
+                    rtn = Utils.remove_nonascii(dt(doctype))
+        if rtn is None:
+            return None
+        else:
+            return rtn.strip()
 

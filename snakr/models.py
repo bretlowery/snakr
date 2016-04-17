@@ -1,12 +1,17 @@
 from django.core.validators import URLValidator
 from django.db import models as mydb
+from google.appengine.ext import ndb
+import secure.settings as settings
 
+_EVENT_TYPE = settings.EVENT_TYPES
+
+_YN = (
+    ('Y', 'Yes'),
+    ('N', 'No'),
+)
 
 class LongURLs(mydb.Model):
-    ORIGINALLY_ENCODED = (
-        ('Y', 'Yes'),
-        ('N', 'No'),
-    )
+    ORIGINALLY_ENCODED = _YN
     id = mydb.BigIntegerField(
             verbose_name='unique 64-bit integer binary hash value of the long URL',
             primary_key=True,
@@ -30,10 +35,7 @@ class LongURLs(mydb.Model):
 
 
 class ShortURLs(mydb.Model):
-    IS_ACTIVE = (
-        ('Y', 'Yes'),
-        ('N', 'No'),
-    )
+    IS_ACTIVE = _YN
     id = mydb.BigIntegerField(
             verbose_name='unique 64-bit integer binary hash value of the short URL',
             primary_key=True,
@@ -70,17 +72,7 @@ class ShortURLs(mydb.Model):
 
 
 class EventLog(mydb.Model):
-    ENTRY_TYPE = (
-        ('B', '403 Bot/Blacklisted'),
-        ('D', 'Debug'),
-        ('E', 'Error'),
-        ('I', 'Information'),
-        ('L', '200 New Long URL Submitted'),
-        ('R', '200 Existing Long URL Resubmitted'),
-        ('S', '302 Short URL Redirect'),
-        ('W', 'Warning'),
-        ('X', 'Exception'),
-    )
+    EVENT_TYPE = _EVENT_TYPE
     id = mydb.AutoField(
             verbose_name='unique 64-bit integer autoincrement; gives order of events (200s, 302s, 400s, 404s, 500s...) as they occurred',
             primary_key=True,
@@ -92,7 +84,7 @@ class EventLog(mydb.Model):
             verbose_name='Type of event logged. See models.Events.ENTRY_TYPE for enumeration details.',
             max_length=1,
             null=False,
-            choices=ENTRY_TYPE)
+            choices=EVENT_TYPE)
     http_status_code = mydb.IntegerField(
             verbose_name='the HTTP status code, if any, on the event, e.g. 200, 302, 404, etc.',
             null = False)
@@ -209,7 +201,6 @@ class CountryLog(mydb.Model):
     class Meta:
         managed = False
 
-
 class IPLog(mydb.Model):
     id = mydb.BigIntegerField(
             verbose_name='unique 64-bit integer binary hash value of the IPv4 or IPv6 of the event, if any',
@@ -227,6 +218,76 @@ class IPLog(mydb.Model):
     class Meta:
         managed = False
 
+class EventStreamVersion(ndb.Model):
+    event_stream_version = ndb.StringProperty(indexed=True)
+    class Meta:
+        managed = False
+
+class EventStream(ndb.Model):
+    EVENT_TYPE = _EVENT_TYPE
+    logged_on = ndb.DateTimeProperty(indexed=True, auto_now_add=True)
+    event_type = ndb.StringProperty(indexed=True)
+    event_description = ndb.StringProperty(indexed=False)
+    event_status_code = ndb.IntegerProperty(indexed=True)
+    http_status_code = ndb.IntegerProperty(indexed=True)
+    info = ndb.StringProperty(indexed=False)
+    longurl = ndb.StringProperty(indexed=False)
+    shorturl = ndb.StringProperty(indexed=False)
+    ip_address = ndb.StringProperty(indexed=True)
+    geo_latlong = ndb.GeoPtProperty(indexed=False)
+    geo_city = ndb.StringProperty(indexed=True)
+    geo_country = ndb.StringProperty(indexed=True)
+    http_host = ndb.StringProperty(indexed=True)
+    http_useragent = ndb.StringProperty(indexed=False)
+    http_referer = ndb.StringProperty(indexed=False)
+    developer_json = ndb.StringProperty(indexed=False)
+    qa_json = ndb.StringProperty(indexed=False)
+    ops_json = ndb.StringProperty(indexed=False)
+    class Meta:
+        managed = False
+
+    @classmethod
+    def query_event_by_id(cls, id):
+        return cls.get_by_id(id)
+
+    @classmethod
+    def query_event_by_type(cls, event_type):
+        return cls.query(event_type=event_type).order(-cls.logged_on, cls.geo_country_ordinal, cls.geo_city_ordinal)
+
+    @classmethod
+    def query_event_by_http_status_code(cls, http_status_code, order_by_date=True):
+        if order_by_date:
+            return cls.query(http_status_code=http_status_code).order(-cls.logged_on, -cls.id)
+        else:
+            return cls.query(http_status_code=http_status_code).order(-cls.id)
+
+    @classmethod
+    def query_event_by_ip(cls, ip, order_by_date=True):
+        if order_by_date:
+            return cls.query(ip=ip).order(-cls.logged_on, -cls.id)
+        else:
+            return cls.query(ip=ip).order(-cls.id)
+
+    @classmethod
+    def query_event_by_country_and_city(cls, country, city, order_by_date=True):
+        if order_by_date:
+            return cls.query(country=country, city=city).order(-cls.logged_on, -cls.id)
+        else:
+            return cls.query(country=country, city=city).order(-cls.id)
+
+    @classmethod
+    def query_event_by_http_host(cls, http_host, order_by_date=True):
+        if order_by_date:
+            return cls.query(http_host=http_host).order(-cls.logged_on, -cls.id)
+        else:
+            return cls.query(http_host=http_host).order(-cls.id)
+
+    @classmethod
+    def query_event_by_http_useragent_hash(cls, http_useragent_hash, order_by_date=True):
+        if order_by_date:
+            return cls.query(http_useragent_hash=http_useragent_hash).order(-cls.logged_on, -cls.id)
+        else:
+            return cls.query(http_useragent_hash=http_useragent_hash).order(-cls.id)
 
 def __str__(self):
     return self.httpurl
