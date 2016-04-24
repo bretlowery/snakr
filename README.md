@@ -48,7 +48,7 @@ Negative effects on SEO, CTR, etc.                      | Shortened URLs may not
 
 ## Performance
 
-Snakr can create and return a short url in under 200ms. I haven't load tested this at volume but assume GC can handle growth.
+Snakr can create and return a short url in under 2s on smallest-possible GC and GAE settings. I haven't load tested this at volume but assume GC can handle growth.
 
 ## Features Provided 
 
