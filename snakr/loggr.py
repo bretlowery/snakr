@@ -49,13 +49,34 @@ class SnakrEventLogger(Exception):
         request = kwargs.pop('request', None)
         if not isinstance(request, HttpRequest):
             request = None
-        infokey = kwargs.pop('messagekey', None)
-        info = kwargs.pop('message', 'none')
+        messagekey = kwargs.pop('messagekey', None)
+        message = kwargs.pop('message', None)
+        if not message:
+            if messagekey: 
+                messagekey = messagekey.strip().upper()
+                try:
+                    message = settings.CANONICAL_MESSAGES[messagekey]
+                    if not message:
+                        message = settings.MESSAGE_OF_LAST_RESORT
+                except:
+                    message = settings.MESSAGE_OF_LAST_RESORT
+                    pass
+            else:
+                message = settings.MESSAGE_OF_LAST_RESORT
         try:
             value = str(kwargs.pop('value', 'none'))
         except:
             value = None
             pass
+        if value is not None and value != 'none':
+            if message:
+                try:
+                    message = message % value
+                except:
+                    message = value
+                    pass
+            else:
+                message = value
         event_type = kwargs.pop('event_type', 'W')
         longurl_id = kwargs.pop('longurl_id', -1)
         longurl = kwargs.pop('longurl', 'none')
@@ -75,31 +96,10 @@ class SnakrEventLogger(Exception):
             status_code = 0
         #if status_code == 200:
         #    event_type = 'I'
-        if status_code not in (-403,0,200,400,404,422,500):
+        if status_code not in (-403,0,200,302,400,404,422,500):
             status_code = 403
         if settings.DEBUG or settings.VERBOSE_LOGGING or (status_code >= 400 and status_code != 404):
             verbose = True
-        if not info:
-            if infokey:
-                infokey = infokey.strip().upper()
-                try:
-                    info = settings.CANONICAL_MESSAGES[infokey]
-                    if not info:
-                        info = settings.MESSAGE_OF_LAST_RESORT
-                except:
-                    info = settings.MESSAGE_OF_LAST_RESORT
-                    pass
-            else:
-                info = settings.MESSAGE_OF_LAST_RESORT
-        if value is not None and value != 'None':
-            if info:
-                try:
-                    info = info % value
-                except:
-                    info = value
-                    pass
-            else:
-                info = value
 
         dupe_message = False
         if request:
@@ -137,7 +137,7 @@ class SnakrEventLogger(Exception):
                         dt = dt,
                         event_type = event_type,
                         status_code = status_code,
-                        info = info,
+                        message = message,
                         shorturl_id = shorturl_id,
                         shorturl = shorturl,
                         longurl_id = longurl_id,
@@ -154,24 +154,24 @@ class SnakrEventLogger(Exception):
                 jsondata['snakr_datastore_eventstream_id'] = str(ds_id)
 
             if abs(status_code) == 403 and settings.LOG_HTTP403:
-                self.logger.warning(info, extra=jsondata)
+                self.logger.warning(message, extra=jsondata)
             elif (status_code <= 200 and settings.LOG_HTTP200) or (status_code == 404 and settings.LOG_HTTP404) or (status_code == 302 and settings.LOG_HTTP302):
-                self.logger.info(info, extra=jsondata)
+                self.logger.info(message, extra=jsondata)
             elif status_code == 400 and settings.LOG_HTTP400:
-                self.logger.warning(info, extra=jsondata)
+                self.logger.warning(message, extra=jsondata)
             else:
-                self.logger.critical(info, extra=jsondata)
+                self.logger.critical(message, extra=jsondata)
 
             def switch(x):
                 return {
                     -403:PermissionDenied,
-                    200: info,
-                    302: info,
-                    400: SuspiciousOperation(info),
-                    403: SuspiciousOperation(info),
+                    200: message,
+                    302: message,
+                    400: SuspiciousOperation(message),
+                    403: SuspiciousOperation(message),
                     404: Http404,
-                    422: SuspiciousOperation(info),
-                    500: HttpResponseServerError(info),
+                    422: SuspiciousOperation(message),
+                    500: HttpResponseServerError(message),
                 }.get(x, 200)
 
             if status_code != 0:
@@ -185,7 +185,7 @@ class SnakrEventLogger(Exception):
         dt = kwargs.pop('dt',  datetime.datetime.now().isoformat())
         event_type = kwargs.pop('event_type', None)
         status_code = kwargs.pop('status_code', None)
-        info = kwargs.pop('info', None)
+        message = kwargs.pop('message', None)
         shorturl_id = kwargs.pop('shorturl_id', -1)
         shorturl = kwargs.pop('shorturl', None)
         longurl_id = kwargs.pop('longurl_id', -1)
@@ -229,7 +229,7 @@ class SnakrEventLogger(Exception):
                     logged_on=dt,
                     event_type=event_type,
                     http_status_code=abs(status_code),
-                    message=info,
+                    message=message,
                     longurl_id=longurl_id,
                     shorturl_id=shorturl_id,
                     ip_id=ip_hash,
@@ -251,7 +251,7 @@ class SnakrEventLogger(Exception):
             ds_id = gds.persist(
                     event_type=event_type,
                     http_status_code=abs(status_code),
-                    info=info,
+                    info=message,
                     longurl=longurl,
                     shorturl=shorturl,
                     ip_address=ip_address,

@@ -87,7 +87,7 @@ class BotDetector():
         #
         for bot in self._known_bots:
             if bot in http_useragent:
-                raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Known Bot {%}' % bot, status_code=-403)
+                raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Known Bot [%]' % bot, status_code=-403)
         for bad in self._blacklisted_useragents:
             if http_useragent == bad:
                 raise self._event.log(request=request, event_type='B', messagekey='ROBOT', value='Blacklisted Useragent [%s]' % http_useragent, status_code=-403)

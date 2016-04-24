@@ -7,6 +7,10 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 """
 #
+# NOTE: changing the ordering of most anything in wsgi.py will most likely break something somewhere
+# Be very careful when deploying changes
+#
+#
 # required pre-Django init
 #
 import os
