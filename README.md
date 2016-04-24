@@ -1,4 +1,4 @@
-# Snakr v1.0.6
+# Snakr v1.0.7
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) and [Google Datastore](https://cloud.google.com/datastore/) backend. 
@@ -23,6 +23,9 @@ Rolled back due to GAE bug.
 
 **v1.0.6**
 Added support for writing the event stream to either Google Cloud SQL (MySQL) and/or Google Datastore (NoSQL). Cloud SQL supports a traditional star schema while the Datastore uses a versioned, schemaless structure.
+
+**v1.0.7**
+Bug fixes to doc title extraction for certain complex URLs or URL targets containing certain Unicode values
 
 
 ## Background 

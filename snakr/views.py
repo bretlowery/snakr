@@ -99,8 +99,8 @@ class Dispatcher(webapp2.RequestHandler):
         # return the doc title too if we got one
         #
         response_data['title'] = title
-        lt = len(title)
-        if lt > 0:
+        if title:
+            lt = len(title)
             ls = len(shorturl)
             ltmax = 140 - ls - 1
             if lt > ltmax:

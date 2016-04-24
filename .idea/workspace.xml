@@ -2,24 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e97d469-436f-4ac1-9d9d-fb46df745c6f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/snakr/bigquery.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/snakr/googledatastore.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source-context.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source-contexts.json" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.yaml" afterPath="$PROJECT_DIR$/app.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements-vendor.txt" afterPath="$PROJECT_DIR$/requirements-vendor.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/__init__.py" afterPath="$PROJECT_DIR$/snakr/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/loggr.py" afterPath="$PROJECT_DIR$/snakr/loggr.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/longurls.py" afterPath="$PROJECT_DIR$/snakr/longurls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/models.py" afterPath="$PROJECT_DIR$/snakr/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/botprotection.py" afterPath="$PROJECT_DIR$/snakr/botprotection.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/googledatastore.py" afterPath="$PROJECT_DIR$/snakr/googledatastore.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/parsers.py" afterPath="$PROJECT_DIR$/snakr/parsers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/shorturls.py" afterPath="$PROJECT_DIR$/snakr/shorturls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/startup.py" afterPath="$PROJECT_DIR$/snakr/startup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/utilities.py" afterPath="$PROJECT_DIR$/snakr/utilities.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/wsgi.py" afterPath="$PROJECT_DIR$/snakr/wsgi.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snakr/views.py" afterPath="$PROJECT_DIR$/snakr/views.py" />
     </list>
     <ignored path="Snakr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,20 +42,31 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/secure/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="15" column="31" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="31" />
+            <state relative-caret-position="-147">
+              <caret line="234" column="18" selection-start-line="234" selection-start-column="18" selection-end-line="234" selection-end-column="18" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
+                <marker date="1461505269000" expanded="true" signature="7459:9704" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.yaml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.yaml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="258">
               <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/snakr/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1395">
+              <caret line="104" column="32" selection-start-line="104" selection-start-column="32" selection-end-line="104" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -75,34 +75,34 @@
       <file leaf-file-name="shorturls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snakr/shorturls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
+            <state relative-caret-position="2205">
               <caret line="152" column="101" selection-start-line="152" selection-start-column="101" selection-end-line="152" selection-end-column="101" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
-          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="-1058">
-                <caret line="293" column="258" selection-start-line="293" selection-start-column="258" selection-end-line="293" selection-end-column="258" />
+              <first_editor relative-caret-position="405">
+                <caret line="27" column="107" selection-start-line="27" selection-start-column="107" selection-end-line="27" selection-end-column="107" />
                 <folding />
               </first_editor>
               <second_editor />
             </state>
+          </provider>
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snakr/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-958">
-              <caret line="202" column="0" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
+            <state relative-caret-position="92">
+              <caret line="244" column="56" selection-start-line="244" selection-start-column="56" selection-end-line="244" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -111,8 +111,8 @@
       <file leaf-file-name="googledatastore.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snakr/googledatastore.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+            <state relative-caret-position="300">
+              <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -120,21 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utilities.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snakr/utilities.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="138" column="25" selection-start-line="138" selection-start-column="25" selection-end-line="138" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="loggr.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snakr/loggr.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-630">
-              <caret line="139" column="36" selection-start-line="139" selection-start-column="36" selection-end-line="139" selection-end-column="36" />
+            <state relative-caret-position="3705">
+              <caret line="256" column="42" selection-start-line="256" selection-start-column="20" selection-end-line="256" selection-end-column="42" />
               <folding>
                 <element signature="e#113#127#0" expanded="true" />
               </folding>
@@ -142,21 +132,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="longurls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
+      <file leaf-file-name="parsers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/snakr/parsers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="124" column="127" selection-start-line="124" selection-start-column="127" selection-end-line="124" selection-end-column="127" />
+            <state relative-caret-position="212">
+              <caret line="61" column="27" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parsers.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snakr/parsers.py">
+      <file leaf-file-name="botprotection.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/snakr/botprotection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+            <state relative-caret-position="57">
+              <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -205,7 +195,6 @@
         <option value="$PROJECT_DIR$/vnext/urls.py" />
         <option value="$PROJECT_DIR$/vnext/loggr.py" />
         <option value="$PROJECT_DIR$/vnext/ipaddr.py" />
-        <option value="$PROJECT_DIR$/snakr/botprotection.py" />
         <option value="$PROJECT_DIR$/vnext/botprotection.py" />
         <option value="$PROJECT_DIR$/vnext/models.py" />
         <option value="$PROJECT_DIR$/vnext.yaml" />
@@ -214,7 +203,6 @@
         <option value="$PROJECT_DIR$/vnext/__init__.py" />
         <option value="$PROJECT_DIR$/vnext/wsgi.py" />
         <option value="$PROJECT_DIR$/vnext/startup.py" />
-        <option value="$PROJECT_DIR$/snakr/views.py" />
         <option value="$PROJECT_DIR$/snakr/bigquery.py" />
         <option value="$PROJECT_DIR$/requirements-vendor.txt" />
         <option value="$PROJECT_DIR$/appengine_config.py" />
@@ -222,16 +210,18 @@
         <option value="$PROJECT_DIR$/snakr/__init__.py" />
         <option value="$PROJECT_DIR$/snakr/startup.py" />
         <option value="$PROJECT_DIR$/snakr/wsgi.py" />
-        <option value="$PROJECT_DIR$/secure/settings.py" />
         <option value="$PROJECT_DIR$/snakr/utilities.py" />
-        <option value="$PROJECT_DIR$/snakr/parsers.py" />
         <option value="$PROJECT_DIR$/snakr/loggr.py" />
-        <option value="$PROJECT_DIR$/snakr/googledatastore.py" />
-        <option value="$PROJECT_DIR$/app.yaml" />
         <option value="$PROJECT_DIR$/snakr/longurls.py" />
         <option value="$PROJECT_DIR$/snakr/shorturls.py" />
+        <option value="$PROJECT_DIR$/snakr/googledatastore.py" />
         <option value="$PROJECT_DIR$/snakr/models.py" />
+        <option value="$PROJECT_DIR$/secure/settings.py" />
+        <option value="$PROJECT_DIR$/snakr/botprotection.py" />
+        <option value="$PROJECT_DIR$/snakr/views.py" />
+        <option value="$PROJECT_DIR$/snakr/parsers.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/app.yaml" />
       </list>
     </option>
   </component>
@@ -291,6 +281,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -316,7 +307,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -744,12 +734,12 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="35" y="23" width="1331" height="745" extended-state="6" />
-    <editor active="true" />
+    <frame x="35" y="23" width="1331" height="745" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1833208" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1825695" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="App Config Tool" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22337279" sideWeight="0.49363297" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="App Config Tool" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22337279" sideWeight="0.49363297" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2514793" sideWeight="0.506367" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -846,9 +836,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
           <first_editor relative-caret-position="210">
@@ -857,6 +844,9 @@
           <second_editor />
         </state>
       </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/secure/settings.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -864,6 +854,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+            <marker date="1461505269000" expanded="true" signature="7459:9704" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -880,9 +871,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1860">
           <caret line="124" column="26" selection-start-line="124" selection-start-column="26" selection-end-line="124" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#11#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1074,23 +1063,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="99" column="9" selection-start-line="99" selection-start-column="9" selection-end-line="99" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#11#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/botprotection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/snakr/ipaddr.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1137,7 +1109,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1145,7 +1116,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1153,49 +1123,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="e#249#258#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/snakr/utilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
+        <state relative-caret-position="1950">
           <caret line="138" column="25" selection-start-line="138" selection-start-column="25" selection-end-line="138" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/loggr.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-630">
-          <caret line="139" column="36" selection-start-line="139" selection-start-column="36" selection-end-line="139" selection-end-column="36" />
-          <folding>
-            <element signature="e#113#127#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snakr/parsers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/snakr/longurls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
+        <state relative-caret-position="1755">
           <caret line="124" column="127" selection-start-line="124" selection-start-column="127" selection-end-line="124" selection-end-column="127" />
           <folding />
         </state>
@@ -1203,16 +1144,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/snakr/shorturls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
+        <state relative-caret-position="2205">
           <caret line="152" column="101" selection-start-line="152" selection-start-column="101" selection-end-line="152" selection-end-column="101" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/loggr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3705">
+          <caret line="256" column="42" selection-start-line="256" selection-start-column="20" selection-end-line="256" selection-end-column="42" />
+          <folding>
+            <element signature="e#113#127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/snakr/googledatastore.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+        <state relative-caret-position="300">
+          <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
@@ -1221,26 +1172,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/snakr/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-958">
-          <caret line="202" column="0" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
+        <state relative-caret-position="92">
+          <caret line="244" column="56" selection-start-line="244" selection-start-column="56" selection-end-line="244" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/secure/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="15" column="31" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="31" />
+        <state relative-caret-position="-147">
+          <caret line="234" column="18" selection-start-line="234" selection-start-column="18" selection-end-line="234" selection-end-column="18" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+            <marker date="1461505269000" expanded="true" signature="7459:9704" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
+    <entry file="file://$PROJECT_DIR$/snakr/botprotection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
+          <folding />
+        </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1395">
+          <caret line="104" column="32" selection-start-line="104" selection-start-column="32" selection-end-line="104" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snakr/parsers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="61" column="27" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="2" column="7" selection-start-line="0" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
@@ -1248,11 +1221,22 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="-1058">
-            <caret line="293" column="258" selection-start-line="293" selection-start-column="258" selection-end-line="293" selection-end-column="258" />
+          <first_editor relative-caret-position="405">
+            <caret line="27" column="107" selection-start-line="27" selection-start-column="107" selection-end-line="27" selection-end-column="107" />
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>

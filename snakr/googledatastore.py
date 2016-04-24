@@ -11,7 +11,7 @@ class client():
     def persist(self, **kwargs):
         if settings.DATASTORE_ENTITY:
             try:
-                dad = models.EventStreamVersion.get_by_id(settings.SNAKR_VERSION, use_cache=False)
+                dad = models.EventStreamVersion.get_by_id(settings.SNAKR_VERSION)
                 if not dad:
                     dad = models.EventStreamVersion(id=settings.SNAKR_VERSION)
                     dad.event_stream_version = settings.SNAKR_VERSION
@@ -32,7 +32,7 @@ class client():
                 event.info = kwargs.pop("info", "none")
                 event.longurl = kwargs.pop("longurl", "none")
                 event.shorturl = kwargs.pop("shorturl", "none")
-                event.ip = kwargs.pop("ip","::0")
+                event.ip_address = kwargs.pop("ip_address","::0")
                 event.geo_latlong = ndb.GeoPt(float(kwargs.pop("geo_lat", 0.0)),float(kwargs.pop("geo_long", 0.0)))
                 event.geo_city = kwargs.pop("geo_city", "none")
                 event.geo_country = kwargs.pop("geo_country", "none")

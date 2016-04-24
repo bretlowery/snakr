@@ -56,17 +56,19 @@ class Parsers():
                 try:
                     soup = bs4.BeautifulSoup(urllib2.urlopen(documenturl), "html.parser")
                     items = [item for item in soup if isinstance(item, bs4.Doctype)]
-                    doctype =  items[0].string if items else None
+                    doctype = items[0].string if items else None
                 except:
                     pass
                 if doctype:
                     def dt(x):
                         return {
                             u'html': soup.title.string,
+                            u'doctype html': soup.title.string,
                             }.get(x, None)
-                    rtn = Utils.remove_nonascii(dt(doctype))
+                    # rtn = Utils.remove_nonascii(dt(doctype))
+                    rtn = dt(doctype)
         if rtn is None:
             return None
         else:
-            return rtn.strip()
+            return rtn.decode('utf8').strip()
 
