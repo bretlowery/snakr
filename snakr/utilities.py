@@ -145,8 +145,10 @@ class Utils:
     def url_exists(url):
         rtn = False
         try:
-            r = urllib2.urlopen(url)
-            if r.code in (200, 401):
+            req = urllib2.Request(url)
+            req.add_header('User-Agent','Snakr URL Shortener Service (http://www.github.com/bretlowery/snakr) v%s' % settings.SNAKR_VERSION)
+            resp = urllib2.urlopen(req)
+            if resp.code in (200, 401):
                 rtn = True
         except:
             pass

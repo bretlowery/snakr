@@ -1,4 +1,4 @@
-# Snakr v1.0.7
+# Snakr v1.0.10
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) and [Google Datastore](https://cloud.google.com/datastore/) backend. 
@@ -19,14 +19,22 @@ Corrected target page title extraction; other bug fixes.
 More bug fixes.
 
 **v1.0.5**
-Rolled back due to GAE bug.
+Rolled back due to GAE bug; not deployed.
 
 **v1.0.6**
 Added support for writing the event stream to either Google Cloud SQL (MySQL) and/or Google Datastore (NoSQL). Cloud SQL supports a traditional star schema while the Datastore uses a versioned, schemaless structure.
 
 **v1.0.7**
-Bug fixes to doc title extraction for certain complex URLs or URL targets containing certain Unicode values
+Bug fixes to doc title extraction for certain complex URLs or URL targets containing certain Unicode values.
 
+**v1.0.8**
+Fix to make A 302 an INFORMATION message in GC Logging, rather than a WARNING.
+
+**v1.0.9**
+Separate botdetection and blacklisting into two separately configurable features; renamed module trafficfilters.py.
+
+**v1.0.10**
+Treat Twitterbot as a special case of allowable bot, and add a setting to enable/disable this special case.
 
 ## Background 
 URL shorteners are used to generate a smaller “abbreviated” version of a URL so that the smaller URL can be used as an alias in place of the longer URL. Subsequent calls to the smaller URL will redirect to the same resource originally identified by the longer URL, including all querystring parameters and other valid URL components. This is useful for several reasons:
@@ -232,8 +240,11 @@ from your local MySQL Workbench client until you grant your new IP acesss on the
 Setting                | Value
 ---------------------- | ------------------------------
 ALLOWED_HOSTS          | A whitelist of all host names and IPs allowed to submit admin and POST requests to snakr.
+ALLOW_TWITTERBOT       | If True, allows all traffic from Twitterbot, even if ENABLE_BOTPROTECTION is set to True.
 CANONICAL_MESSAGES     | The list of snakr service error and warning messages.
 DATABASE_LOGGING       | If True, logs events and request metadata into Google Cloud SQL (if PERSIST_EVENTSTREAM_TO_CLOUDSQL is also True) and/or Google Datastore (if PERSIST_EVENTSTREAM_TO_DATASTORE is also True).
+ENABLE_BLACKLISTING    | If True, enables blacklist filters on city, country, ip, host name, and/or user agent string. 403s any blacklisted traffic found.
+ENABLE_BOTPROTECTION   | If True, enables bot protection and 403s any known bot encountered (except Twitterbot, a special case; see below).
 ENABLE_LOGGING         | If True, logs service requests to the snakr log. False turns off logging.
 GAE_APP_NAME           | "snakr"
 GAE_APP_KEY            | The Google API key to use for the app. Provided by the Google API admin dashboard.

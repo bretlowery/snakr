@@ -6,7 +6,7 @@ from urlparse import urlparse
 import webapp2
 import secure.settings as settings
 from parsers import Parsers
-from botprotection import BotDetector
+from trafficfilters import TrafficFilters
 import loggr
 
 def maintenance_page(self, request):
@@ -17,7 +17,7 @@ class Dispatcher(webapp2.RequestHandler):
 
     def __init__(self):
         super(Dispatcher, self).__init__()
-        self._botdetector = BotDetector()
+        self._botdetector = TrafficFilters()
         self._event = loggr.SnakrEventLogger()
         return
 
