@@ -30,8 +30,8 @@ class LongURL:
 
         if not Utils.is_url_valid(lurl):
             raise self._event.log(messagekey='LONG_URL_INVALID', value=lurl, status_code=400)
-        if not Utils.url_exists(lurl):
-            raise self._event.log(messagekey='LONG_URL_DOESNTEXIST', value=lurl, status_code=400)
+        #if not Utils.url_exists(lurl):
+        #    raise self._event.log(messagekey='LONG_URL_DOESNTEXIST', value=lurl, status_code=400)
 
         self.vanity_path = Utils.get_json(request, 'vp')
 

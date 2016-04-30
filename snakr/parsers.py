@@ -32,41 +32,48 @@ class Parsers():
     def get_title(self, documenturl):
         rtn = None
         mime_type = None
+        docurl = None
         try:
-            mime_type = mimetypes.guess_type(documenturl, strict=True)[0]
-        except:
+            docurl = urllib2.urlopen(documenturl)
+        except urllib2.HTTPError as e:
+            raise Exception('HTTPError %s: %s' % (e.code, e.reason))
+        else:
             pass
-        if mime_type:
-            def mt(x):
-                return {
-                    'application/pdf': self._get_pdf_title(documenturl),
-                    }.get(x, None)
-            rtn = mt(mime_type)
-        if not mime_type or not rtn:
-            doc_supports_og = False
+        if docurl:
             try:
-                ogdoc = PyOpenGraph.PyOpenGraph(documenturl)
-                doc_supports_og = ogdoc.is_valid()
+                mime_type = mimetypes.guess_type(documenturl, strict=True)[0]
             except:
                 pass
-            if doc_supports_og:
-                rtn = ogdoc.metadata['title']
-            if not rtn:
-                doctype = None
+            if mime_type:
+                def mt(x):
+                    return {
+                        'application/pdf': self._get_pdf_title(documenturl),
+                        }.get(x, None)
+                rtn = mt(mime_type)
+            if not mime_type or not rtn:
+                doc_supports_og = False
                 try:
-                    soup = bs4.BeautifulSoup(urllib2.urlopen(documenturl), "html.parser")
-                    items = [item for item in soup if isinstance(item, bs4.Doctype)]
-                    doctype = items[0].string if items else None
+                    ogdoc = PyOpenGraph.PyOpenGraph(documenturl)
+                    doc_supports_og = ogdoc.is_valid()
                 except:
                     pass
-                if doctype:
-                    def dt(x):
-                        return {
-                            u'html': soup.title.string,
-                            u'doctype html': soup.title.string,
-                            }.get(x, None)
-                    # rtn = Utils.remove_nonascii(dt(doctype))
-                    rtn = dt(doctype)
+                if doc_supports_og:
+                    rtn = ogdoc.metadata['title']
+                if not rtn:
+                    doctype = None
+                    try:
+                        soup = bs4.BeautifulSoup(docurl, "html.parser")
+                        items = [item for item in soup if isinstance(item, bs4.Doctype)]
+                        doctype = items[0].string if items else None
+                    except:
+                        pass
+                    if doctype:
+                        def dt(x):
+                            return {
+                                u'html': soup.title.string,
+                                u'doctype html': soup.title.string,
+                                }.get(x, None)
+                        rtn = dt(doctype)
         if rtn is None:
             return None
         else:

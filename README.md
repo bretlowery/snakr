@@ -1,4 +1,4 @@
-# Snakr v1.0.10
+# Snakr v1.0.11
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) and [Google Datastore](https://cloud.google.com/datastore/) backend. 
@@ -35,6 +35,9 @@ Separate botdetection and blacklisting into two separately configurable features
 
 **v1.0.10**
 Treat Twitterbot as a special case of allowable bot, and add a setting to enable/disable this special case.
+
+**v1.0.11**
+Add better notification when a long url target website blacklists Google Cloud traffic and/or snakr as a possible bad bot when attempting to get the page title of the long url.
 
 ## Background 
 URL shorteners are used to generate a smaller “abbreviated” version of a URL so that the smaller URL can be used as an alias in place of the longer URL. Subsequent calls to the smaller URL will redirect to the same resource originally identified by the longer URL, including all querystring parameters and other valid URL components. This is useful for several reasons:

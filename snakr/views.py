@@ -76,6 +76,7 @@ class Dispatcher(webapp2.RequestHandler):
         #
         self._botdetector.if_bot_then_403(request)
         #
+        #
         # create an instance of the LongURL object, validate the long URL, and if successful load the LongURL instance with it
         #
         l = LongURL(request)
@@ -87,12 +88,19 @@ class Dispatcher(webapp2.RequestHandler):
         #
         # get document title
         #
+        response_data = {}
+        response_data['errmsg'] = ''
+        title = None
         p = Parsers()
-        title = p.get_title(l.longurl)
+        try:
+            title = p.get_title(l.longurl)
+        except Exception as e:
+            response_data['errmsg'] = 'The long URL responded with `%s` when attempting to get its page title for link generation. The long URL site may have Google Cloud or this service blacklisted as a possible source of bot traffic. Your short URLs will still resolve, tho.' % e.message
+        else:
+            pass
         #
         # prepare JSON and add shorturl to return it to the caller
         #
-        response_data = {}
         response_data['version'] = settings.SNAKR_VERSION
         response_data['shorturl'] = shorturl
         #
