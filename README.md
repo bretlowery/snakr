@@ -48,18 +48,19 @@ No thirteenth floor? Then no thirteenth version either.
 **v1.0.14**
 Added third party blacklisting service protection. Loads several Palo Alto Networks free daily IP blacklists and scans for requests from IPs on these and if found 403s them. Current PAN lists uploaded are:
 
-List                                     | No of Entries as of May 30 2016 | Link                          | Description
-Spamhaus DROP                            | 733 entries	                   | http://www.spamhaus.org/drop/ | DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission
-Spamhaus EDROP                           | 62 entries                      | http://www.spamhaus.org/drop/ | DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission
-OpenBL block list                        | 4754 entries                    | http://www.openbl.org/        | The OpenBL.org project (formerly known as the SSH blacklist) is about detecting, logging and reporting bruteforce attacks.
+List                                     | No of Entries as of May 30 2016 | Link                               | Description
+---------------------------------------- | ------------------------------- | ---------------------------------- | -------------
+Spamhaus DROP                            | 733 entries	                   | http://www.spamhaus.org/drop/      | DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission
+Spamhaus EDROP                           | 62 entries                      | http://www.spamhaus.org/drop/      | DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission
+OpenBL block list                        | 4754 entries                    | http://www.openbl.org/             | The OpenBL.org project (formerly known as the SSH blacklist) is about detecting, logging and reporting bruteforce attacks.
 BruteForceBlocker                        | 1043 entries                    | http://danger.rulez.sk/index.php/bruteforceblocker/ | 
-Malware Domain List                      | 1437 entries                    | http://www.malwaredomainlist.com/ | 
+Malware Domain List                      | 1437 entries                    | http://www.malwaredomainlist.com/  |  
 Emerging Threats RBN                     | 1 entry                         | http://doc.emergingthreats.net/bin/view/Main/RussianBusinessNetwork | 
 Emerging Threats TOR                     | 6656 entries                    | http://doc.emergingthreats.net/bin/view/Main/TorRules | Emerging Threats Tor rules.
 Emerging Threats Known Compromised Hosts | 1056 entries                    | http://doc.emergingthreats.net/bin/view/Main/CompromisedHost | 
 Dshield Recommended Block List           | 20 entries                      | http://feeds.dshield.org/block.txt | DShield.org Recommended Block List.
-SSL Abuse IP List                        | 70 entries                      | | SSLBL 30 days block list.
-Zeus Tracker Bad IPs List                | 136 entries                     | | abuse.ch ZeuS IP blocklist "BadIPs" (excluding hijacked sites and free hosting providers).
+SSL Abuse IP List                        | 70 entries                      |                                    | SSLBL 30 days block list.
+Zeus Tracker Bad IPs List                | 136 entries                     |                                    | abuse.ch ZeuS IP blocklist "BadIPs" (excluding hijacked sites and free hosting providers).
 
 ## Background 
 URL shorteners are used to generate a smaller “abbreviated” version of a URL so that the smaller URL can be used as an alias in place of the longer URL. Subsequent calls to the smaller URL will redirect to the same resource originally identified by the longer URL, including all querystring parameters and other valid URL components. This is useful for several reasons:
