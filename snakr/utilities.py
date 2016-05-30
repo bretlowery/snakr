@@ -1,12 +1,12 @@
 import hashlib
 import random
 import urllib
-from urlparse import urlparse
 import secure.settings as settings
 from django.core.validators import URLValidator
 import json
 import mimetypes
 import urllib2
+from snakr.ipaddr import IP
 
 _URL_VALIDATOR = URLValidator()
 
@@ -155,21 +155,33 @@ class Utils:
         return rtn
 
     @staticmethod
-    def get_geo_country_ordinal(geo_country):
-        if geo_country == 'us':
-            return 0
-        else:
-            return (1000 * ord(geo_country[0].lower())) + ord(geo_country[1].lower())
+    def is_ip_valid(ip_address):
+        rtn = False
+        try:
+            ip = IP(ip_address)
+            if ip:
+                rtn = True
+        except:
+            pass
+        return rtn
 
-    @staticmethod
-    def get_geo_city_ordinal(geo_city):
-        c = geo_city.replace(' ','')
-        def ggco_recurse(c, l, o):
-            k = c[0:1]
-            i = ord(k) - 96
-            o = o + (i * 10**-l)
-            l += 1
-        if geo_country == 'us':
-            return 0
-        else:
-            return
+    #
+    # @staticmethod
+    # def get_geo_country_ordinal(geo_country):
+    #     if geo_country == 'us':
+    #         return 0
+    #     else:
+    #         return (1000 * ord(geo_country[0].lower())) + ord(geo_country[1].lower())
+    #
+    # @staticmethod
+    # def get_geo_city_ordinal(geo_city):
+    #     c = geo_city.replace(' ','')
+    #     def ggco_recurse(c, l, o):
+    #         k = c[0:1]
+    #         i = ord(k) - 96
+    #         o = o + (i * 10**-l)
+    #         l += 1
+    #     if geo_country == 'us':
+    #         return 0
+    #     else:
+    #         return

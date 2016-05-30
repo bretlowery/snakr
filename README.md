@@ -1,4 +1,4 @@
-# Snakr v1.0.11
+# Snakr v1.0.14
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) and [Google Datastore](https://cloud.google.com/datastore/) backend. 
@@ -38,6 +38,55 @@ Treat Twitterbot as a special case of allowable bot, and add a setting to enable
 
 **v1.0.11**
 Add better notification when a long url target website blacklists Google Cloud traffic and/or snakr as a possible bad bot when attempting to get the page title of the long url.
+
+**v1.0.12**
+Add better notification when a long url target website blacklists Google Cloud traffic and/or snakr as a possible bad bot when attempting to get the page title of the long url.
+
+**v1.0.13**
+No thirteenth floor? Then no thirteenth version either. 
+
+**v1.0.14**
+Added third party blacklisting service protection. Loads several Palo Alto Networks free daily IP blacklists and scans for requests from IPs on these and if found 403s them. Current PAN lists uploaded are:
+1. Spamhaus DROP
+733 entries	as of 30 May 2016 21:55	
+DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission
+See http://www.spamhaus.org/drop/
+2. Spamhaus EDROP
+62 entries as of 30 May 2016 21:55	
+DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission
+See http://www.spamhaus.org/drop/
+3. OpenBL block list
+4754 entries as of 30 May 2016 11:31	
+The OpenBL.org project (formerly known as the SSH blacklist) is about detecting, logging and reporting bruteforce attacks.
+See http://www.openbl.org/
+4. BruteForceBlocker
+1043 entries as of 30 May 2016 10:40	
+See http://danger.rulez.sk/index.php/bruteforceblocker/
+5. Malware Domain List	
+1437 entries as of 30 May 2016 11:01	
+See http://www.malwaredomainlist.com/
+6. Emerging Threats RBN	
+1 entry as of 30 May 2016 11:15	
+From Emerging Threats RBN rules.
+See http://doc.emergingthreats.net/bin/view/Main/RussianBusinessNetwork
+7. Emerging Threats TOR	
+6656 entries as of 30 May 2016 10:37	
+Emerging Threats Tor rules.
+See http://doc.emergingthreats.net/bin/view/Main/TorRules
+8. Emerging Threats Known Compromised Hosts	
+1056 entries as of 30 May 2016 21:50	
+See http://doc.emergingthreats.net/bin/view/Main/CompromisedHost
+9. Dshield Recommended Block List	20 entries	30 May 2016 21:34	
+DShield.org Recommended Block List.
+See http://feeds.dshield.org/block.txt
+10. SSL Abuse IP List	
+70 entries as of 30 May 2016 14:39	
+SSLBL 30 days block list.
+See SSL Blacklist
+11. Zeus Tracker Bad IPs List	
+136 entries	as of 30 May 2016 11:19	
+abuse.ch ZeuS IP blocklist "BadIPs" (excluding hijacked sites and free hosting providers).
+See Zeus Tracker Block Lists
 
 ## Background 
 URL shorteners are used to generate a smaller “abbreviated” version of a URL so that the smaller URL can be used as an alias in place of the longer URL. Subsequent calls to the smaller URL will redirect to the same resource originally identified by the longer URL, including all querystring parameters and other valid URL components. This is useful for several reasons:
@@ -244,6 +293,7 @@ Setting                | Value
 ---------------------- | ------------------------------
 ALLOWED_HOSTS          | A whitelist of all host names and IPs allowed to submit admin and POST requests to snakr.
 ALLOW_TWITTERBOT       | If True, allows all traffic from Twitterbot, even if ENABLE_BOTPROTECTION is set to True.
+BLACKLISTED_BOTS       | The list of HTTP_USER_AGENT string fragments that if encountered denote a bot. If ENABLE_BOTPROTECTION is set to True, any traffic with a user agent containing one of these fragments will be 403d.
 CANONICAL_MESSAGES     | The list of snakr service error and warning messages.
 DATABASE_LOGGING       | If True, logs events and request metadata into Google Cloud SQL (if PERSIST_EVENTSTREAM_TO_CLOUDSQL is also True) and/or Google Datastore (if PERSIST_EVENTSTREAM_TO_DATASTORE is also True).
 ENABLE_BLACKLISTING    | If True, enables blacklist filters on city, country, ip, host name, and/or user agent string. 403s any blacklisted traffic found.
@@ -271,8 +321,9 @@ SHORTURL_HOST          | The root host (netloc) to append to the front of the no
 SHORTURL_PATH_ALPHABET | The alphabet containing the characters from which to build the short URL. This CANNOT be changed at will without possible breaking previously generated short URLs. This can occur if a character or digit is removed form the alphabet but which still appears in a previously-generated short URL. Those short URLs will break the next time they are used.
 SHORTURL_PATH_SIZE     | How many characters in the 'shorten_using' alphabet to use in building short URLs, from 6 to 12. Note that this can be changed at will to a larger or smaller value between 6 and 12, and all historical short URLs will still work.
 SNAKRDB_DEBUG_DB       | When set to DEBUG and snakr is run locally from devappserver.py, local snakr will connect to remote GCS rather than local MySQL.
+THRIDPARTY_IP_BLACKLISTS | Defines the list and location of third-party IP blacklists to load and apply to traffic sources. If a request is made from an IP on the list, it is 403d. The IPs in the list must be in one of these four formats: (1) single IPv6 address (2) single IPv4 address (3) IPv4 address in CIDR format 'a.b.c.d/nn', or (4) an IPv4 range in the form 'a.b.c.d-e.f.g.h'
 VERBOSE_LOGGING        | If True appends a JSON info record containing the requestor's IP, lat, long, user agent, host, city, and country of origin to the logging record for the URL request._
-
+WHITELISTED_BOTS       | HTTP_USER_AGENT fragments that denote good or allowed bots, e.g. Googlebot. These bots are never 403d.
 
 ## Storage
 

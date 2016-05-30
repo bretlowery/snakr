@@ -130,6 +130,10 @@ class EventLog(mydb.Model):
             verbose_name='the HTTP_REFERER from which this event was received',
             max_length=2083,
             null=False)
+    snakr_version = mydb.CharField(
+            verbose_name='the Snakr version/build number at the time of the event',
+            max_length=40,
+            null=False)
 
     class Meta:
         managed = False
@@ -230,6 +234,49 @@ class IPLog(mydb.Model):
         managed = False
 
 
+#Third Party IP Blacklists
+class TPIpBls(mydb.Model):
+    id = mydb.BigIntegerField(
+            verbose_name='unique 64-bit integer binary hash value of the blacklist name (the 1st value) in each entry in settings.THRIDPARTY_IP_BLACKLISTS',
+            primary_key=True,
+            null=False)
+    name = mydb.CharField(
+            verbose_name='each blacklist name (the 1st value) in each entry in settings.THRIDPARTY_IP_BLACKLISTS',
+            max_length=100,
+            null=False)
+    download_from_url = mydb.CharField(
+            verbose_name='URL location of the remote source of the blacklist',
+            max_length=4096,
+            validators=[URLValidator()],
+            null=False,
+            blank=False)
+    first_loaded_on = mydb.DateTimeField(
+            verbose_name='datetime that the blacklist was first successfully loaded from the remote source',
+            null=True)
+    last_loaded_on = mydb.DateTimeField(
+            verbose_name='datetime that the blacklist was last successfully loaded from the remote source',
+            null=True)
+
+    class Meta:
+        managed = False
+
+
+#Third Party IP Blacklist Ranges
+class TPIpBl_Ranges(mydb.Model):
+    id = mydb.BigIntegerField(
+            verbose_name='unique 64-bit integer binary hash value of the blacklist name (the 1st value) in each entry in settings.THRIDPARTY_IP_BLACKLISTS',
+            primary_key=True,
+            null=False)
+    ip_range = mydb.CharField(
+            verbose_name='One or more IPv4 entries in the 3rd party blacklist; formats a.b.c.d, a.b.c.d/nn, or a.b.c.d-w.x.y.z',
+            primary_key=True,
+            max_length=50,
+            null=False,
+            blank=False)
+    class Meta:
+        managed = False
+
+
 class EventStreamVersion(ndb.Model):
     event_stream_version = ndb.StringProperty(indexed=True)
 
@@ -238,6 +285,7 @@ class EventStreamVersion(ndb.Model):
 
 
 class EventStream(ndb.Model):
+    event_version = ndb.StringProperty(indexed=True)
     logged_on = ndb.DateTimeProperty(indexed=True, auto_now_add=True)
     event_type = ndb.StringProperty(indexed=True)
     event_description = ndb.StringProperty(indexed=False)

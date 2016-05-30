@@ -37,11 +37,19 @@ class Dispatcher(webapp2.RequestHandler):
         #
         # check for unfriendly bot first
         #
-        self._botdetector.if_bot_then_403(request)
+        self._botdetector.filter_traffic(request)
         #
-        # check to see if a long url was submitted for shortening via the "u" query parameter
+        # if this is a request to reload the blacklists, do so
         #
         url_parts = urlparse(request.build_absolute_uri())
+        if '/gsmnp/daily-blacklist-reload' in url_parts.geturl():
+            if settings.THRIDPARTY_IP_BLACKLISTS:
+                self._event.log(event_type='I',
+                                message='START automatic daily third party blacklist reload.')
+                TrafficFilters.reload_thirdpartyblacklists()
+                self._event.log(event_type='I',
+                                message='END automatic daily third party blacklist reload.')
+                return HttpResponse("<H2>OK</H2>", content_type="text/html")
         #
         # if not, create an instance of the ShortURL object, validate the short URL,
         # #and if successful load the ShortURL instance with it
@@ -74,7 +82,7 @@ class Dispatcher(webapp2.RequestHandler):
         #
         # check for unfriendly bot first
         #
-        self._botdetector.if_bot_then_403(request)
+        self._botdetector.filter_traffic(request)
         #
         #
         # create an instance of the LongURL object, validate the long URL, and if successful load the LongURL instance with it

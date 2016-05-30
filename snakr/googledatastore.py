@@ -19,6 +19,7 @@ class client():
                 else:
                     key = dad.key
                 event = models.EventStream(parent=key)
+                event.event_version = settings.SNAKR_VERSION
                 event.event_type = kwargs.pop("event_type", "Z")
                 for e in settings.EVENT_TYPES:
                     if e[0] == event.event_type:

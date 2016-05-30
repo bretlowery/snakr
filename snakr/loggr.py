@@ -238,7 +238,8 @@ class SnakrEventLogger(Exception):
                     city_id=city_hash,
                     country_id=country_hash,
                     host_id=host_hash,
-                    useragent_id=useragent_hash
+                    useragent_id=useragent_hash,
+                    snakr_version=settings.SNAKR_VERSION
             )
 
             e.save()

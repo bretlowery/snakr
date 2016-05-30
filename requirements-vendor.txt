@@ -5,3 +5,4 @@ PyOpenGraph==0.2
 BeautifulSoup==3.2.1
 python-json-logger==0.1.4
 pdfminer==20140328
+netaddr

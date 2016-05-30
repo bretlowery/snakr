@@ -1,0 +1,4 @@
+cron:
+- description: reload PAN blacklists daily
+  url: /gsmnp/daily-blacklist-reload
+  schedule: every day 08:00

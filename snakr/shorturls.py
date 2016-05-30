@@ -150,7 +150,7 @@ class ShortURL:
         #
         # Log that a 302 request to the matching long url is about to occur
         #
-        self._event.log(request=request, event_type='S', messagekey='HTTP_302', value=self.shorturl, longurl_id=s.longurl_id, longurl=longurl, shorturl_id=self.id, shorturl=self.shorturl, status_code=302)
+        self._event.log(request=request, event_type='S', messagekey='HTTP_302', value=longurl, longurl_id=s.longurl_id, longurl=longurl, shorturl_id=self.id, shorturl=self.shorturl, status_code=302)
         #
         # Return the longurl
         #
