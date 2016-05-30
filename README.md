@@ -48,6 +48,8 @@ No thirteenth floor? Then no thirteenth version either.
 **v1.0.14**
 Added third party blacklisting service protection. Loads several Palo Alto Networks free daily IP blacklists and scans for requests from IPs on these and if found 403s them. Current PAN lists uploaded are:
 
+From https://panwdbl.appspot.com/ :
+
 List                                     | No of Entries 5/30/16           | Link                               | Description
 ---------------------------------------- | ------------------------------- | ---------------------------------- | -------------
 Spamhaus DROP                            | 733 entries	                   | http://www.spamhaus.org/drop/      | DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission

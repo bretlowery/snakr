@@ -36,11 +36,9 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/secure/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
-              <folding>
-                <marker date="1464649726000" expanded="true" signature="621:1540" ph="..." />
-              </folding>
+            <state relative-caret-position="145">
+              <caret line="22" column="59" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="59" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,8 +101,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="62" column="101" selection-start-line="62" selection-start-column="101" selection-end-line="62" selection-end-column="101" />
+            <state relative-caret-position="116">
+              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1227,11 +1225,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/secure/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
-          <folding>
-            <marker date="1464649726000" expanded="true" signature="621:1540" ph="..." />
-          </folding>
+        <state relative-caret-position="145">
+          <caret line="22" column="59" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="59" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1240,8 +1236,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="62" column="101" selection-start-line="62" selection-start-column="101" selection-end-line="62" selection-end-column="101" />
+        <state relative-caret-position="116">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding />
         </state>
       </provider>
