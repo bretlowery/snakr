@@ -1,4 +1,4 @@
-# Snakr v1.0.14
+# Snakr v1.0.15
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) and [Google Datastore](https://cloud.google.com/datastore/) backend. 
@@ -48,28 +48,15 @@ No thirteenth floor? Then no thirteenth version either.
 **v1.0.14**
 Added third party blacklisting service protection. Loads several Palo Alto Networks free daily IP blacklists and scans for requests from IPs on these and if found 403s them. Current PAN lists uploaded are:
 
-From https://panwdbl.appspot.com/ :
-
-List                                     | No of Entries 5/30/16           | Link                               | Description
----------------------------------------- | ------------------------------- | ---------------------------------- | -------------
-Spamhaus DROP                            | 733 entries	                   | http://www.spamhaus.org/drop/      | DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission
-Spamhaus EDROP                           | 62 entries                      | http://www.spamhaus.org/drop/      | DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission
-OpenBL block list                        | 4754 entries                    | http://www.openbl.org/             | The OpenBL.org project (formerly known as the SSH blacklist) is about detecting, logging and reporting bruteforce attacks.
-BruteForceBlocker                        | 1043 entries                    | [http://danger.rulez.sk/index.php /bruteforceblocker/](http://danger.rulez.sk/index.php/bruteforceblocker/) | This ruleset is compiled from a number of sources. It's contents are hosts that are known to be compromised by bots, phishing sites, etc, or known to be spewing hostile traffic. These are not your everyday infected and sending a bit of spam hosts, these are significantly infected and hostile hosts.
-Malware Domain List                      | 1437 entries                    | http://www.malwaredomainlist.com/  |  See website for more.
-Emerging Threats RBN                     | 1 entry                         | [http://doc.emergingthreats.net/bin/ view/Main/RussianBusinessNetwork](http://doc.emergingthreats.net/bin/view/Main/RussianBusinessNetwork) | See website for more.
-Emerging Threats TOR                     | 6656 entries                    | [http://doc.emergingthreats.net/bin/ view/Main/TorRules](http://doc.emergingthreats.net/bin/view/Main/TorRules) | See website for more.
-Emerging Threats Known Compromised Hosts | 1056 entries                    | [http://doc.emergingthreats.net/bin/ view/Main/CompromisedHost](http://doc.emergingthreats.net/bin/view/Main/CompromisedHost) | See website for more.
-Dshield Recommended Block List           | 20 entries                      | http://feeds.dshield.org/block.txt | DShield.org Recommended Block List, a top-20 most egregious class C address list.
-SSL Abuse IP List                        | 70 entries                      |                                    | SSLBL 30 days block list.
-Zeus Tracker Bad IPs List                | 136 entries                     |                                    | abuse.ch ZeuS IP blocklist "BadIPs" (excluding hijacked sites and free hosting providers).
+**v1.0.15**
+Added cron.yaml support to automatically refresh third party IP blacklists on a preset schedule.
 
 ## Background 
 URL shorteners are used to generate a smaller “abbreviated” version of a URL so that the smaller URL can be used as an alias in place of the longer URL. Subsequent calls to the smaller URL will redirect to the same resource originally identified by the longer URL, including all querystring parameters and other valid URL components. This is useful for several reasons:
 
 Upside                                          | Reason
 ----------------------------------------------- | ------------------------------
-Easier to use (“beautification”)                | It can be substantially easier to enter, copy, paste, manipulate, remember, or otherwise use a shorter URL rather than its longer version. Smaller is inherently “more beautiful” than longer.
+Easier to use (“beautification”)               | It can be substantially easier to enter, copy, paste, manipulate, remember, or otherwise use a shorter URL rather than its longer version. Smaller is inherently “more beautiful” than longer.
 Less prone to breakage                          | Longer URLs can be broken when embedded in documents, messages, etc. due to misentry, mispaste, line wrapping breakages, or cutoffs due to data length limitations in standards and tools like SMS or Twitter. Shorter URLs are less prone to these problems.
 Less bandwidth used                             | Shorter URLs require less transmission sources that longer ones, a problem that increasingly manifests itself at scale.
 Less storage used                               | If the URLs are stored, the shorter URL will use less space.
@@ -205,8 +192,56 @@ Alternatively, you can use your short domain for short HTTP urls and yorudomain.
     ```
     
     16. A mobile app/endpoints would be neat.
-    
-    
+ 
+## Third Party Blacklists 
+Why do you need this, you ask? Doesn't Google Cloud block bots and other malicious traffic?
+
+Partially? Yes. All of it? No.
+
+I use this app on Twitter and other social media, and well over half my hits were coming from non-human traffic.  Sure, it drives up your impression counts, but also your costs for using this URL shortener. Personally, I'd rather impress people (pun intended) than software.
+
+If enabled, Snakr can also filter traffic out based on third party blacklists from Palo Alto Networks. These blacklists are reloaded at app start and if enabled in cron on a regularly scheduled update (daily is recommended).
+
+Currently, this includes (from https://panwdbl.appspot.com/):
+
+List                                     | No of Entries 5/30/16           | Link                               | Description
+---------------------------------------- | ------------------------------- | ---------------------------------- | -------------
+Spamhaus DROP                            | 733 entries	                   | http://www.spamhaus.org/drop/      | DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission
+Spamhaus EDROP                           | 62 entries                      | http://www.spamhaus.org/drop/      | DROP (Don't Route Or Peer) and EDROP are advisory "drop all traffic" lists, consisting of stolen 'hijacked' netblocks and netblocks controlled entirely by criminals and professional spammers. Spamhaus (c) data used with permission
+OpenBL block list                        | 4754 entries                    | http://www.openbl.org/             | The OpenBL.org project (formerly known as the SSH blacklist) is about detecting, logging and reporting bruteforce attacks.
+BruteForceBlocker                        | 1043 entries                    | [http://danger.rulez.sk/index.php /bruteforceblocker/](http://danger.rulez.sk/index.php/bruteforceblocker/) | This ruleset is compiled from a number of sources. It's contents are hosts that are known to be compromised by bots, phishing sites, etc, or known to be spewing hostile traffic. These are not your everyday infected and sending a bit of spam hosts, these are significantly infected and hostile hosts.
+Malware Domain List                      | 1437 entries                    | http://www.malwaredomainlist.com/  |  See website for more.
+Emerging Threats RBN                     | 1 entry                         | [http://doc.emergingthreats.net/bin/ view/Main/RussianBusinessNetwork](http://doc.emergingthreats.net/bin/view/Main/RussianBusinessNetwork) | See website for more.
+Emerging Threats TOR                     | 6656 entries                    | [http://doc.emergingthreats.net/bin/ view/Main/TorRules](http://doc.emergingthreats.net/bin/view/Main/TorRules) | See website for more.
+Emerging Threats Known Compromised Hosts | 1056 entries                    | [http://doc.emergingthreats.net/bin/ view/Main/CompromisedHost](http://doc.emergingthreats.net/bin/view/Main/CompromisedHost) | See website for more.
+Dshield Recommended Block List           | 20 entries                      | http://feeds.dshield.org/block.txt | DShield.org Recommended Block List, a top-20 most egregious class C address list.
+SSL Abuse IP List                        | 70 entries                      |                                    | SSLBL 30 days block list.
+Zeus Tracker Bad IPs List                | 136 entries                     |                                    | abuse.ch ZeuS IP blocklist "BadIPs" (excluding hijacked sites and free hosting providers).
+
+These files can be set to automatically reload via a GC cron job specified in your cron.yaml (see [GC cron help for Python](https://cloud.google.com/appengine/docs/python/config/cron) for more info). Pick a long, pseudorandom URL string and append it to your root domain, e.g.:
+
+http://yoursnakrdomain.appspot.com/this_should_be_a_really_long_and_fairly_random_url_to_avoid_malicious_DoS_attacks_from_hitting_it
+
+Then in your settings.py, add the THIRDPARTY_IP_BLACKLIST_CRONJOB_URL setting and point to it as follows:
+
+```
+# note the leading slash
+THIRDPARTY_IP_BLACKLIST_CRONJOB_URL = "/this_should_be_a_really_long_and_fairly_random_url_to_avoid_malicious_DoS_attacks_from_hitting_it"
+```
+ 
+The upload a cron.yaml like the one below to run once a day using [the instructions on the Google Cloud cron job reference page](https://cloud.google.com/appengine/docs/python/config/cron):
+
+```
+cron:
+- description: reload 3rd party blacklists daily
+  url: /this_should_be_a_really_long_and_fairly_random_url_to_avoid_malicious_DoS_attacks_from_hitting_it
+  schedule: every day 06:00
+```
+
+Now your 3rd party lists will be reloaded automatically every day at 6:00AM in your selected GC timezone. Be sure you select a refresh time by when the third party has actually written new files to their remote URL locations for you to pick up.
+
+Again, it's imperative that you use a really long randomized URL to avoid bots and other bad actors from guessing it and hitting it over and over.
+
 ## Test It Online
 1. Install curl or another REST client testing tool like [Advanced Rest Client Application for Chrome](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo/reviews?hl=en-US&utm_source=ARC)
 
@@ -419,6 +454,17 @@ Column             | Datatype (all NOT NULL)  | Description
 id (PK)            | BIGINT                   | The 64-bit hash of the HTTP_USER_AGENT of the origination of one or more events.
 useragent          | VARCHAR(8192)            | The HTTP_USER_AGENT of the origination of one or more events.
 is_blacklisted     | CHAR(1)                  | Y=The user agent is blacklisted. All requests from a client with this exact user agent will be 403d. N=The user agent is not blacklisted. This is *not* queried per request, but cached at Snakr start. If this value is updated, Snakr must be restarted to recache the change.
+
+#### Table snakr_tpipbls
+One row per unique third party IP blacklist file ingested by Snakr.
+
+Column             | Datatype (all NOT NULL)  | Description
+------------------ | ------------------------ | ------------
+id (PK)            | BIGINT                   | The 64-bit hash of the name of the third party blacklist file.
+name               | VARCHAR(100)             | Displayable name of the 3rd party IP blacklist file, e.g. "Zeus Tracker Bad IPs List"
+download_from_url  | VARCHAR(4096)            | The URL providing the pickup location of the file.
+first_loaded_on    | DATETIME                 | When the file was first loaded.
+last_loaded_on     | DATETIME                 | Most recent reload of the file.
 
 
 ### Installing Libraries

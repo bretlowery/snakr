@@ -8,6 +8,7 @@ from models import ShortURLs, LongURLs
 from utilities import Utils
 from django.db import transaction as xaction
 import loggr
+from django.http import HttpResponse
 
 class ShortURL:
     """Validates and processes the short URL in the GET request."""

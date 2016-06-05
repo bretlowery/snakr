@@ -18,7 +18,7 @@
 # [START django_app]
 application: snakrv2
 module: default
-version: 14
+version: 15
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -37,5 +37,3 @@ libraries:
 - name: ssl
   version: "latest"
 
-inbound_services:
-- warmup

@@ -50,3 +50,4 @@ coverage.xml
 #settings.py
 settings*.py
 lib/
+/snakr/bigquery.py
