@@ -46,7 +46,7 @@ Add better notification when a long url target website blacklists Google Cloud t
 No thirteenth floor? Then no thirteenth version either. 
 
 **v1.0.14**
-Added third party blacklisting service protection. Loads several Palo Alto Networks free daily IP blacklists and scans for requests from IPs on these and if found 403s them. Current PAN lists uploaded are:
+Added third party blacklisting service protection. Loads several Palo Alto Networks free daily IP blacklists and scans for requests from IPs on these and if found 403s them. Current PAN lists uploaded are listed below.
 
 **v1.0.15**
 Added cron.yaml support to automatically refresh third party IP blacklists on a preset schedule.
