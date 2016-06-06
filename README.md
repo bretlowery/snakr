@@ -1,4 +1,4 @@
-# Snakr v1.0.15
+# Snakr v1.0.16
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) and [Google Datastore](https://cloud.google.com/datastore/) backend. 
@@ -50,6 +50,9 @@ Added third party blacklisting service protection. Loads several Palo Alto Netwo
 
 **v1.0.15**
 Added cron.yaml support to automatically refresh third party IP blacklists on a preset schedule.
+
+**v1.0.16**
+Whitelist appengine-google http_user_agent
 
 ## Background 
 URL shorteners are used to generate a smaller “abbreviated” version of a URL so that the smaller URL can be used as an alias in place of the longer URL. Subsequent calls to the smaller URL will redirect to the same resource originally identified by the longer URL, including all querystring parameters and other valid URL components. This is useful for several reasons:

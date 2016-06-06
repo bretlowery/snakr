@@ -323,7 +323,7 @@ EVENT_STATUSES = (
     ('Z', -1)
 )
 
-WHITELISTED_BOTS = ['googlebot', 'googlecloudmonitoring']
+WHITELISTED_BOTS = ['googlebot', 'googlecloudmonitoring', 'appengine-google']
 
 BLACKLISTED_BOTS = ['(simulated_by_webserver_stress_tool)', '/teoma', '1job', 'abot', 'adbeat', 'adgbot', 'adometrybot',
                     'adr)', 'adsbot-google', 'advanced email extractor', 'advanced+email+extractor', 'agentname',
