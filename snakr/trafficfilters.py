@@ -27,9 +27,6 @@ class TrafficFilters():
             # all entries must be lowercase
             #
             self._known_bots = settings.BLACKLISTED_BOTS
-            if not settings.ALLOW_TWITTERBOT:
-                self._known_bots.append('twitterbot')
-                self._known_bots.append('bot/1.0')
             # bot whitelist
             self._whitelisted_bots=settings.WHITELISTED_BOTS
         else:
@@ -132,12 +129,12 @@ class TrafficFilters():
         self.reload_thirdpartyblacklists()
 
     def reload_thirdpartyblacklists(self):
-        if settings.THRIDPARTY_IP_BLACKLISTS:
+        if settings.THRIDPARTY_BLACKLISTS:
             self._thirdparty_blacklisted_ips = []
             t = 0
             s = 0
             f = 0
-            for thirdparty_blacklist_setting in settings.THRIDPARTY_IP_BLACKLISTS:
+            for thirdparty_blacklist_setting in settings.THRIDPARTY_BLACKLISTS:
                 thirdparty_blacklist_name = thirdparty_blacklist_setting[0]
                 self._event.log(event_type='I', message='(Re)loading daily %s...' % thirdparty_blacklist_name)
                 thirdparty_blacklist_url = thirdparty_blacklist_setting[1]

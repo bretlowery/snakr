@@ -18,7 +18,7 @@
 # [START django_app]
 application: snakrv2
 module: default
-version: 15
+version: 17
 runtime: python27
 api_version: 1
 threadsafe: yes

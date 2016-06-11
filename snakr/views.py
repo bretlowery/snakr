@@ -42,8 +42,8 @@ class Dispatcher(webapp2.RequestHandler):
         # if this is a request to reload the blacklists, do so
         #
         url_parts = urlparse(request.build_absolute_uri())
-        if settings.THIRDPARTY_IP_BLACKLIST_CRONJOB_URL in url_parts.geturl():
-            if settings.THRIDPARTY_IP_BLACKLISTS:
+        if settings.THIRDPARTY_FILELOAD_CRONJOB_URL in url_parts.geturl():
+            if settings.THRIDPARTY_BLACKLISTS:
                 self._event.log(event_type='I',
                                 message='START automatic daily third party blacklist reload.')
                 self._botdetector.reload_thirdpartyblacklists()

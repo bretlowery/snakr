@@ -237,11 +237,11 @@ class IPLog(mydb.Model):
 #Third Party IP Blacklists
 class TPIpBls(mydb.Model):
     id = mydb.BigIntegerField(
-            verbose_name='unique 64-bit integer binary hash value of the blacklist name (the 1st value) in each entry in settings.THRIDPARTY_IP_BLACKLISTS',
+            verbose_name='unique 64-bit integer binary hash value of the blacklist name (the 1st value) in each entry in settings.THRIDPARTY_BLACKLISTS',
             primary_key=True,
             null=False)
     name = mydb.CharField(
-            verbose_name='each blacklist name (the 1st value) in each entry in settings.THRIDPARTY_IP_BLACKLISTS',
+            verbose_name='each blacklist name (the 1st value) in each entry in settings.THRIDPARTY_BLACKLISTS',
             max_length=100,
             null=False)
     download_from_url = mydb.CharField(
@@ -264,7 +264,7 @@ class TPIpBls(mydb.Model):
 #Third Party IP Blacklist Ranges
 class TPIpBl_Ranges(mydb.Model):
     id = mydb.BigIntegerField(
-            verbose_name='unique 64-bit integer binary hash value of the blacklist name (the 1st value) in each entry in settings.THRIDPARTY_IP_BLACKLISTS',
+            verbose_name='unique 64-bit integer binary hash value of the blacklist name (the 1st value) in each entry in settings.THRIDPARTY_BLACKLISTS',
             primary_key=True,
             null=False)
     ip_range = mydb.CharField(

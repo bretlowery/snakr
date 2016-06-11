@@ -1,4 +1,4 @@
 cron:
 - description: reload PAN blacklists daily
-  url: /am3r1can1nf3rn0gsmnp200111221965/reload-thirdparty-ip-blacklists
+  url: /am3r1can1nf3rn0gsmnp200111221965/reload-thirdparty-blacklists
   schedule: every day 08:00

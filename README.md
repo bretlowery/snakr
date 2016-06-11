@@ -1,4 +1,4 @@
-# Snakr v1.0.16
+# Snakr v1.0.17
 
 A URL shortener service demo using [Python 2.7](https://www.python.org/) and [Django 1.9](https://www.djangoproject.com/)
 on [Google App Engine](https://cloud.google.com/appengine) with a [Google Cloud SQL (1st Generation)](https://cloud.google.com/sql/) and [Google Datastore](https://cloud.google.com/datastore/) backend. 
@@ -53,6 +53,9 @@ Added cron.yaml support to automatically refresh third party IP blacklists on a 
 
 **v1.0.16**
 Whitelist appengine-google http_user_agent
+
+**v1.0.17**
+Whitelisted other Google, Bing, Yahoo, Twitter, Facebook, Apple, DuckDuckGo search crawlers; updated blacklist; removed ALLOW_TWITTERBOT setting (can be controlled via standard whitelisting/blacklisting settings); renamed related settings.
 
 ## Background 
 URL shorteners are used to generate a smaller “abbreviated” version of a URL so that the smaller URL can be used as an alias in place of the longer URL. Subsequent calls to the smaller URL will redirect to the same resource originally identified by the longer URL, including all querystring parameters and other valid URL components. This is useful for several reasons:
@@ -306,7 +309,6 @@ from your local MySQL Workbench client until you grant your new IP acesss on the
 Setting                | Value
 ---------------------- | ------------------------------
 ALLOWED_HOSTS          | A whitelist of all host names and IPs allowed to submit admin and POST requests to snakr.
-ALLOW_TWITTERBOT       | If True, allows all traffic from Twitterbot, even if ENABLE_BOTPROTECTION is set to True.
 BLACKLISTED_BOTS       | The list of HTTP_USER_AGENT string fragments that if encountered denote a bot. If ENABLE_BOTPROTECTION is set to True, any traffic with a user agent containing one of these fragments will be 403d.
 CANONICAL_MESSAGES     | The list of snakr service error and warning messages.
 DATABASE_LOGGING       | If True, logs events and request metadata into Google Cloud SQL (if PERSIST_EVENTSTREAM_TO_CLOUDSQL is also True) and/or Google Datastore (if PERSIST_EVENTSTREAM_TO_DATASTORE is also True).
@@ -335,7 +337,7 @@ SHORTURL_HOST          | The root host (netloc) to append to the front of the no
 SHORTURL_PATH_ALPHABET | The alphabet containing the characters from which to build the short URL. This CANNOT be changed at will without possible breaking previously generated short URLs. This can occur if a character or digit is removed form the alphabet but which still appears in a previously-generated short URL. Those short URLs will break the next time they are used.
 SHORTURL_PATH_SIZE     | How many characters in the 'shorten_using' alphabet to use in building short URLs, from 6 to 12. Note that this can be changed at will to a larger or smaller value between 6 and 12, and all historical short URLs will still work.
 SNAKRDB_DEBUG_DB       | When set to DEBUG and snakr is run locally from devappserver.py, local snakr will connect to remote GCS rather than local MySQL.
-THRIDPARTY_IP_BLACKLISTS | Defines the list and location of third-party IP blacklists to load and apply to traffic sources. If a request is made from an IP on the list, it is 403d. The IPs in the list must be in one of these four formats: (1) single IPv6 address (2) single IPv4 address (3) IPv4 address in CIDR format 'a.b.c.d/nn', or (4) an IPv4 range in the form 'a.b.c.d-e.f.g.h'
+THRIDPARTY_BLACKLISTS  | Defines the list and location of third-party IP blacklists to load and apply to traffic sources. If a request is made from an IP on the list, it is 403d. The IPs in the list must be in one of these four formats: (1) single IPv6 address (2) single IPv4 address (3) IPv4 address in CIDR format 'a.b.c.d/nn', or (4) an IPv4 range in the form 'a.b.c.d-e.f.g.h'
 VERBOSE_LOGGING        | If True appends a JSON info record containing the requestor's IP, lat, long, user agent, host, city, and country of origin to the logging record for the URL request._
 WHITELISTED_BOTS       | HTTP_USER_AGENT fragments that denote good or allowed bots, e.g. Googlebot. These bots are never 403d.
 
