@@ -17,7 +17,6 @@ ROOT_URLCONF = os.environ.get('SNAKR_ROOT_URLCONF')
 PERSIST_EVENTSTREAM_TO_CLOUDSQL = True
 PERSIST_EVENTSTREAM_TO_DATASTORE = False
 ENABLE_BOTPROTECTION = True
-ALLOW_TWITTERBOT = True
 ENABLE_BLACKLISTING = True
 THRIDPARTY_IP_BLACKLISTS = [
          ('PAN Spamhous DROP', 'https://panwdbl.appspot.com/lists/shdrop.txt'),
@@ -323,7 +322,9 @@ EVENT_STATUSES = (
     ('Z', -1)
 )
 
-WHITELISTED_BOTS = ['googlebot', 'googlecloudmonitoring', 'appengine-google']
+WHITELISTED_BOTS = ['googlebot', 'googlecloudmonitoring', 'appengine-google', 'msnbot', 'bingbot', 'slurp', 'twitterbot', 'bot/1.0',
+                    'Googlebot-Mobile','Googlebot-Image','Googlebot-News','Googlebot-Video','DuckDuckBot','Facebot','Applebot']
+
 
 BLACKLISTED_BOTS = ['(simulated_by_webserver_stress_tool)', '/teoma', '1job', 'abot', 'adbeat', 'adgbot', 'adometrybot',
                     'adr)', 'adsbot-google', 'advanced email extractor', 'advanced+email+extractor', 'agentname',
@@ -338,7 +339,7 @@ BLACKLISTED_BOTS = ['(simulated_by_webserver_stress_tool)', '/teoma', '1job', 'a
                     'discoverybot', 'download ninja', 'download+ninja', 'drupal', 'dts agent', 'dts+agent',
                     'ec2linkfinder', 'echo', 'europarchive', 'everyonesocialbot', 'evrinid',
                     'ez publish link validator', 'ez+publish+link+validator', 'ezooms', 'facebookexternalhit',
-                    'fairshare', 'favorg', 'fdm 3.x', 'fdm+3.x', 'feed43', 'feedburner', 'fetch', 'findlinks',
+                    'fairshare', 'favorg', 'fdm 3.x', 'fdm+3.x', 'feed43', 'feedburner', 'fetch', 'findlinks','firefox/1.',
                     'flamingo_searchengine', 'flamingosearch', 'flashget', 'freedom', 'frontier', 'funnelback',
                     'fupbot', 'genieo', 'getright', 'goldfire', 'golem', 'gomezagent', 'google web preview',
                     'google wireless transcoder', 'google+web+preview', 'google+wireless+transcoder',
