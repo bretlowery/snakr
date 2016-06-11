@@ -322,9 +322,10 @@ EVENT_STATUSES = (
     ('Z', -1)
 )
 
-WHITELISTED_BOTS = ['googlebot', 'googlecloudmonitoring', 'appengine-google', 'msnbot', 'bingbot', 'slurp', 'twitterbot', 'bot/1.0',
-                    'Googlebot-Mobile','Googlebot-Image','Googlebot-News','Googlebot-Video','DuckDuckBot','Facebot','Applebot']
-
+WHITELISTED_BOTS = ['googlebot', 'googlecloudmonitoring', 'appengine-google', 'msnbot', 'bingbot', 'slurp',
+                    'twitterbot', 'bot/1.0',
+                    'Googlebot-Mobile', 'Googlebot-Image', 'Googlebot-News', 'Googlebot-Video', 'DuckDuckBot',
+                    'Facebot', 'Applebot']
 
 BLACKLISTED_BOTS = ['(simulated_by_webserver_stress_tool)', '/teoma', '1job', 'abot', 'adbeat', 'adgbot', 'adometrybot',
                     'adr)', 'adsbot-google', 'advanced email extractor', 'advanced+email+extractor', 'agentname',
@@ -339,7 +340,8 @@ BLACKLISTED_BOTS = ['(simulated_by_webserver_stress_tool)', '/teoma', '1job', 'a
                     'discoverybot', 'download ninja', 'download+ninja', 'drupal', 'dts agent', 'dts+agent',
                     'ec2linkfinder', 'echo', 'europarchive', 'everyonesocialbot', 'evrinid',
                     'ez publish link validator', 'ez+publish+link+validator', 'ezooms', 'facebookexternalhit',
-                    'fairshare', 'favorg', 'fdm 3.x', 'fdm+3.x', 'feed43', 'feedburner', 'fetch', 'findlinks','firefox/1.',
+                    'fairshare', 'favorg', 'fdm 3.x', 'fdm+3.x', 'feed43', 'feedburner', 'fetch', 'findlinks',
+                    'firefox/1.',
                     'flamingo_searchengine', 'flamingosearch', 'flashget', 'freedom', 'frontier', 'funnelback',
                     'fupbot', 'genieo', 'getright', 'goldfire', 'golem', 'gomezagent', 'google web preview',
                     'google wireless transcoder', 'google+web+preview', 'google+wireless+transcoder',
@@ -360,7 +362,7 @@ BLACKLISTED_BOTS = ['(simulated_by_webserver_stress_tool)', '/teoma', '1job', 'a
                     'mozilla/4.0+(compatible;+msie+6.0;+windows+nt+5.1;1813)', 'mozilla/5.0 (compatible; msie 5.0)',
                     'mozilla/5.0+(compatible;+msie+5.0)', 'ms frontpage', 'ms search', 'ms+frontpage', 'ms+search',
                     'msnptc', 'nbot', 'nerdbynature', 'newsapp', 'newsnow', 'nextgensearchbot', 'ng/2.0', 'nielsen adr',
-                    'nielsen+adr', 'nomad', 'npbot', 'nutch', 'nutscrape', 'obot', 'omniexplorer', 'oodlebot',
+                    'nielsen+adr', 'nomad', 'npbot', 'nutch', 'nutscrape', 'nuzzel', ''obot', 'omniexplorer', 'oodlebot',
                     'orangebot-mobile', 'outbrain', 'panscient.com', 'paperlibot', 'paros', 'patric', 'phantomjs',
                     'pingdom', 'pioneer', 'pita', 'pluck', 'plumtree', 'postrank', 'powermarks', 'proximic', 'psbot',
                     'python-httplib', 'python-urllib', 'reconnoiter', 'riverglassscanner', 'rpt-http', 'rssreader',
