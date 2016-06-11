@@ -200,9 +200,7 @@ Alternatively, you can use your short domain for short HTTP urls and yorudomain.
     16. A mobile app/endpoints would be neat.
  
 ## Third Party Blacklists 
-Why do you need this, you ask? Doesn't Google Cloud block bots and other malicious traffic?
-
-Partially? Yes. All of it? No.
+Why do you need blacklists, you ask? 
 
 I use this app on Twitter and other social media, and well over half my hits were coming from non-human traffic.  Sure, it drives up your impression counts, but also your costs for using this URL shortener. Personally, I'd rather impress people (pun intended) than software.
 
