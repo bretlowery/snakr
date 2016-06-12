@@ -51,8 +51,13 @@ class Dispatcher(webapp2.RequestHandler):
                                 message='END automatic daily third party blacklist reload.')
             return HttpResponse("<H2>OkeyDokey</H2>", content_type="text/html")
         #
-        # if not, create an instance of the ShortURL object, validate the short URL,
-        # #and if successful load the ShortURL instance with it
+        # favicon handling
+        #
+        if 'favicon.ico' in url_parts.geturl():
+            raise Http404
+        #
+        # create an instance of the ShortURL object, validate the short URL,
+        # and if successful load the ShortURL instance with it
         #
         s = ShortURL(request)
         #
@@ -65,7 +70,7 @@ class Dispatcher(webapp2.RequestHandler):
         if longurl:
             return HttpResponseRedirect(longurl)
         else:
-            return Http404
+            raise Http404
 
     def post_handler(self, request, *args, **kwargs):
         #
