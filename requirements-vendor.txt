@@ -1,4 +1,4 @@
-Django==1.9.4
+Django==2.2.28
 gcloud
 google-api-python-client
 PyOpenGraph==0.2
